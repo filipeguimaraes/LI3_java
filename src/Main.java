@@ -28,6 +28,7 @@ public static List<String> readLinesWithBuff(String fich){
     try(
         BufferedReader inStream = new BufferedReader(new FileReader(fich))){
         while((linha= inStream.readLine())!=null){
+           ////// if linha.metodo verifica-se
             linhas.add(linha);
         }
     }
