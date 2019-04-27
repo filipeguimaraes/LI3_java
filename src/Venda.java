@@ -1,52 +1,31 @@
-import java.util.Objects;
+import static java.lang.Double.parseDouble;
+import static java.lang.Integer.parseInt;
 
 public class Venda {
-
-    private String codProd;
+    private Produto codProd;
+    private Cliente codCli;
     private double preco;
-    private int compra;
+    private int quantidade;
     private String tipo;
-    private String codCli;
     private int mes;
     private int filial;
 
-    public Venda() {
-        this.codProd = "";
-        this.preco = 0;
-        this.compra = 0;
-        this.tipo = "";
-        this.codCli = "";
-        this.mes = 1;
-        this.filial = 1;
-    }
-
-    public Venda(String codProd, double preco, int compra, String tipo, String codCli, int mes, int filial) {
+    public Venda(Produto codProd, Cliente codCli, double preco, int quantidade, String tipo, int mes, int filial) {
         this.codProd = codProd;
-        this.preco = preco;
-        this.compra = compra;
-        this.tipo = tipo;
         this.codCli = codCli;
+        this.preco = preco;
+        this.quantidade = quantidade;
+        this.tipo = tipo;
         this.mes = mes;
         this.filial = filial;
     }
 
-    public Venda(Venda umaVenda) {
-        this.codProd = umaVenda.getCodProd();
-        this.preco = umaVenda.getPreco();
-        this.compra = umaVenda.getCompra();
-        this.tipo = umaVenda.getTipo();
-        this.codCli = umaVenda.getCodCli();
-        this.mes = umaVenda.getMes();
-        this.filial = umaVenda.getFilial();
+    public int getQuantidade() {
+        return quantidade;
     }
 
-
-    public String getCodProd() {
-        return codProd;
-    }
-
-    public void setCodProd(String codProd) {
-        this.codProd = codProd;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
     public double getPreco() {
@@ -57,12 +36,20 @@ public class Venda {
         this.preco = preco;
     }
 
-    public int getCompra() {
-        return compra;
+    public int getMes() {
+        return mes;
     }
 
-    public void setCompra(int compra) {
-        this.compra = compra;
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
+
+    public Produto getCodProd() {
+        return codProd;
+    }
+
+    public void setCodProd(Produto codProd) {
+        this.codProd = codProd;
     }
 
     public String getTipo() {
@@ -73,20 +60,12 @@ public class Venda {
         this.tipo = tipo;
     }
 
-    public String getCodCli() {
+    public Cliente getCodCli() {
         return codCli;
     }
 
-    public void setCodCli(String codCli) {
+    public void setCodCli(Cliente codCli) {
         this.codCli = codCli;
-    }
-
-    public int getMes() {
-        return mes;
-    }
-
-    public void setMes(int mes) {
-        this.mes = mes;
     }
 
     public int getFilial() {
@@ -97,33 +76,27 @@ public class Venda {
         this.filial = filial;
     }
 
-
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Venda venda = (Venda) o;
-        return Double.compare(venda.preco, preco) == 0 &&
-                compra == venda.compra &&
-                mes == venda.mes &&
-                filial == venda.filial &&
-                Objects.equals(codProd, venda.codProd) &&
-                Objects.equals(tipo, venda.tipo) &&
-                Objects.equals(codCli, venda.codCli);
+    static boolean validaPreco(String preco){
+        double p = parseDouble(preco);
+        return 0 <= p && p <=999.99 ;
     }
 
-    public String toString() {
-        return "Venda{" +
-                "codProd='" + codProd + '\'' +
-                ", preco=" + preco +
-                ", compra=" + compra +
-                ", tipo='" + tipo + '\'' +
-                ", codCli='" + codCli + '\'' +
-                ", mes=" + mes +
-                ", filial=" + filial +
-                '}';
+    static boolean validaMes(String mes){
+        int m = parseInt(mes);
+        return 0 < m && m < 13;
     }
 
-    public Venda clone(){
-        return new Venda(this);
+    static boolean validaFilial(String filial){
+        int f = parseInt(filial);
+        return 0 < f && f < 4;
+    }
+
+    static boolean validaTipo(String tipo){
+        return tipo.equals("N") || tipo.equals("P");
+    }
+
+    static boolean validaQuant(String quant) {
+        int q = parseInt(quant);
+        return 0 < q && q < 201;
     }
 }
