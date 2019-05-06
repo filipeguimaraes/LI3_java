@@ -1,6 +1,7 @@
 import java.util.Objects;
+import static java.lang.Integer.parseInt;
 
-public class Cliente {
+public class Cliente implements Comparable<Cliente>, ICliente{
     private String codCli;
 
     public Cliente(){
@@ -27,13 +28,13 @@ public class Cliente {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
-        return Objects.equals(codCli, cliente.codCli);
+        return cliente.getCodCli().equals(this.codCli);
     }
 
     public String toString() {
-        return "Cliente{" +
-                "codCli='" + codCli + '\'' +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("codigo cliente" + this.codCli);
+        return sb.toString();
     }
 
     public Cliente clone(){
@@ -58,54 +59,24 @@ public class Cliente {
         return this.codCli.length()==5;
     }
 
-    public static   int atoi(String str) {
-        /*validate input*/
-        if (str == null || str.length() == 0) return 0;
-        long longRes = 0; // result can be out of range
-        /*whitespaces*/
-        str = str.trim(); // remove front and trailing whitespaces
-        /*sign*/
-        boolean neg = false; // is negative or not
-        if (str.charAt(0) == '-') {
-            neg = true;
-            str = str.substring(1, str.length());
-        } else if (str.charAt(0) == '+') {
-            str = str.substring(1, str.length());
-        }
-        /*calculation*/
-        int i = 0;
-        while (i < str.length()) { // calculate without sign
-            char c = str.charAt(i);
-            if (c >= '0' && c <= '9') {
-                longRes = longRes * 10 + (c - '0');
-            } else break; // break when not a digit
-            i++;
-        }
-        longRes = neg ? longRes * (-1) : longRes; // add sign
-        /*out of range*/
-        if (longRes > Integer.MAX_VALUE) {
-            return Integer.MAX_VALUE;
-        } else if (longRes < Integer.MIN_VALUE) {
-            return Integer.MIN_VALUE;
-        }
-
-        return (int)longRes;
-    }
 
 
     public boolean validaIntCliente(){
         if(this.validaInt_Cli()){
-            return (1000 <= atoi(this.codCli.substring(1))  && atoi(this.codCli.substring(1)) <= 5000);
+            return (1000 <= parseInt(this.codCli.substring(1))  && parseInt(this.codCli.substring(1)) <= 5000);
         }
         else return false;
     }
 
 
-   public boolean validaClientes(){
+   public boolean validaCliente(){
         if(this.compCliente_Cli()){
             return (this.validaLetras_Cli() && this.validaIntCliente());
         }
         else return false;
     }
+
+    public int compareTo(Cliente c){return this.codCli.compareTo(c.getCodCli());}
+
 
 }

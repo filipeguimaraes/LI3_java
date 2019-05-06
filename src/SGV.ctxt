@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=SGV
+comment1.params=fich
+comment1.target=int\ readProdutos(java.lang.String)
+comment2.params=fich
+comment2.target=int\ readClientes(java.lang.String)
+comment3.params=fich
+comment3.target=int\ readLinesWithBuff(java.lang.String)
+comment4.params=
+comment4.target=java.lang.String\ adiciona()
+comment5.params=args
+comment5.target=void\ main(java.lang.String[])
+numComments=6

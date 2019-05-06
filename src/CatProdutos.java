@@ -1,38 +1,57 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class CatProdutos{
+    private Set<String> produtos;
 
-    public static List<Produto> readLinesWithBuff(String fich){
-        List<Produto> linhas = new ArrayList<>();
-        String linha = null;
-
-        try(
-                BufferedReader inStream = new BufferedReader(new FileReader(fich))){
-            while((linha= inStream.readLine())!=null){
-                Produto c = new Produto(linha);
-                if (c.validaProdutos()) linhas.add(c);
-            }
-        }
-        catch(IOException e){
-            System.out.println(e);
-        }
-        return linhas;
+    public CatProdutos(){
+        this.produtos=new TreeSet<>();
     }
 
+    public CatProdutos(Set<String> produtos) {
+        this.setProdutos(produtos);
+    }
+
+    public CatProdutos(CatProdutos cat){
+        this.produtos=cat.getProdutos();
+    }
+
+    public Set<String> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(Set<String> produtos) {
+        this.produtos = produtos;
+    }
+
+    public List<String> lista (){
+        return this.produtos.stream().collect(Collectors.toList());
+    }
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CatProdutos that = (CatProdutos) o;
+        return produtos.equals(that.produtos);
+    }
+
+    public String toString() {
+        return "CatProdutos{" +
+                "produtos=" + produtos +
+                '}';
+    }
+
+    public CatProdutos clone(){
+        return new CatProdutos(this);
+    }
+
+
+
     public boolean existeProduto(String s){
-        boolean r=false;
-        Iterator<Produto> it = this.readLinesWithBuff("Produtos.txt").iterator();
-        Produto prod;
-        while(!r && it.hasNext()){
-            prod=it.next();
-            r=prod.getCodProd().equals(s);
-        }
-        return r;
+        return this.produtos.contains(s);
     }
 
 }

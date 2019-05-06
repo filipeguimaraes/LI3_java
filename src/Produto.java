@@ -1,6 +1,7 @@
 import java.util.Objects;
+import static java.lang.Integer.parseInt;
 
-public class Produto {
+public class Produto implements Comparable<Produto>,IProduto {
     private String codProd;
 
     public Produto(){
@@ -31,9 +32,9 @@ public class Produto {
     }
 
     public String toString() {
-        return "Produto{" +
-                "codProd='" + codProd + '\'' +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("codigo produto" + this.codProd);
+        return sb.toString();
     }
 
     public Produto clone(){
@@ -59,56 +60,24 @@ public class Produto {
         return this.codProd.length()==6;
     }
 
-    public static   int atoi(String str) {
-        /*validate input*/
-        if (str == null || str.length() == 0) return 0;
-        long longRes = 0; // result can be out of range
-        /*whitespaces*/
-        str = str.trim(); // remove front and trailing whitespaces
-        /*sign*/
-        boolean neg = false; // is negative or not
-        if (str.charAt(0) == '-') {
-            neg = true;
-            str = str.substring(1, str.length());
-        } else if (str.charAt(0) == '+') {
-            str = str.substring(1, str.length());
-        }
-        /*calculation*/
-        int i = 0;
-        while (i < str.length()) { // calculate without sign
-            char c = str.charAt(i);
-            if (c >= '0' && c <= '9') {
-                longRes = longRes * 10 + (c - '0');
-            } else break; // break when not a digit
-            i++;
-        }
-        longRes = neg ? longRes * (-1) : longRes; // add sign
-        /*out of range*/
-        if (longRes > Integer.MAX_VALUE) {
-            return Integer.MAX_VALUE;
-        } else if (longRes < Integer.MIN_VALUE) {
-            return Integer.MIN_VALUE;
-        }
-
-        return (int)longRes;
-    }
 
 
     public boolean validaIntProduto(){
         if(this.validaInt_Prod()){
-            return (1000 <= atoi(this.codProd.substring(2))  && atoi(this.codProd.substring(2)) <= 9999);
+            return (1000 <= parseInt(this.codProd.substring(2))  && parseInt(this.codProd.substring(2)) <= 9999);
         }
         else return false;
     }
 
 
-    public boolean validaProdutos(){
+    public boolean validaProduto(){
         if(this.compProduto_Prod()){
             return (this.validaLetras_Prod() && this.validaIntProduto());
         }
         else return false;
     }
 
+    public int compareTo(Produto p){return this.codProd.compareTo(p.getCodProd());}
 
 
 }

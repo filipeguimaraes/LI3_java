@@ -3,56 +3,61 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static java.lang.reflect.Array.get;
 
 public class CatVendas {
-    private List<Venda> vendas;
+    private List<String> vendas;
 
     public CatVendas() {
-        this.vendas = new ArrayList<Venda>();
+        this.vendas = new ArrayList<>();
     }
 
-    public CatVendas(List<Venda> vendas) {
-        this.vendas = vendas;
+    public CatVendas(List<String> vendas) {
+        this.setVendas(vendas);
     }
 
-    public List<Venda> getVendas() {
-        return vendas;
+    public CatVendas(CatVendas cv){
+        this.vendas=cv.getVendas();
     }
 
-    public void setVendas(List<Venda> vendas) {
-        this.vendas = vendas;
+    public List<String> getVendas() {
+        return new ArrayList<String>(this.vendas.stream()
+                          .collect(Collectors.toList()));
     }
 
-    public void addVenda(Venda venda){
-        this.vendas.add(venda);
+    public void setVendas(List<String> v) {
+        this.vendas =v;
     }
 
-    public static List<String> readLinesWithBuff(String fich){
-        List<String> linhas = new ArrayList<>();
-        String linha;
-        String [] divd;
-
-        try(BufferedReader inStream = new BufferedReader(new FileReader(fich))){
-            while((linha= inStream.readLine())!=null){
-                divd = linha.split(" ");
-                if(divd.length == 7
-                        && Venda.validaPreco((String) get(divd,1))
-                        && Venda.validaQuant((String) get(divd,2))
-                        && Venda.validaTipo((String) get(divd, 3))
-                        && Venda.validaMes((String) get(divd,5))
-                        && Venda.validaFilial((String) get(divd,6)))
-                    linhas.add(linha);
-                // linhas.add(Venda(divd));
-            }
-        }
-        catch(IOException e){
-            System.out.println(e);
-        }
-
-        return linhas;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CatVendas catVendas = (CatVendas) o;
+        return vendas.equals(catVendas.vendas);
     }
 
+    public int hashCode() {
+        return Objects.hash(vendas);
+    }
+
+    public String toString() {
+        return "CatVendas{" +
+                "vendas=" + vendas +
+                '}';
+    }
+
+    public CatVendas clone(){
+        return new CatVendas(this);
+    }
+
+    public void addVenda(String s){
+        //Venda v = new Venda(s);
+        //if(v.validaVenda()) {
+            this.vendas.add(s);
+        //}
+    }
 
 }
