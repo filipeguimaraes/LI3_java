@@ -3,16 +3,31 @@
   <component name="ChangeListManager">
     <list default="true" id="7c133bfa-5c83-4609-a155-7e110da5032a" name="Default Changelist" comment="Produtos+Clientes+CatClientes+CatProdutos">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LI3_java/Cliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LI3_java/Cliente.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LI3_java/Produto.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LI3_java/Produto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LI3_java/Venda.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LI3_java/Venda.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CatClientes.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/CatClientes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CatClientes.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CatClientes.ctxt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CatClientes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CatClientes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CatFaturacao.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/CatFaturacao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CatFaturacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CatFaturacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CatProdutos.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/CatProdutos.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CatProdutos.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CatProdutos.ctxt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CatProdutos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CatProdutos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CatVendas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CatVendas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cliente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cliente.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cliente.ctxt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Clientes.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ICliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/ICliente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ICliente.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ICliente.ctxt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ICliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ICliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IProduto.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/IProduto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IProduto.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/src/IProduto.ctxt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IProduto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IProduto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Produto.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Produto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Produto.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Produto.ctxt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Produto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Produto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Venda.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Venda.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SGV.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/SGV.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SGV.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/src/SGV.ctxt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SGV.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SGV.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Teste.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Teste.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package.bluej" beforeDir="false" afterPath="$PROJECT_DIR$/src/package.bluej" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,8 +56,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Produto.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="570">
-              <caret line="51" column="23" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="23" />
+            <state>
+              <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -53,13 +68,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CatProdutos.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
+            <state relative-caret-position="285">
               <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/CatClientes.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="450">
@@ -71,14 +86,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CatFaturacao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="747">
+            <state relative-caret-position="746">
               <caret line="100" column="6" selection-start-line="100" selection-start-column="6" selection-end-line="100" selection-end-column="6" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -107,8 +131,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ICliente.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="45">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -275,6 +299,9 @@
       <workItem from="1556750049627" duration="8000" />
       <workItem from="1556886990112" duration="587000" />
       <workItem from="1556887604966" duration="14000" />
+      <workItem from="1557161144307" duration="599000" />
+      <workItem from="1557162237723" duration="5000" />
+      <workItem from="1557241233163" duration="1692000" />
     </task>
     <task id="LOCAL-00001" summary="Produtos+Clientes+CatClientes+CatProdutos">
       <created>1556221407555</created>
@@ -287,12 +314,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64120000" />
+    <option name="totallyTimeSpent" value="66416000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-3" y="0" width="1926" height="1058" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.226254" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23425826" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -367,13 +395,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="39" selection-start-line="23" selection-end-line="39" />
         </state>
       </provider>
     </entry>
@@ -502,8 +523,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Produto.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="51" column="23" selection-start-line="51" selection-start-column="23" selection-end-line="51" selection-end-column="23" />
+        <state>
+          <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -512,18 +533,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CatProdutos.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
+        <state relative-caret-position="285">
           <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CatClientes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -546,8 +557,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ICliente.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
@@ -561,10 +572,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="17" column="32" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/CatFaturacao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="747">
+        <state relative-caret-position="746">
           <caret line="100" column="6" selection-start-line="100" selection-start-column="6" selection-end-line="100" selection-end-column="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CatClientes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

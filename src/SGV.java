@@ -15,45 +15,7 @@ public class SGV {
     private CatFaturacao CatFat;
 
 
-    public int readProdutos (String fich){
-        this.CatProds = new CatProdutos();
-        String linha = null;
-        int i=0;
-        try(
-                BufferedReader inStream = new BufferedReader(new FileReader(fich))){
-            while((linha= inStream.readLine())!=null){
-                Produto c = new Produto(linha);
-                if (c.validaProduto()) {
-                    this.CatProds.getProdutos().add(c.toString());
-                    i++;
-                }    
-            }
-        }
-        catch(IOException e){
-            System.out.println(e);
-        }
-        return i;
-    }
 
-    public int readClientes(String fich){
-        this.CatClis = new CatClientes();
-        String linha = null;
-        int i=0;
-        try(
-                BufferedReader inStream = new BufferedReader(new FileReader(fich))){
-            while((linha= inStream.readLine())!=null){
-                Cliente c = new Cliente(linha);
-                if (c.validaCliente()) {
-                    this.CatClis.getClientes().add(c.toString());
-                    i++;
-                }
-            }
-        }
-        catch(IOException e){
-            System.out.println(e);
-        }
-        return i;
-    }
 
 
 
@@ -69,14 +31,10 @@ public class SGV {
             while ((linha = inStream.readLine()) != null) {
 
                 divd = linha.split(" ");
-                Cliente c = new Cliente((String) get(divd,4));
-                Produto p = new Produto((String) get(divd, 0));
                 Venda v = new Venda(divd);
                 if (divd.length == 7
-                        && c.validaCliente()
-                        && this.CatClis.existeCliente(c.toString())
-                        && p.validaProduto()
-                        && this.CatProds.existeProduto(p.toString())
+                        && this.CatClis.existeCliente((String) get(divd,4))
+                        && this.CatProds.existeProduto((String) get(divd, 0))
                         && v.validaVenda()) {
                     this.CatVendas.addVenda(linha);
               
@@ -108,8 +66,8 @@ public class SGV {
         //c.readClientes("Clientes.txt");
         //CatFaturacao cf = new CatFaturacao();
         
-        System.out.println("p "+ c.readProdutos("Produtos.txt"));
-        System.out.println("c "+ c.readClientes("Clientes.txt"));
+        //System.out.println("p "+ c.readProdutos("Produtos.txt"));
+        //System.out.println("c "+ c.readClientes("Clientes.txt"));
         System.out.println("v "+ c.readLinesWithBuff("Vendas_1M.txt"));
         System.out.println(c.adiciona());
 

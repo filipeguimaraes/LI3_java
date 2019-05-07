@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.util.*;
 
 public class CatClientes{
-    private Set<String> clientes;
+    private Set<ICliente> clientes;
 
     public CatClientes(){
         this.clientes=new TreeSet<>();
     }
 
-    public CatClientes(Set<String> clientes) {
+    public CatClientes(Set<ICliente> clientes) {
         this.setClientes(clientes);
     }
 
@@ -18,11 +18,11 @@ public class CatClientes{
         this.clientes=cat.getClientes();
     }
 
-    public Set<String> getClientes() {
+    public Set<ICliente> getClientes() {
         return clientes;
     }
 
-    public void setClientes(Set<String> clientes) {
+    public void setClientes(Set<ICliente> clientes) {
         this.clientes = clientes;
     }
 
@@ -46,6 +46,27 @@ public class CatClientes{
 
     public boolean existeCliente(String s){
         return this.clientes.contains(s);
+    }
+
+        public int readClientes(String fich){
+        String linha = null;
+        int i=0;
+        try(
+                BufferedReader inStream = new BufferedReader(new FileReader(fich))){
+            while((linha= inStream.readLine())!=null){
+                
+                
+                if (Cliente.validaCliente(linha)) {
+                    ICliente c = new Cliente(linha);
+                    clientes.add(c);
+                    i++;
+                }
+            }
+        }
+        catch(IOException e){
+            System.out.println(e);
+        }
+        return i;
     }
 
 }

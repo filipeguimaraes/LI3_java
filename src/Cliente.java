@@ -69,14 +69,20 @@ public class Cliente implements Comparable<Cliente>, ICliente{
     }
 
 
-   public boolean validaCliente(){
-        if(this.compCliente_Cli()){
-            return (this.validaLetras_Cli() && this.validaIntCliente());
+   public static boolean validaCliente(String s){
+        boolean r;
+        r=s.length()==5;
+        r=Character.isUpperCase(s.charAt(0));
+        for(int i=1;r && i<5;i++){
+            r=Character.isDigit(s.charAt(i));
         }
-        else return false;
-    }
+        r= r && (1000 <= parseInt(s.substring(1))  && parseInt(s.substring(1)) <= 5000);
+        return r;
+   }
+        
+   
 
-    public int compareTo(Cliente c){return this.codCli.compareTo(c.getCodCli());}
+   public int compareTo(Cliente c){return this.codCli.compareTo(c.getCodCli());}
 
 
 }

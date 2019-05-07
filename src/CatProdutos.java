@@ -5,13 +5,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CatProdutos{
-    private Set<String> produtos;
+    private Set<IProduto> produtos;
 
     public CatProdutos(){
         this.produtos=new TreeSet<>();
     }
 
-    public CatProdutos(Set<String> produtos) {
+    public CatProdutos(Set<IProduto> produtos) {
         this.setProdutos(produtos);
     }
 
@@ -19,15 +19,15 @@ public class CatProdutos{
         this.produtos=cat.getProdutos();
     }
 
-    public Set<String> getProdutos() {
+    public Set<IProduto> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(Set<String> produtos) {
+    public void setProdutos(Set<IProduto> produtos) {
         this.produtos = produtos;
     }
 
-    public List<String> lista (){
+    public List<IProduto> lista (){
         return this.produtos.stream().collect(Collectors.toList());
     }
 
@@ -48,10 +48,27 @@ public class CatProdutos{
         return new CatProdutos(this);
     }
 
-
-
     public boolean existeProduto(String s){
         return this.produtos.contains(s);
+    }
+
+    public int readProdutos (String fich){
+        String linha = null;
+        int i=0;
+        try(
+                BufferedReader inStream = new BufferedReader(new FileReader(fich))){
+            while((linha= inStream.readLine())!=null){
+                if (Produto.validaProduto(linha)) {
+                    IProduto c = new Produto(linha);
+                    produtos.add(c);
+                    i++;
+                }    
+            }
+        }
+        catch(IOException e){
+            System.out.println(e);
+        }
+        return i;
     }
 
 }
