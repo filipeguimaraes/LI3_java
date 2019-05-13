@@ -35,6 +35,8 @@ hs_err_pid*
 *.TXT
 
 # Out folder
-out/*
+out/
+src/*.class
+src/*.ctxt
 
 # End of https://www.gitignore.io/api/java
