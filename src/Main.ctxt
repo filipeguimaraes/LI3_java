@@ -1,8 +1,0 @@
-#BlueJ class context
-comment0.target=Main
-comment1.params=fich
-comment1.target=java.util.List\ readLinesWithBuff(java.lang.String)
-comment1.text=\ \ \ \ public\ static\ List<String>\ readFilesWithNIO(String\ filePath){\n\ \ \ \ \ \ \ \ Path\ p\ \=\ Paths.get(filePath);\n\ \ \ \ \ \ \ \ List<String>\ l\ \=\ null;\n\ \ \ \ \ \ \ \ try{\n\ \ \ \ \ \ \ \ \ \ \ \ l\=\ Files.readAllLines(p,\ StandardCharsets.UTF_8);\n\ \ \ \ \ \ \ \ }\ catch\ (IOException\ e){\n\ \ \ \ \ \ \ \ \ \ \ \ e.printStackTrace();\n\ \ \ \ \ \ \ \ }\n\ \ \ \ \ \ \ \ return\ l;\n}
-comment2.params=args
-comment2.target=void\ main(java.lang.String[])
-numComments=3
