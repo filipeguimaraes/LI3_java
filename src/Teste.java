@@ -3,7 +3,7 @@ public class Teste {
 
 
         CatClientes c = new CatClientes();
-        
+        c.readClientes("Clientes.txt");
         System.out.println(c);
 
     }

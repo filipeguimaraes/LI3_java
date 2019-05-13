@@ -3,6 +3,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -14,10 +15,12 @@ public class SGV {
     private CatVendas CatVendas;
     private CatFaturacao CatFat;
 
-
-
-
-
+    public SGV() {
+        CatProds = new CatProdutos();
+        CatClis = new CatClientes();
+        CatVendas = new CatVendas();
+        CatFat = new CatFaturacao();
+    }
 
     public int readLinesWithBuff(String fich) {
         this.CatVendas = new CatVendas();
@@ -25,16 +28,14 @@ public class SGV {
         String[] divd = new String[7];
         int i =0;
 
-
-
         try (BufferedReader inStream = new BufferedReader(new FileReader(fich))) {
             while ((linha = inStream.readLine()) != null) {
 
                 divd = linha.split(" ");
                 Venda v = new Venda(divd);
                 if (divd.length == 7
-                        && this.CatClis.existeCliente((String) get(divd,4))
-                        && this.CatProds.existeProduto((String) get(divd, 0))
+                        && this.CatClis.existeCliente(v.getCodCli())
+                        && this.CatProds.existeProduto(v.getCodProd())
                         && v.validaVenda()) {
                     this.CatVendas.addVenda(linha);
               
@@ -47,7 +48,18 @@ public class SGV {
         return i;
     }
 
-    public String adiciona (){
+
+    public void adicionaFatNComp(){
+        Set<String> clis_compram = this.CatFat.getSetVendidos();
+        for(String s : this.CatProds.getListProds()){
+            if(!clis_compram.contains(s)){
+                this.CatFat.addNaoVendidos(s);
+            }
+        }
+    }
+
+
+    public void loadFat (){
         List<String> lv = this.CatVendas.getVendas();
         List<Venda> lvs = lv.stream().map(Venda::new).collect(Collectors.toList());
         this.CatFat = new CatFaturacao();
@@ -57,19 +69,18 @@ public class SGV {
                     (v.getTipo().equals("P")?(double) v.getQuantidade() * v.getPreco() : 0),
                     v.getFilial());
         }
-        return this.CatFat.toString();
+        this.adicionaFatNComp();
     }
+
 
     public static void main(String[] args){
         SGV c = new SGV();
-        //CatClientes cc = new CatClientes();
-        //c.readClientes("Clientes.txt");
-        //CatFaturacao cf = new CatFaturacao();
-        
-        //System.out.println("p "+ c.readProdutos("Produtos.txt"));
-        //System.out.println("c "+ c.readClientes("Clientes.txt"));
+        c.CatClis.readClientes("Clientes.txt");
+        c.CatProds.readProdutos("Produtos.txt");
+
         System.out.println("v "+ c.readLinesWithBuff("Vendas_1M.txt"));
-        System.out.println(c.adiciona());
+        c.loadFat();
+        System.out.println(c.CatFat.getSetVendidos().size());
 
     }
 

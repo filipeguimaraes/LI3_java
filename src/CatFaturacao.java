@@ -1,27 +1,24 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CatFaturacao {
-    private Map<Integer, Map<String,Map<Integer,DadosMes>>> vendidos;
-    private Map<String, Map<Integer,DadosMes>> n_vendidos;
+    private Map<Integer, Map<String, Map<Integer, DadosMes>>> vendidos;
+    private Set<String> n_vendidos;
 
     public CatFaturacao(){
         this.vendidos=new HashMap<>();
-        this.n_vendidos= new HashMap<>();
+        this.n_vendidos= new HashSet<>();
     }
 
     //alterado
-    public CatFaturacao(Map<Integer, Map<String, Map<Integer, DadosMes>>> vendidos, Map<String, Map<Integer, DadosMes>> n_vendidos) {
+    public CatFaturacao(Map<Integer, Map<String, Map<Integer, DadosMes>>> vendidos, Set<String> n_vendidos) {
         this.vendidos = vendidos;
         this.n_vendidos = n_vendidos;
     }
 
     public CatFaturacao(CatFaturacao cf){
         this.vendidos=cf.getVendidos();
-        this.n_vendidos=cf.getN_vendidos();
+        this.n_vendidos= (Set<String>) cf.getN_vendidos();
     }
 
     //alt
@@ -43,11 +40,11 @@ public class CatFaturacao {
                 n_vendidos.equals(that.n_vendidos);
     }
 
-    public Map<String, Map<Integer, DadosMes>> getN_vendidos() {
+    public Set<String> getN_vendidos() {
         return n_vendidos;
     }
 
-    public void setN_vendidos(Map<String, Map<Integer, DadosMes>> n_vendidos) {
+    public void setN_vendidos(Set<String> n_vendidos) {
         this.n_vendidos = n_vendidos;
     }
 
@@ -95,9 +92,18 @@ public class CatFaturacao {
         }
    }
 
-/*   public void addNVendidos(int filial, String cod, List<String> l){
-        Map<String,Map<Integer,DadosMes>> clis = this.vendidos.values().stream().collect(Collectors.toMap());
-        
-   }*/
+
+   public Set<String> getSetVendidos(){
+        Set<String> clis_compram = new TreeSet<String>();
+        for(Map<String,Map<Integer,DadosMes>> ss : new ArrayList<>(this.vendidos.values())){
+            clis_compram.addAll(ss.keySet());
+        }
+        return clis_compram;
+   }
+
+
+   public void addNaoVendidos(String cod){
+        this.n_vendidos.add(cod);
+   }
 
 }

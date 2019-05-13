@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class CatClientes{
     private Set<ICliente> clientes;
@@ -16,6 +17,10 @@ public class CatClientes{
 
     public CatClientes(CatClientes cat){
         this.clientes=cat.getClientes();
+    }
+
+    public List<String> getListClientes(){
+        return this.clientes.stream().map(ICliente::getCodCli).collect(Collectors.toList());
     }
 
     public Set<ICliente> getClientes() {
@@ -45,7 +50,8 @@ public class CatClientes{
 
 
     public boolean existeCliente(String s){
-        return this.clientes.contains(s);
+        ICliente ic = new Cliente(s);
+        return this.clientes.contains(ic);
     }
 
         public int readClientes(String fich){

@@ -27,8 +27,8 @@ public class CatProdutos{
         this.produtos = produtos;
     }
 
-    public List<IProduto> lista (){
-        return this.produtos.stream().collect(Collectors.toList());
+    public List<String> getListProds(){
+        return this.produtos.stream().map(IProduto::getCodProd).collect(Collectors.toList());
     }
 
     public boolean equals(Object o) {
@@ -49,7 +49,8 @@ public class CatProdutos{
     }
 
     public boolean existeProduto(String s){
-        return this.produtos.contains(s);
+        IProduto ip = new Produto(s);
+        return this.produtos.contains(ip);
     }
 
     public int readProdutos (String fich){

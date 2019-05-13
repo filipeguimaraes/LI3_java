@@ -31,7 +31,7 @@ public class Cliente implements Comparable<Cliente>, ICliente{
         return cliente.getCodCli().equals(this.codCli);
     }
 
-    public String toString() {
+    public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("codigo cliente" + this.codCli);
         return sb.toString();
