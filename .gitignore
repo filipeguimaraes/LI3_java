@@ -41,6 +41,5 @@ hs_err_pid*
 out/
 src/*.class
 src/*.ctxt
-.idea/
 
 # End of https://www.gitignore.io/api/java
