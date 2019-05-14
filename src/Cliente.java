@@ -33,7 +33,7 @@ public class Cliente implements Comparable<Cliente>, ICliente{
 
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("codigo cliente" + this.codCli);
+        sb.append("codigo cliente " + this.codCli);
         return sb.toString();
     }
 

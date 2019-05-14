@@ -135,13 +135,13 @@ public class Venda implements IVenda{
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("codigo produto" + this.codProd);
-        sb.append("codigo cliente" + this.codCli);
-        sb.append("preco" + this.preco);
-        sb.append("quantidade" + this.quantidade);
-        sb.append("tipo" + this.tipo);
-        sb.append("mes" + this.mes);
-        sb.append("filial" + this.filial);
+        sb.append("codigo produto " + this.codProd);
+        sb.append("codigo cliente " + this.codCli);
+        sb.append("preco " + this.preco);
+        sb.append("quantidade " + this.quantidade);
+        sb.append("tipo " + this.tipo);
+        sb.append("mes " + this.mes);
+        sb.append("filial " + this.filial);
 
         return sb.toString();
     }
