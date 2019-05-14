@@ -49,16 +49,6 @@ public class SGV {
     }
 
 
-    public void adicionaFatNComp(){
-        Set<String> clis_compram = this.CatFat.getSetVendidos();
-        for(String s : this.CatProds.getListProds()){
-            if(!clis_compram.contains(s)){
-                this.CatFat.addNaoVendidos(s);
-            }
-        }
-    }
-
-
     public void loadFat (){
         List<String> lv = this.CatVendas.getVendas();
         List<Venda> lvs = lv.stream().map(Venda::new).collect(Collectors.toList());
@@ -69,7 +59,7 @@ public class SGV {
                     (v.getTipo().equals("P")?(double) v.getQuantidade() * v.getPreco() : 0),
                     v.getFilial());
         }
-        this.adicionaFatNComp();
+        this.CatFat.adicionaFatNComp(lv);
     }
 
 

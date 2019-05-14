@@ -102,6 +102,16 @@ public class CatFaturacao {
    }
 
 
+    public void adicionaFatNComp(List<String> l){
+        Set<String> clis_compram = this.getSetVendidos();
+        for(String s : l){
+            if(!clis_compram.contains(s)){
+                this.addNaoVendidos(s);
+            }
+        }
+    }
+
+
    public void addNaoVendidos(String cod){
         this.n_vendidos.add(cod);
    }
