@@ -2,16 +2,4 @@
 comment0.target=ICliente
 comment1.params=
 comment1.target=java.lang.String\ getCodCli()
-comment2.params=codCli
-comment2.target=void\ setCodCli(java.lang.String)
-comment3.params=
-comment3.target=boolean\ validaLetras_Cli()
-comment4.params=
-comment4.target=boolean\ validaInt_Cli()
-comment5.params=
-comment5.target=boolean\ compCliente_Cli()
-comment6.params=
-comment6.target=boolean\ validaIntCliente()
-comment7.params=
-comment7.target=boolean\ validaCliente()
-numComments=8
+numComments=2

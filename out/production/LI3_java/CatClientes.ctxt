@@ -2,6 +2,8 @@
 comment0.target=CatClientes
 comment1.params=
 comment1.target=CatClientes()
+comment10.params=fich
+comment10.target=int\ readClientes(java.lang.String)
 comment2.params=clientes
 comment2.target=CatClientes(java.util.Set)
 comment3.params=cat
@@ -18,4 +20,4 @@ comment8.params=
 comment8.target=CatClientes\ clone()
 comment9.params=s
 comment9.target=boolean\ existeCliente(java.lang.String)
-numComments=10
+numComments=11

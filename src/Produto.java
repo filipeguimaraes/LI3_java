@@ -34,7 +34,7 @@ public class Produto implements Comparable<Produto>,IProduto {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("codigo produto" + this.codProd);
+        sb.append("codigo produto " + this.codProd);
         return sb.toString();
     }
 

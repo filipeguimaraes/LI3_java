@@ -2,7 +2,8 @@ public class Teste {
     public static void main(String[] args){
 
 
-        CatClientes c = new CatClientes();
+        CatVendas c = new CatVendas();
+        //c.readVendas("Vendas_1M.txt");
         
         System.out.println(c);
 
