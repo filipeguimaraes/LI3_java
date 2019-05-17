@@ -2,7 +2,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CatFaturacao {
-    private Map<Integer, Map<String, Map<Integer, DadosMes>>> vendidos;
+    private Map<Integer, ProdutosFilial> vendidos;
     private Set<String> n_vendidos;
 
     public CatFaturacao(){
@@ -11,7 +11,7 @@ public class CatFaturacao {
     }
 
     //alterado
-    public CatFaturacao(Map<Integer, Map<String, Map<Integer, DadosMes>>> vendidos, Set<String> n_vendidos) {
+    public CatFaturacao(Map<Integer, ProdutosFilial> vendidos, Set<String> n_vendidos) {
         this.vendidos = vendidos;
         this.n_vendidos = n_vendidos;
     }
@@ -22,12 +22,12 @@ public class CatFaturacao {
     }
 
     //alt
-    public Map<Integer, Map<String, Map<Integer, DadosMes>>> getVendidos() {
+    private Map<Integer, ProdutosFilial> getVendidos() {
         return vendidos;
     }
 
     //alt
-    public void setVendidos(Map<Integer, Map<String, Map<Integer, DadosMes>>> vendidos) {
+    public void setVendidos(Map<Integer, ProdutosFilial> vendidos) {
         this.vendidos = vendidos;
     }
 
@@ -40,7 +40,7 @@ public class CatFaturacao {
                 n_vendidos.equals(that.n_vendidos);
     }
 
-    public Set<String> getN_vendidos() {
+    private Set<String> getN_vendidos() {
         return n_vendidos;
     }
 
@@ -59,53 +59,28 @@ public class CatFaturacao {
         return new CatFaturacao(this);
     }
 
-    public void addDadosMes(String cod, int mes, int quant, double fat_N, double fat_P, int fil){
-        DadosMes dm;
-        Map<String,Map<Integer,DadosMes>> cli = new HashMap<>();
-        Map<Integer,DadosMes> dadosmes = new HashMap<>();
-        if(this.vendidos.containsKey(fil)) {
-            cli = this.vendidos.get(fil);
-            if(cli.containsKey(cod)) {
-                dadosmes = cli.get(cod);
-                if (dadosmes.containsKey(mes)) {
-                    dm = dadosmes.get(mes);
-                    dm.addQuantidade(quant);
-                    dm.addFaturacao_N(fat_N);
-                    dm.addFaturacao_P(fat_P);
-                    dm.addRegisto_vendas(1);
-                } else {
-                    dm = new DadosMes(quant,fat_N,fat_P,1);
-                    dadosmes.put(mes,dm.clone());
-                }
-            }
-            else{
-                dm = new DadosMes(quant,fat_N,fat_P,1);
-                dadosmes.put(mes,dm.clone());
-                cli.put(cod,dadosmes);
-            }
+    public void addCatFaturacao(String cod, int mes, int quant, double fat_N, double fat_P, int fil){
+        if(!this.vendidos.containsKey(fil)){
+            ProdutosFilial pf = new ProdutosFilial(fil);
+            this.vendidos.put(fil,pf);
         }
-        else{
-            dm = new DadosMes(quant,fat_N,fat_P,1);
-            dadosmes.put(mes,dm.clone());
-            cli.put(cod,dadosmes);
-            this.vendidos.put(fil,cli);
-        }
+        this.vendidos.get(fil).addProdutosFilial(cod,mes,quant,fat_N,fat_P);
    }
 
 
-   public Set<String> getSetVendidos(){
-        Set<String> clis_compram = new TreeSet<String>();
-        for(Map<String,Map<Integer,DadosMes>> ss : new ArrayList<>(this.vendidos.values())){
-            clis_compram.addAll(ss.keySet());
+   private TreeSet<String> getSetVendidos(){
+        TreeSet<String> clis_compram = new TreeSet<String>();
+        for(ProdutosFilial pf : new ArrayList<>(this.vendidos.values())){
+            clis_compram.addAll(pf.getCodClisFilial());
         }
         return clis_compram;
    }
 
 
     public void adicionaFatNComp(List<String> l){
-        Set<String> clis_compram = this.getSetVendidos();
+        TreeSet<String> prods_comprados = this.getSetVendidos();
         for(String s : l){
-            if(!clis_compram.contains(s)){
+            if(!prods_comprados.contains(s)){
                 this.addNaoVendidos(s);
             }
         }

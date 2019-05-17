@@ -1,6 +1,10 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -8,7 +12,7 @@ public class CatProdutos{
     private Set<IProduto> produtos;
 
     public CatProdutos(){
-        this.produtos=new TreeSet<>();
+        this.produtos = new TreeSet<>();
     }
 
     public CatProdutos(Set<IProduto> produtos) {
@@ -53,23 +57,25 @@ public class CatProdutos{
         return this.produtos.contains(ip);
     }
 
-    public int readProdutos (String fich){
-        String linha = null;
-        int i=0;
-        try(
-                BufferedReader inStream = new BufferedReader(new FileReader(fich))){
-            while((linha= inStream.readLine())!=null){
-                if (Produto.validaProduto(linha)) {
-                    IProduto c = new Produto(linha);
-                    produtos.add(c);
-                    i++;
-                }    
+    public static List<String> readFilesWithNIO(String filePath) {
+        Path p = Paths.get(filePath);
+        List<String> l = null;
+        try {
+            l = Files.readAllLines(p, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return l;
+    }
+
+    public void readProdutos (String fich){
+        for( String s : readFilesWithNIO(fich) ){
+            if (Produto.validaProduto(s)) {
+                IProduto c = new Produto(s);
+                produtos.add(c);
             }
         }
-        catch(IOException e){
-            System.out.println(e);
-        }
-        return i;
+
     }
 
 }

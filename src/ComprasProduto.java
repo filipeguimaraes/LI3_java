@@ -2,22 +2,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
-public class ListaComprasProd {
+public class ComprasProduto {
     private String codProd;
     private List<Venda> lista;
 
-    public ListaComprasProd(){
+    public ComprasProduto(){
         this.codProd="";
         this.lista= new ArrayList<>();
     }
 
-    public ListaComprasProd(String codProd, List<Venda> lista) {
+    public ComprasProduto(String codProd, List<Venda> lista) {
         this.codProd = codProd;
         this.lista=lista;
     }
 
-    public ListaComprasProd(ListaComprasProd l){
+    public ComprasProduto(ComprasProduto l){
         this.codProd=l.getCodProd();
         this.lista=l.getLista();
     }
@@ -31,7 +32,27 @@ public class ListaComprasProd {
     }
 
     public List<Venda> getLista() {
-        return lista;
+        return lista.stream().map(Venda::clone).collect(Collectors.toList());
+    }
+
+    public String toString() {
+        return "ComprasProduto{" +
+                "lista=" + lista +
+                '}';
+    }
+
+    public int getNumVendasMes(int mes){
+        int r = 0;
+        for(Venda v : lista){
+            if(v.getMes()==mes){
+                r++;
+            }
+        }
+        return r;
+    }
+
+    public int getNumVezesQueProdComprado(){
+        return this.getLista().size();
     }
 
     public void setLista(List<Venda> lista) {
@@ -41,20 +62,13 @@ public class ListaComprasProd {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ListaComprasProd that = (ListaComprasProd) o;
+        ComprasProduto that = (ComprasProduto) o;
         return codProd.equals(that.codProd) &&
                 lista.equals(that.lista);
     }
 
-    public String toString() {
-        return "ListaComprasProd{" +
-                "codProd='" + codProd + '\'' +
-                ", lista=" + lista +
-                '}';
-    }
-
-    public ListaComprasProd clone(){
-        return new ListaComprasProd(this);
+    public ComprasProduto clone(){
+        return new ComprasProduto(this);
     }
 
     public void addDados(Venda v){

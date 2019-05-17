@@ -1,20 +1,31 @@
 import java.util.Objects;
 
 public class DadosMes {
+    private int mes;
     private int quantidade;
     private double faturacao_N;
     private double faturacao_P;
     private int registo_vendas;
 
     public DadosMes(){
+        this.mes=0;
         this.quantidade = 0;
         this.faturacao_N = 0;
-        this.faturacao_P=0;
+        this.faturacao_P = 0;
         this.registo_vendas = 0;
 
     }
 
-    public DadosMes(int quantidade, double faturacao_N, double faturacao_P, int registo_vendas) {
+    public DadosMes(int mes) {
+        this.mes = mes;
+        this.quantidade = 0;
+        this.faturacao_N = 0;
+        this.faturacao_P = 0;
+        this.registo_vendas = 0;
+    }
+
+    public DadosMes(int mes, int quantidade, double faturacao_N, double faturacao_P, int registo_vendas) {
+        this.mes = mes;
         this.quantidade = quantidade;
         this.faturacao_N = faturacao_N;
         this.faturacao_P = faturacao_P;
@@ -22,6 +33,7 @@ public class DadosMes {
     }
 
     public DadosMes(DadosMes dm){
+        this.mes = dm.getMes();
         this.quantidade = dm.getQuantidade();
         this.faturacao_N = dm.getFaturacao_N();
         this.faturacao_P=dm.getFaturacao_P();
@@ -31,6 +43,14 @@ public class DadosMes {
 
     public int getQuantidade() {
         return quantidade;
+    }
+
+    public int getMes() {
+        return mes;
+    }
+
+    public void setMes(int mes) {
+        this.mes = mes;
     }
 
     public void setQuantidade(int quantidade) {
@@ -99,6 +119,13 @@ public class DadosMes {
 
     public DadosMes clone(){
         return new DadosMes(this);
+    }
+
+    public void addDadosMes(int quant, double fat_N, double fat_P){
+        this.addQuantidade(quant);
+        this.addFaturacao_N(fat_N);
+        this.addFaturacao_P(fat_P);
+        this.registo_vendas++;
     }
 
 }
