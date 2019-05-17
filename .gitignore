@@ -42,4 +42,6 @@ out/
 src/*.class
 src/*.ctxt
 
+.ideia/
+
 # End of https://www.gitignore.io/api/java

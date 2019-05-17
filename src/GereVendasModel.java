@@ -75,6 +75,7 @@ public class GereVendasModel {
     }
 
 
+
     public static void main(String[] args){
         GereVendasModel c = new GereVendasModel();
         c.CatClis.readClientes("Clientes.txt");
