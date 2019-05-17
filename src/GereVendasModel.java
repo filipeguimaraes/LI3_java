@@ -9,13 +9,14 @@ import java.util.stream.Collectors;
 
 import static java.lang.reflect.Array.get;
 
-public class SGV {
+public class GereVendasModel {
     private CatProdutos CatProds;
     private CatClientes CatClis;
     private CatVendas CatVendas;
     private CatFaturacao CatFat;
+    private Filial filial;
 
-    public SGV() {
+    public GereVendasModel() {
         CatProds = new CatProdutos();
         CatClis = new CatClientes();
         CatVendas = new CatVendas();
@@ -63,15 +64,25 @@ public class SGV {
     }
 
 
+    public void loadFilial (){
+        List<String> lv = this.CatVendas.getVendas();
+        List<Venda> lvs = lv.stream().map(Venda::new).collect(Collectors.toList());
+        this.filial = new Filial();
+        for(Venda v  : lvs){
+            this.filial.addListaComprasProd(v.getFilial(),
+                    v.getCodCli(),v.getCodProd(),v);
+        }
+    }
+
+
     public static void main(String[] args){
-        SGV c = new SGV();
+        GereVendasModel c = new GereVendasModel();
         c.CatClis.readClientes("Clientes.txt");
         c.CatProds.readProdutos("Produtos.txt");
 
         System.out.println("v "+ c.readLinesWithBuff("Vendas_1M.txt"));
         c.loadFat();
-        System.out.println(c.CatFat.getSetVendidos().size());
-
+        c.loadFilial();
     }
 
 
