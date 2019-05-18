@@ -53,6 +53,10 @@ public class Produto implements Comparable<Produto>,IProduto {
         return r;
     }
 
+    public int hashCode(){
+        return this.codProd.hashCode();
+    }
+
     public int compareTo(Produto p){return this.codProd.compareTo(p.getCodProd());}
 
 

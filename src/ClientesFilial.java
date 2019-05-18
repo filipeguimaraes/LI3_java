@@ -28,13 +28,13 @@ public class ClientesFilial {
         this.filial = filial;
     }
 
-    public void addListaComprasProd(Venda v, String codProd, String codCli){
+    public void addListaComprasProd(int filial, String codProd, String codCli, double preco, int quant, String tipo, int mes){
         if(!this.clientes_com_compras.containsKey(codCli)){
             ProdutosCompradosCliente lpc = new ProdutosCompradosCliente();
             lpc.setCliente(codCli);
             this.clientes_com_compras.put(codCli,lpc);
         }
-        this.clientes_com_compras.get(codCli).addCompraProd(v,codProd);
+        this.clientes_com_compras.get(codCli).addCompraProd(filial,codProd,codCli,preco,quant,tipo,mes);
     }
 
     public int getNumProdCompras(){

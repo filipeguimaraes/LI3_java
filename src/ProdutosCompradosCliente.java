@@ -38,13 +38,13 @@ public class ProdutosCompradosCliente {
         return this.cliente.hashCode();
     }
 
-    public void addCompraProd(Venda v, String codProd){
+    public void addCompraProd(int filial, String codProd, String codCli, double preco, int quant, String tipo, int mes){
         if(!this.produtos_comprados.containsKey(codProd)) {
             ComprasProduto lcp = new ComprasProduto();
             lcp.setCodProd(codProd);
             this.produtos_comprados.put(codProd, lcp);
         }
-        this.produtos_comprados.get(codProd).addDados(v.clone());
+        this.produtos_comprados.get(codProd).addDados(filial,codProd,codCli,preco,quant,tipo,mes);
     }
 
     public int getNumProdCompras(){

@@ -11,12 +11,13 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import static java.lang.Double.parseDouble;
+import static java.lang.Integer.parseInt;
 import static java.lang.reflect.Array.get;
 
 public class GereVendasModel {
     private CatProdutos CatProds;
     private CatClientes CatClis;
-    private CatVendas CatVendas;
     private CatFaturacao CatFat;
     private CatFiliais CatFiliais;
 
@@ -39,53 +40,31 @@ public class GereVendasModel {
     }
 
     public void readLinesWithBuff(String fich) {
-        //this.CatVendas = new CatVendas();
         String[] divd = new String[7];
 
         for( String s  : readFilesWithNIO(fich) ) {
             divd = s.split(" ");
-            Venda v = new Venda(divd);
             if (divd.length == 7
-                    && this.CatClis.existeCliente(v.getCodCli())
-                    && this.CatProds.existeProduto(v.getCodProd())
-                    && v.validaVenda()) {
-                //this.CatVendas.addVenda(s);
-                this.CatFat.addCatFaturacao(v.getCodProd(), v.getMes(), v.getQuantidade(),
-                        (v.getTipo().equals("N")?(double) v.getQuantidade() * v.getPreco() : 0),
-                        (v.getTipo().equals("P")?(double) v.getQuantidade() * v.getPreco() : 0),
-                        v.getFilial());
-                this.CatFiliais.addClienteFilial(v.getFilial(),
-                        v.getCodProd(),v.getCodCli(),v);
+            && this.CatClis.existeCliente(divd[4])
+            && this.CatProds.existeProduto(divd[0])){
+                int mes = parseInt(divd[5]);
+                int filial = parseInt(divd[6]);
+                double preco = parseDouble(divd[1]);
+                int quant = parseInt(divd[2]);
+
+                this.CatFat.addCatFaturacao(divd[0], mes, quant,
+                        (divd[3].equals("N")?(double) quant * preco : 0),
+                        (divd[3].equals("P")?(double) quant * preco: 0),
+                        filial);
+                this.CatFiliais.addClienteFilial(filial,
+                        divd[0],divd[4],preco,
+                        quant,divd[3],mes);
             }
         }
 
         this.CatFat.adicionaFatNComp(this.CatProds.getListProds());
     }
 
-
-    public void loadFat (){
-        List<String> lv = this.CatVendas.getVendas();
-        List<Venda> lvs = lv.stream().map(Venda::new).collect(Collectors.toList());
-        this.CatFat = new CatFaturacao();
-        for(Venda v  : lvs){
-            this.CatFat.addCatFaturacao(v.getCodProd(), v.getMes(), v.getQuantidade(),
-                    (v.getTipo().equals("N")?(double) v.getQuantidade() * v.getPreco() : 0),
-                    (v.getTipo().equals("P")?(double) v.getQuantidade() * v.getPreco() : 0),
-                    v.getFilial());
-        }
-        this.CatFat.adicionaFatNComp(this.CatProds.getListProds());
-    }
-
-
-    public void loadCatFiliais (){
-        List<String> lv = this.CatVendas.getVendas();
-        List<Venda> lvs = lv.stream().map(Venda::new).collect(Collectors.toList());
-        this.CatFiliais = new CatFiliais();
-        for(Venda v  : lvs){
-            this.CatFiliais.addClienteFilial(v.getFilial(),
-                    v.getCodProd(),v.getCodCli(),v);
-        }
-    }
 
     public List<Integer> query_2(int mes, int filial){
         List<Integer> l = new ArrayList<>();
@@ -105,7 +84,6 @@ public class GereVendasModel {
 //        c.loadCatFiliais();
         tmp.stop();
         System.out.println(tmp.print());
-        System.out.println(c.CatFiliais.getNumProdCompras());
     }
 
 

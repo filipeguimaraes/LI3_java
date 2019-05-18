@@ -80,7 +80,9 @@ public class Cliente implements Comparable<Cliente>, ICliente{
         return r;
    }
         
-   
+   public int hashCode(){
+        return this.codCli.hashCode();
+   }
 
    public int compareTo(Cliente c){return this.codCli.compareTo(c.getCodCli());}
 

@@ -71,8 +71,9 @@ public class ComprasProduto {
         return new ComprasProduto(this);
     }
 
-    public void addDados(Venda v){
-        this.lista.add(v);
+    public void addDados(int filial, String codProd, String codCli, double preco, int quant, String tipo, int mes){
+        Venda v = new Venda(codProd,codCli,preco,quant,tipo,mes,filial);
+        if(v.validaVenda())this.lista.add(v);
     }
 
 }

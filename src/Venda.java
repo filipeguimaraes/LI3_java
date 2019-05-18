@@ -158,27 +158,41 @@ public class Venda implements IVenda{
         return new Venda(this);
     }
 
-    public boolean validaPreco(){
+    private boolean validaPreco(){
         return 0 <= this.preco && this.preco <=999.99 ;
     }
 
-    public boolean validaMes(){
+    private boolean validaMes(){
         return 0 < this.mes  && this.mes < 13;
     }
 
-    public boolean validaFilial(){
+    private boolean validaFilial(){
         return 0 < this.filial && this.filial < 4;
     }
 
-    public boolean validaTipo(){
+    private boolean validaTipo(){
         return this.tipo.equals("N") || this.tipo.equals("P");
     }
 
-    public boolean validaQuant() {
+    private boolean validaQuant() {
         return 0 < this.quantidade && this.quantidade < 201;
     }
 
     public double totalFaturado(){
         return this.quantidade*this.preco;
+    }
+
+    public static boolean validaVenda(String s){
+        String[] split = s.split(" ");
+        double preco = parseDouble(split[1]);
+        int quantidade = parseInt(split[2]);
+        String tipo = split[3];
+        int mes = parseInt(split[5]);
+        int filial = parseInt(split[6]);
+        return 0 <= preco && preco <=999.99
+            && 0 < mes  && mes < 13
+            && 0 < filial && filial < 4
+            && (tipo.equals("N") || tipo.equals("P"))
+            && 0 < quantidade && quantidade < 201;
     }
 }

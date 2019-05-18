@@ -38,13 +38,13 @@ public class CatFiliais {
         return Objects.hash(filial_clientes);
     }
 
-    public void addClienteFilial(int filial, String codProd, String codCli, Venda v){
+    public void addClienteFilial(int filial, String codProd, String codCli, double preco, int quant, String tipo, int mes){
         if(!this.filial_clientes.containsKey(filial)){
-            ClientesFilial ccc = new ClientesFilial();
-            ccc.setFilial(filial);
-            this.filial_clientes.put(filial,ccc);
+            ClientesFilial cf = new ClientesFilial();
+            cf.setFilial(filial);
+            this.filial_clientes.put(filial,cf);
         }
-        this.filial_clientes.get(filial).addListaComprasProd(v,codProd,codCli);
+        this.filial_clientes.get(filial).addListaComprasProd(filial,codProd,codCli,preco,quant,tipo,mes);
     }
 
     public int getNumProdCompras(){
