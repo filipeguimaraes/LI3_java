@@ -18,13 +18,13 @@ public class GereVendasModel {
     private CatClientes CatClis;
     private CatVendas CatVendas;
     private CatFaturacao CatFat;
-    private CatFiliais filial;
+    private CatFiliais CatFiliais;
 
     public GereVendasModel() {
         CatProds = new CatProdutos();
         CatClis = new CatClientes();
-        CatVendas = new CatVendas();
         CatFat = new CatFaturacao();
+        CatFiliais = new CatFiliais();
     }
 
     public static List<String> readFilesWithNIO(String filePath) {
@@ -39,7 +39,7 @@ public class GereVendasModel {
     }
 
     public void readLinesWithBuff(String fich) {
-        this.CatVendas = new CatVendas();
+        //this.CatVendas = new CatVendas();
         String[] divd = new String[7];
 
         for( String s  : readFilesWithNIO(fich) ) {
@@ -49,9 +49,17 @@ public class GereVendasModel {
                     && this.CatClis.existeCliente(v.getCodCli())
                     && this.CatProds.existeProduto(v.getCodProd())
                     && v.validaVenda()) {
-                this.CatVendas.addVenda(s);
+                //this.CatVendas.addVenda(s);
+                this.CatFat.addCatFaturacao(v.getCodProd(), v.getMes(), v.getQuantidade(),
+                        (v.getTipo().equals("N")?(double) v.getQuantidade() * v.getPreco() : 0),
+                        (v.getTipo().equals("P")?(double) v.getQuantidade() * v.getPreco() : 0),
+                        v.getFilial());
+                this.CatFiliais.addClienteFilial(v.getFilial(),
+                        v.getCodProd(),v.getCodCli(),v);
             }
         }
+
+        this.CatFat.adicionaFatNComp(this.CatProds.getListProds());
     }
 
 
@@ -72,9 +80,9 @@ public class GereVendasModel {
     public void loadCatFiliais (){
         List<String> lv = this.CatVendas.getVendas();
         List<Venda> lvs = lv.stream().map(Venda::new).collect(Collectors.toList());
-        this.filial = new CatFiliais();
+        this.CatFiliais = new CatFiliais();
         for(Venda v  : lvs){
-            this.filial.addClienteFilial(v.getFilial(),
+            this.CatFiliais.addClienteFilial(v.getFilial(),
                     v.getCodProd(),v.getCodCli(),v);
         }
     }
@@ -87,12 +95,17 @@ public class GereVendasModel {
     }
 
     public static void main(String[] args){
+        Crono tmp = new Crono();
+        tmp.start();
         GereVendasModel c = new GereVendasModel();
         c.CatClis.readClientes("Clientes.txt");
         c.CatProds.readProdutos("Produtos.txt");
         c.readLinesWithBuff("Vendas_1M.txt");
-        c.loadFat();
-        c.loadCatFiliais();
+//        c.loadFat();
+//        c.loadCatFiliais();
+        tmp.stop();
+        System.out.println(tmp.print());
+        System.out.println(c.CatFiliais.getNumProdCompras());
     }
 
 

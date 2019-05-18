@@ -24,7 +24,7 @@ public class Produto implements Comparable<Produto>,IProduto {
         this.codProd = codProd;
     }
 
-   
+
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
