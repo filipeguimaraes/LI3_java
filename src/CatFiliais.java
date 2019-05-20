@@ -1,5 +1,6 @@
 import javax.print.DocFlavor;
 import java.util.*;
+import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.stream.Collectors;
 
 public class CatFiliais {
@@ -52,5 +53,57 @@ public class CatFiliais {
         for( Integer i : this.filial_clientes.values().stream().map(ClientesFilial::getNumProdCompras).collect(Collectors.toList()))
             r += i;
         return r;
+    }
+
+    public int getNumClientesCompramMesFilial(int filial, int mes){
+        HashSet<String> clis_compra_mes;
+        clis_compra_mes= new HashSet<>();
+        if(filial==0){
+            for (ClientesFilial cf : this.filial_clientes.values()) {
+                //clis_compra_mes.addAll(cf.getHashSetClientesCompramMes(mes,clis_compra_mes));
+                cf.getHashSetClientesCompramMes(mes,clis_compra_mes);
+            }
+        }
+        else {
+            if(this.filial_clientes.containsKey(filial)){
+                //clis_compra_mes = this.filial_clientes.get(filial).getHashSetClientesCompramMes(mes,clis_compra_mes);
+                this.filial_clientes.get(filial).getHashSetClientesCompramMes(mes,clis_compra_mes);
+            }
+            else{
+                return 0; // throw...
+            }
+        }
+        return clis_compra_mes.size();
+    }
+
+    public List<String> getQuantosProdsDifsEGastos(String cliente){
+        Map<Integer,Set<String>> prods_mes = new HashMap<>();
+        List<String> l = new ArrayList<String>();
+        StringBuilder sb;
+        int [] r_quant_reg_total = new int [12];
+        double [] r_gastos_total = new double [12];
+        double [] gastos_filial;
+        int [] quantos_filial;
+        int i;
+        for(ClientesFilial cf : this.filial_clientes.values()){
+            quantos_filial = cf.getClienteQuantidadeCompradaFilialMeses(cliente);
+            gastos_filial = cf.getClienteGastosCompradaFilialMeses(cliente);
+            cf.verificaComprasDeClientes(cliente,prods_mes);
+            for(i=0;i<12;i++){
+                r_quant_reg_total[i] += quantos_filial[i];
+                r_gastos_total[i] += gastos_filial[i];
+            }
+        }
+        int num_clis;
+        for (i=0;i<12;i++){
+            num_clis = 0;
+            sb = new StringBuilder();
+            if(prods_mes.containsKey(i+1)) num_clis = prods_mes.get(i+1).size();
+            sb.append(r_quant_reg_total[i]).append(" ")
+              .append(num_clis).append(" ")
+              .append(r_gastos_total[i]);
+            l.add(sb.toString());
+        }
+        return l;//getListaComprasProdsDifsGasto();
     }
 }

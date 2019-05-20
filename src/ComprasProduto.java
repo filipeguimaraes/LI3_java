@@ -35,24 +35,47 @@ public class ComprasProduto {
         return lista.stream().map(Venda::clone).collect(Collectors.toList());
     }
 
+    public int getNumVendasProd(){
+        return this.lista.size();
+    }
+
+    public int [] getNumComprasMes(){
+        int [] r = new int [12];
+        for(Venda v : this.lista){
+            r[v.getMes()-1]++;
+        }
+        return r;
+    }
+
+    public double [] getGastoMes(){
+        double [] r = new double [12];
+        for(Venda v : this.lista){
+            r[v.getMes()-1] += v.getPreco() * v.getQuantidade();
+        }
+        return r;
+    }
+
     public String toString() {
         return "ComprasProduto{" +
                 "lista=" + lista +
                 '}';
     }
 
-    public int getNumVendasMes(int mes){
-        int r = 0;
+    public boolean vendeMes(int mes){
         for(Venda v : lista){
             if(v.getMes()==mes){
-                r++;
+                return true;
             }
         }
-        return r;
+        return false;
     }
 
-    public int getNumVezesQueProdComprado(){
-        return this.getLista().size();
+    public List<Integer> getMesesEmQueVendeProd(){
+        List<Integer> l = new ArrayList<>();
+        for(Venda v : this.lista){
+            l.add(v.getMes());
+        }
+        return l;
     }
 
     public void setLista(List<Venda> lista) {

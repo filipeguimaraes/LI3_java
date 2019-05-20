@@ -1,5 +1,4 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -37,11 +36,33 @@ public class ClientesFilial {
         this.clientes_com_compras.get(codCli).addCompraProd(filial,codProd,codCli,preco,quant,tipo,mes);
     }
 
+
     public int getNumProdCompras(){
         int r=0;
         for( Integer i : this.clientes_com_compras.values().stream().map(ProdutosCompradosCliente::getNumProdCompras).collect(Collectors.toList()))
             r += i;
         return  r;
+    }
+
+    public void getHashSetClientesCompramMes(int mes, HashSet<String> aux){
+        //HashSet<String> clis = new HashSet<>();
+        for(ProdutosCompradosCliente pcc : this.clientes_com_compras.values())
+            if((!aux.contains(pcc.getCliente())) && pcc.clienteCompraNoMes(mes)) aux.add(pcc.getCliente());
+        //return clis;
+    }
+
+
+
+    public int [] getClienteQuantidadeCompradaFilialMeses(String cliente){
+        return this.clientes_com_compras.get(cliente).getNumRegComprasMeses();
+    }
+
+    public double [] getClienteGastosCompradaFilialMeses(String cliente){
+        return  this.clientes_com_compras.get(cliente).getGastosMesesTotal();
+    }
+
+    public void verificaComprasDeClientes(String cliente, Map<Integer,Set<String>> prods_mes){
+        this.clientes_com_compras.get(cliente).verificaCompraDeProdutosDiferentes(prods_mes);
     }
 }
 

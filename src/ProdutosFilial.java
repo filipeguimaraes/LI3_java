@@ -1,27 +1,28 @@
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ProdutosFilial {
     int filial;
-    private Map<String, DadosAnual> clientes_filial;
+    private Map<String, DadosAnual> produtos_filial;
 
     public ProdutosFilial() {
         this.filial = 0;
-        this.clientes_filial = new HashMap<String, DadosAnual>();
+        this.produtos_filial = new HashMap<String, DadosAnual>();
     }
 
     public ProdutosFilial(int filial) {
         this.filial = filial;
-        this.clientes_filial = new HashMap<String, DadosAnual>();
+        this.produtos_filial = new HashMap<String, DadosAnual>();
     }
 
-    public Map<String, DadosAnual> getClientes_filial() {
-        return clientes_filial;
+    public Map<String, DadosAnual> getprodutos_filial() {
+        return produtos_filial;
     }
 
-    public void setClientes_filial(Map<String, DadosAnual> clientes_filial) {
-        this.clientes_filial = clientes_filial;
+    public void setprodutos_filial(Map<String, DadosAnual> produtos_filial) {
+        this.produtos_filial = produtos_filial;
     }
 
     public int getFilial() {
@@ -33,14 +34,22 @@ public class ProdutosFilial {
     }
 
     public Set<String> getCodClisFilial(){
-        return this.clientes_filial.keySet();
+        return this.produtos_filial.keySet();
     }
 
     public void addProdutosFilial(String codProd, int mes, int quant, double fat_N, double fat_P){
-        if(!this.clientes_filial.containsKey(codProd)){
+        if(!this.produtos_filial.containsKey(codProd)){
             DadosAnual da = new DadosAnual(codProd);
-            this.clientes_filial.put(codProd,da);
+            this.produtos_filial.put(codProd,da);
         }
-        this.clientes_filial.get(codProd).addDadosAnual(mes,quant,fat_N,fat_P);
+        this.produtos_filial.get(codProd).addDadosAnual(mes,quant,fat_N,fat_P);
+    }
+
+    public int getNumVendasRegMes(int mes){
+        int r = 0;
+        for(DadosAnual da : this.produtos_filial.values()){
+            r += da.getNumVendidoMes(mes);
+        }
+        return r;
     }
 }

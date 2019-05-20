@@ -181,18 +181,4 @@ public class Venda implements IVenda{
     public double totalFaturado(){
         return this.quantidade*this.preco;
     }
-
-    public static boolean validaVenda(String s){
-        String[] split = s.split(" ");
-        double preco = parseDouble(split[1]);
-        int quantidade = parseInt(split[2]);
-        String tipo = split[3];
-        int mes = parseInt(split[5]);
-        int filial = parseInt(split[6]);
-        return 0 <= preco && preco <=999.99
-            && 0 < mes  && mes < 13
-            && 0 < filial && filial < 4
-            && (tipo.equals("N") || tipo.equals("P"))
-            && 0 < quantidade && quantidade < 201;
-    }
 }

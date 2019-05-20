@@ -43,4 +43,11 @@ public class DadosAnual {
         }
         this.dados_mensais.get(mes).addDadosMes(quant,fat_N,fat_P);
     }
+
+    public int getNumVendidoMes(int mes){
+        if(this.dados_mensais.containsKey(mes))
+            return this.dados_mensais.get(mes).getRegisto_vendas();
+        else
+            return 0;
+    }
 }
