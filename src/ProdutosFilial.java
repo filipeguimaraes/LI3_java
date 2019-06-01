@@ -52,4 +52,36 @@ public class ProdutosFilial {
         }
         return r;
     }
+
+    public int [] getVendasRegMesesFilial(String produto){
+        if(this.produtos_filial.containsKey(produto)){
+            int [] reg_prod_filial = new int [12];
+            int i;
+            for(i=0; i<12; i++){
+                reg_prod_filial[i] += this.produtos_filial.get(produto).getNumVendidoMes(i+1);
+            }
+            return reg_prod_filial;
+        }
+        return null;
+    }
+
+    public double [] getVendasFaturadoMesesFilial(String produto){
+        if(this.produtos_filial.containsKey(produto)){
+            double [] fat_prod_filial = new double [12];
+            int i;
+            for(i=0; i<12; i++){
+                fat_prod_filial[i] += this.produtos_filial.get(produto).getFaturadoMes(i+1);
+            }
+            return fat_prod_filial;
+        }
+        return null;
+    }
+
+    public Map<String,Integer> getProdsQuant(){
+        Map<String,Integer> m = new HashMap<>();
+        for(Map.Entry<String,DadosAnual> me : this.produtos_filial.entrySet()){
+            m.put(me.getKey(),me.getValue().getQuantidadeAnual());
+        }
+        return m;
+    }
 }

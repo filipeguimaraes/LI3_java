@@ -104,4 +104,29 @@ public class ProdutosCompradosCliente {
             }
         }
     }
+
+    public void addProdsCompramMes(String prod, Map<Integer,Set<String>> clis_mes){
+        if(this.produtos_comprados.containsKey(prod))
+            this.produtos_comprados.get(prod).compraProdutoMes(clis_mes);
+    }
+
+    public List<AbstractMap.SimpleEntry<String,Integer>> getListaProdutoQuantidade(){
+        List<AbstractMap.SimpleEntry<String,Integer>> l = new ArrayList<>();
+        for(Map.Entry<String,ComprasProduto> me : this.produtos_comprados.entrySet()){
+            l.add(new AbstractMap.SimpleEntry<>(me.getKey(),me.getValue().getQuantidadeTotalVendidaProduto()));
+        }
+        return l;
+    }
+
+    public boolean clienteCompraProd(String prod){
+        return this.produtos_comprados.containsKey(prod);
+    }
+
+    public double getGastosTotal(){
+        double gastos = 0;
+        for(ComprasProduto cp : this.produtos_comprados.values()){
+            gastos += cp.getGastoProd();
+        }
+        return gastos;
+    }
 }

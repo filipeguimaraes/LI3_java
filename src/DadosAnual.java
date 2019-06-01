@@ -50,4 +50,20 @@ public class DadosAnual {
         else
             return 0;
     }
+
+    public double getFaturadoMes(int mes){
+        if(this.dados_mensais.containsKey(mes))
+            return this.dados_mensais.get(mes).getFaturacao_N()+this.dados_mensais.get(mes).getFaturacao_P();
+        else
+            return 0;
+    }
+
+    public int getQuantidadeAnual(){
+        int r = 0;
+        for(DadosMes dm : this.dados_mensais.values()){
+            r += dm.getQuantidade();
+        }
+        return r;
+    }
+
 }

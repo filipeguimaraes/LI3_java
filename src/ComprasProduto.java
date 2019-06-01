@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ComprasProduto {
@@ -55,6 +52,14 @@ public class ComprasProduto {
         return r;
     }
 
+    public double getGastoProd(){
+        double r = 0;
+        for(Venda v : this.lista){
+            r += v.getPreco() * v.getQuantidade();
+        }
+        return r;
+    }
+
     public String toString() {
         return "ComprasProduto{" +
                 "lista=" + lista +
@@ -97,6 +102,20 @@ public class ComprasProduto {
     public void addDados(int filial, String codProd, String codCli, double preco, int quant, String tipo, int mes){
         Venda v = new Venda(codProd,codCli,preco,quant,tipo,mes,filial);
         if(v.validaVenda())this.lista.add(v);
+    }
+
+    public void compraProdutoMes(Map<Integer, Set<String>> clis_mes){
+        for(Venda v : this.lista){
+            clis_mes.get(v.getMes()).add(v.getCodCli());
+        }
+    }
+
+    public int getQuantidadeTotalVendidaProduto(){
+        int r = 0;
+        for(Venda v : this.lista){
+            r += v.getQuantidade();
+        }
+        return r;
     }
 
 }

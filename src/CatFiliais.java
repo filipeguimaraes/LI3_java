@@ -106,4 +106,53 @@ public class CatFiliais {
         }
         return l;//getListaComprasProdsDifsGasto();
     }
+
+
+    public int [] getClisDifsCompramProdMeses(String produto){
+        Map<Integer,Set<String>> clis_mes = new HashMap<>();
+        int i;
+        for (i=1;i<13;i++) {
+            Set<String> set = new HashSet<>();
+            clis_mes.put(i, set);
+        }
+        for(ClientesFilial cf : this.filial_clientes.values()){
+            cf.addClientesCompramProdMes(produto,clis_mes);
+        }
+        int [] num_clis = new int [12];
+        for (i=1;i<13;i++){
+            if(clis_mes.containsKey(i)) num_clis[i-1] = clis_mes.get(i).size();
+        }
+        return num_clis;
+    }
+
+    public Map<String,Integer> getProdutoQuantidadeDeUmCliente(String cliente){
+        Map<String,Integer> map = new HashMap<>();
+        int k;
+        for(ClientesFilial cf : this.filial_clientes.values()){
+            for(Map.Entry<String,Integer> me : cf.getProdsQuantCli(cliente).entrySet() ){
+                if(map.containsKey(me.getKey())){
+                    k = map.get(me.getKey()) + me.getValue();
+                    map.put(me.getKey(),k);
+                }
+                else{
+                   map.put(me.getKey(),me.getValue());
+                }
+            }
+        }
+        return map;
+    }
+
+    public int getNumClisDiferentesCompraProd(String prod){
+        Set<String> set = new HashSet<>();
+        for(ClientesFilial cf : this.filial_clientes.values()){
+            set.addAll(cf.getClisCompramProduto(prod,set));
+        }
+        return set.size();
+    }
+
+    public String getTop3CompradoresFilial(int filial){
+        if(this.filial_clientes.containsKey(filial))
+            return this.filial_clientes.get(filial).getTop3Faturacao();
+        else return "N/A";
+    }
 }

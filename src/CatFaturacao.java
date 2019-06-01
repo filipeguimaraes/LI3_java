@@ -109,8 +109,52 @@ public class CatFaturacao {
         return r;
     }
 
+    public int [] getVendasRegMeses(String produto){
+        int [] num_reg_vendas = new int [12];
+        int [] reg_aux;
+        int i;
+        for(ProdutosFilial pf : this.vendidos.values()){
+            reg_aux = pf.getVendasRegMesesFilial(produto);
+            if(reg_aux != null){
+                for(i=0; i<12; i++){
+                    num_reg_vendas[i] += reg_aux[i];
+                }
+            }
+        }
+        return num_reg_vendas;
+    }
 
+    public double [] getVendasFaturadoMeses(String produto){
+        double [] faturado_vendas = new double [12];
+        double [] faturado_aux;
+        int i;
+        for(ProdutosFilial pf : this.vendidos.values()){
+            faturado_aux= pf.getVendasFaturadoMesesFilial(produto);
+            if(faturado_aux != null){
+                for(i=0; i<12; i++){
+                    faturado_vendas[i] += faturado_aux[i];
+                }
+            }
+        }
+        return faturado_vendas;
+    }
 
+    public Map<String,Integer> getListaProdutosEQuantidadeVendida(){
+        Map<String,Integer> map = new HashMap<>();
+        int k;
+        for(ProdutosFilial pf : this.vendidos.values()){
+            for(Map.Entry<String,Integer> me : pf.getProdsQuant().entrySet() ){
+                if(map.containsKey(me.getKey())){
+                    k = map.get(me.getKey()) + me.getValue();
+                    map.put(me.getKey(),k);
+                }
+                else{
+                    map.put(me.getKey(),me.getValue());
+                }
+            }
+        }
+        return map;
+    }
 
    public void addNaoVendidos(String cod){
         this.n_vendidos.add(cod);

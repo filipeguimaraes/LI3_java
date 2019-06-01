@@ -51,7 +51,10 @@ public class ClientesFilial {
         //return clis;
     }
 
-
+    public void addClientesCompramProdMes(String prod, Map<Integer,Set<String>> prods_mes){
+        for(ProdutosCompradosCliente pcc : this.clientes_com_compras.values())
+            pcc.addProdsCompramMes(prod,prods_mes);
+    }
 
     public int [] getClienteQuantidadeCompradaFilialMeses(String cliente){
         return this.clientes_com_compras.get(cliente).getNumRegComprasMeses();
@@ -63,6 +66,58 @@ public class ClientesFilial {
 
     public void verificaComprasDeClientes(String cliente, Map<Integer,Set<String>> prods_mes){
         this.clientes_com_compras.get(cliente).verificaCompraDeProdutosDiferentes(prods_mes);
+    }
+
+    public Map<String,Integer> getProdsQuantCli(String cliente){
+        Map<String,Integer> map = new HashMap<>();
+        if(this.clientes_com_compras.containsKey(cliente)){
+            for(AbstractMap.SimpleEntry<String,Integer> se : this.clientes_com_compras.get(cliente).getListaProdutoQuantidade()){
+                map.put(se.getKey(),se.getValue());
+            }
+        }
+        return map;
+    }
+
+    public Set<String> getClisCompramProduto(String prod, Set<String> old){
+        Set<String> set = new HashSet<>();
+        for(ProdutosCompradosCliente pcc : this.clientes_com_compras.values()){
+            if(!old.contains(prod) && pcc.clienteCompraProd(prod)) set.add(pcc.getCliente());
+        }
+        return set;
+    }
+
+    public String getTop3Faturacao(){
+        List<Map.Entry<String,Double>> l = new ArrayList<>();
+        for(ProdutosCompradosCliente pcc : this.clientes_com_compras.values()){
+            l.add(new AbstractMap.SimpleEntry<String,Double>(pcc.getCliente(),pcc.getGastosTotal()));
+        }
+        Comparator<Map.Entry<String,Double>> c = new Comparator<Map.Entry<String,Double>>() {
+            public int compare(Map.Entry<String,Double> o1, Map.Entry<String,Double> o2) {
+                if(o1.getValue()<o2.getValue()) {
+                    return 1;
+                }
+                else{
+                    if(o1.getValue()>o2.getValue()){
+                        return -1;
+                    }
+                    else{
+                        return (o1.getKey().compareTo(o2.getKey()));
+                    }
+                }
+            }
+        };
+        l.sort(c);
+        int i;
+        StringBuilder sb;
+        sb = new StringBuilder();
+        for (i=0;i<2;i++) {
+            sb.append(l.get(i).getKey()).append(" ")
+                    .append(l.get(i).getValue())
+                    .append("|");
+        }
+        sb.append(l.get(i).getKey()).append(" ")
+                .append(l.get(i).getValue());
+        return sb.toString();
     }
 }
 
