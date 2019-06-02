@@ -111,13 +111,30 @@ public class ClientesFilial {
         StringBuilder sb;
         sb = new StringBuilder();
         for (i=0;i<2;i++) {
-            sb.append(l.get(i).getKey()).append(" ")
-                    .append(l.get(i).getValue())
-                    .append("|");
+            sb.append(l.get(i).getKey()).append(" ");
         }
-        sb.append(l.get(i).getKey()).append(" ")
-                .append(l.get(i).getValue());
+        sb.append(l.get(i).getKey());
         return sb.toString();
+    }
+
+    public Map<String,Set<String>> getClienteProdsDiferentes(){
+        Map<String,Set<String>> map = new HashMap<>();
+        for(ProdutosCompradosCliente pcc : this.clientes_com_compras.values()){
+            map.put(pcc.getCliente(), pcc.getProdsDifComprados());
+        }
+        return  map;
+    }
+
+    public Map<String,Double> getClisFatProd(String prod){
+        Map<String,Double> map = new HashMap<>();
+        double d;
+        for(ProdutosCompradosCliente pcc : this.clientes_com_compras.values()){
+            d = pcc.getGastoProdutoTotal(prod);
+            if(d != 0){
+                map.put(pcc.getCliente(),d);
+            }
+        }
+        return map;
     }
 }
 

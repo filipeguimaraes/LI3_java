@@ -1,16 +1,12 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
-import static java.lang.reflect.Array.get;
 
 public class GereVendasModel{
     private CatProdutos CatProds;
@@ -25,7 +21,7 @@ public class GereVendasModel{
         CatFiliais = new CatFiliais();
     }
 
-    public static boolean validaVenda(String s){
+    private static boolean validaVenda(String s){
         String[] split = s.split(" ");
         double preco = parseDouble(split[1]);
         int quantidade = parseInt(split[2]);
@@ -39,7 +35,7 @@ public class GereVendasModel{
                 && 0 < quantidade && quantidade < 201;
     }
 
-    public static List<String> readFilesWithNIO(String filePath) {
+    private static List<String> readFilesWithNIO(String filePath) {
         Path p = Paths.get(filePath);
         List<String> l = null;
         try {
@@ -50,7 +46,7 @@ public class GereVendasModel{
         return l;
     }
 
-    public void readLinesWithBuff(String fich) {
+    private void readLinesWithBuff(String fich) {
         String[] divd = new String[7];
 
         for (String s : readFilesWithNIO(fich)) {
@@ -72,25 +68,24 @@ public class GereVendasModel{
                         quant, divd[3], mes);
             }
         }
-
-        this.CatFat.adicionaFatNComp(this.CatProds.getListProds());
     }
 
-    // Query 1
+
     /**
-     *
-     * @return
+     * Metodo que retorna a lista de produtos não comprados.
+     * @return Lista de códigos de produtos não comprados. Exemplo: ["AF1184", "UJ3773", ...]
      */
     public List<String> getListaDeProdutosNaoComprados(){
-        return this.CatFat.getListaNaoComprados();
+        return this.CatFat.getListaNaoComprados(this.CatProds.getListProds());
     }
 
-    // Query 2
+
     /**
-     *
-     * @param mes
-     * @param filial
-     * @return
+     * Método que recebe uma filial e um mês, retorna um array com dois inteiros em que o primeiro corresponde
+     * ao número de vendas no mês nessa filial e o segundo o número de clientes que compram nesse mês.
+     * @param mes Mês do ano (int).
+     * @param filial Número de filial (int);
+     * @return Array(de inteiros) de duas posições.
      */
     public int [] getQuerie2(int mes, int filial){
         int [] r = new int[2];
@@ -99,22 +94,25 @@ public class GereVendasModel{
         return r;
     }
 
-    // Query 3
 
     /**
-     *
-     * @param cliente
-     * @return
+     * Método que recebe um código de cliente, retorna uma lista em que cada elemento é uma String com o número de
+     * registo de vendas respetivo ao cliente, número de produtos diferentes que o comprou e os gastos dessas vendas
+     * eftuadas pelo cliente, respetivamente ao mês, por exemplo o primeiro elemento da lista corresponde ao mes 1 (Janeiro).
+     * @param cliente Código de cliente (String).
+     * @return Lista de Strings. Exemplo: ["3 3 523.23202", ...]
      */
     public List<String> getQuerie3(String cliente){
         return this.CatFiliais.getQuantosProdsDifsEGastos(cliente);
     }
 
-    // Query 4
+
     /**
-     *
-     * @param produto
-     * @return
+     * Método que recebe um código de produto, retorna uma lista de Strings, em que cada String tem o número de vendas
+     * registadas com esse produto, número de clientes diferentes que compram esse produto e total faturado na venda
+     * desse produto; respetivamente aos meses.
+     * @param produto Código produto (String).
+     * @return Lista de Strings. Exemplo: ["3 3 523.23202", ...]
      */
     public List<String> getQuerie4(String produto){
         List<String> l = new ArrayList<>();
@@ -137,10 +135,17 @@ public class GereVendasModel{
         return l;
     }
 
-    // Query 5
-    public List<AbstractMap.SimpleEntry<String,Integer>> getQuerie5(String cliente){
-        Map m = this.CatFiliais.getProdutoQuantidadeDeUmCliente(cliente);
-        List<AbstractMap.SimpleEntry<String,Integer>> l = new ArrayList<>(m.entrySet());
+    /**
+     * Método que dado um código de cliente retorna uma lista(Top) dos produtos que comprou em
+     * relação a quantidade comprada. A lista é composta por pares de código produto e quantidade
+     * comprada;estes pares são ordenados por mais quantidade comprada, que caso seja igual
+     * ordena pelo código de produto.
+     * @param cliente Código de cliente.
+     * @return Lista de pares exemplo: [("AF1184",5321), ("ZA3421",3213), ...]
+     */
+    public List<Map.Entry<String,Integer>> getQuerie5(String cliente){
+        Map<String,Integer> m = this.CatFiliais.getProdutoQuantidadeDeUmCliente(cliente);
+        List<Map.Entry<String,Integer>> l = new ArrayList<Map.Entry<String,Integer>>(m.entrySet());
         Comparator<Map.Entry<String,Integer>> c = new Comparator<Map.Entry<String,Integer>>() {
             public int compare(Map.Entry<String,Integer> o1, Map.Entry<String,Integer> o2) {
                 if(o1.getValue()<o2.getValue()) {
@@ -160,7 +165,13 @@ public class GereVendasModel{
         return l;
     }
 
-    // Query 6
+    /**
+     * Método que dado um x, retorna um Top(x) de produtos por mais unidades vendidas, e tendo também o
+     * número de clientes diferentes que compraram esse produto.
+     * @param x Tamanho do Top de produtos pretendido.
+     * @return Lista exemplo: ["AF1184 732", "KR8394 662", ...] sendo código produto e número de clientes diferentes
+     * separado por um espaço (" ").
+     */
     public List<String> getQuerie6(int x) {
         List<String> lreturn = new ArrayList<>();
         Map m = this.CatFat.getListaProdutosEQuantidadeVendida();
@@ -188,7 +199,13 @@ public class GereVendasModel{
         return lreturn;
     }
 
-    // Query 7
+    /**
+     * Método que retorna a lista com o Top3 dos maiores compradores(clientes) por filial, sendo retornada uma lista
+     * de Strings, conrespondendo cada String ao Top3 de cada filial.
+     * @return Lista de Strings exemplo: ["K3992 A8832 J2366", "H8329 ...", ...]
+     * Sendo neste exemplo A8832 o segundo maior comprador da filial 1
+     * e H8329 o maior comprador da filial 2.
+     */
     public List<String> getQuerie7(){
         List<String> l = new ArrayList<>();
         l.add(this.CatFiliais.getTop3CompradoresFilial(1));
@@ -197,23 +214,110 @@ public class GereVendasModel{
         return l;
     }
 
-    public static void main(String[] args){
-        Crono tmp = new Crono();
-        tmp.start();
-        GereVendasModel c = new GereVendasModel();
-        c.CatClis.readClientes("Clientes.txt");
-        c.CatProds.readProdutos("Produtos.txt");
-        c.readLinesWithBuff("Vendas_1M.txt");
-//        c9.loadFat();
-//        c.loadCatFiliais();
-        tmp.stop();
-        System.out.println(tmp.print());
+    /**
+     * Método que dado um tamanho(x), retorna o Top(x) de clientes que compram o maior número de produtos
+     * diferentes, apresentados numa lista de pares (Código cliente, Quantidade de compras).
+     * Apresenta ainda uma ordem decrescente sobre a quantidade de compras, que se for igual,
+     * ordena por sua vez alfabéticamente por código cliente.
+     * @param x Tamanho do Top pretendido.
+     * @return Lista de pares exemplo: [("A1184", 32123), ("K2311", 2339), ...]
+     */
+    public List<Map.Entry<String,Integer>> getQuerie8(int x){
+        List<Map.Entry<String,Integer>> l = this.CatFiliais.getClienteNumProdsCompDiferentes();
+        Comparator<Map.Entry<String,Integer>> c = new Comparator<Map.Entry<String,Integer>>() {
+            public int compare(Map.Entry<String,Integer> o1, Map.Entry<String,Integer> o2) {
+                if (o1.getValue()-o2.getValue() != 0) return o2.getValue()-o1.getValue();
+                else return o1.getKey().compareTo(o2.getKey());
+            }
+        };
+        l.sort(c);
+        if(l.size()>x) {
+            l = l.subList(0, x);
+        }
+        return l;
+    }
 
-        tmp.start();
-        System.out.println(c.getQuerie7());
 
-        tmp.stop();
-        System.out.println(tmp.print());
+    /**
+     * Metodo que dado prod e tam retorna uma lista de pares, que reflete a o quanto um cliente gastou nesse produto.
+     * Esse tem a informação (Codigo cliente, Faturado produto),
+     * ordenado por maior faturação e secundáriamente caso tenha a mesma faturação por código cliente.
+     * @param produto Código do produto.
+     * @param tamanho Número de produtos que pertende na lista de retorno.
+     * @return Lista de pares exemplo: [("A1184", 1233321.32123), ("K2311", 23398.34027), ...]
+     */
+    public List<Map.Entry<String,Double>> getQuerie9(String produto, int tamanho){
+        List<Map.Entry<String,Double>> l = this.CatFiliais.getClientesFaturacaoProd(produto);
+        Comparator<Map.Entry<String,Double>> c = new Comparator<Map.Entry<String,Double>>() {
+            public int compare(Map.Entry<String,Double> o1, Map.Entry<String,Double> o2) {
+                double k = o1.getValue()-o2.getValue();
+                if (k != 0){
+                    if (k > 0){
+                        return -1;
+                    }
+                    else{
+                        return 1;
+                    }
+                }
+                else{
+                    return o1.getKey().compareTo(o2.getKey());
+                }
+            }
+        };
+        l.sort(c);
+        if(l.size()>tamanho){
+            l = l.subList(0,tamanho);
+        }
+        return l;
+    }
+
+
+    /**
+     * Método que retorna uma lista de Strings com a informação mês a mês, e para cada mês filial a filial,
+     * a facturação total a cada produto.
+     * @return Lista de Strings as quais têm o seguinte
+     * formato "<cod_prod>:<filial 1 mes 1 faturado>;<filial 2 mes 1 faturado>;<filial 3 mes 1 filial> faturado>|<filial 1 mes 2 faturado>;<filial 2 mes 2 faturado>;<filial 3 mes 2 faturado>|..."
+     * sendo ":" -> divisão cod_prod e dados; "|" divisão entre meses; ";" divisão entre dados por filial.
+     */
+    public List<String> getQuerie10(){
+        List<String> listOfProds = this.CatProds.getListProds();
+        List<String> l = new ArrayList<>();
+        Map<Integer,Map<Integer,Double>> filiais = new HashMap<>();
+        StringBuilder sb;
+        int i,j;
+        double k;
+        for (String s : listOfProds){
+            for (i=1; i<4; i++){
+                filiais.put(i,this.CatFat.getFatsProdMesFiliais(s,i));
+            }
+
+            sb = new StringBuilder();
+            sb.append(s).append(":");
+            for (j=1; j<13; j++){
+                for(i=1; i<4; i++){
+                    if(filiais.get(i) != null && filiais.get(i).containsKey(j)) k = filiais.get(i).get(j);
+                    else k = 0;
+                    sb.append(k);
+                    if(i<3)sb.append(";");
+                }
+                if(j<12 )sb.append("|");
+            }
+            sb.append("\n");
+            l.add(sb.toString());
+        }
+        return l;
+    }
+
+    /**
+     * Método que lê os ficheiros dando parse a informação útil para os modúlos.
+     * @param clientestxt Ficheiro de Clientes.
+     * @param produtostxt Ficheiro de Produtos.
+     * @param vendastxt Ficheiro de Vendas.
+     */
+    public void load(String clientestxt, String produtostxt, String vendastxt){
+        this.CatClis.readClientes(clientestxt);
+        this.CatProds.readProdutos(produtostxt);
+        this.readLinesWithBuff(vendastxt);
     }
 
 

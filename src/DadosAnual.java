@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DadosAnual {
-    String codProd;
+    private String codProd;
     private Map<Integer, DadosMes> dados_mensais;
 
     public DadosAnual() {
@@ -64,6 +64,14 @@ public class DadosAnual {
             r += dm.getQuantidade();
         }
         return r;
+    }
+
+    public Map<Integer,Double> getFaturacaoPorMes(){
+        Map<Integer,Double> map = new HashMap<>();
+        for (DadosMes dm : this.dados_mensais.values()){
+            map.put(dm.getMes(),dm.getFaturacaoTotal());
+        }
+        return map;
     }
 
 }

@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ProdutosFilial {
-    int filial;
+    private int filial;
     private Map<String, DadosAnual> produtos_filial;
 
     public ProdutosFilial() {
@@ -83,5 +83,15 @@ public class ProdutosFilial {
             m.put(me.getKey(),me.getValue().getQuantidadeAnual());
         }
         return m;
+    }
+
+
+    public Map<Integer,Double> getFatsProdMes(String prod){
+        if(this.produtos_filial.containsKey(prod)){
+            return this.produtos_filial.get(prod).getFaturacaoPorMes();
+        }
+        else{
+            return null; // throw
+        }
     }
 }

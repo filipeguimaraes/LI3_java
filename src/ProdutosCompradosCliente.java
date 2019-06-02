@@ -60,9 +60,8 @@ public class ProdutosCompradosCliente {
         return false;
     }
 
-    public int getNumProdsDifComprados(){
-        int r = 0;
-        return r;
+    public Set<String> getProdsDifComprados(){
+        return this.produtos_comprados.keySet();
     }
 
     public double [] getGastosMesesTotal(){
@@ -128,5 +127,14 @@ public class ProdutosCompradosCliente {
             gastos += cp.getGastoProd();
         }
         return gastos;
+    }
+
+    public double getGastoProdutoTotal(String prod){
+        if(this.produtos_comprados.containsKey(prod)){
+            return this.produtos_comprados.get(prod).getGastoProd();
+        }
+        else{
+            return 0.0;
+        }
     }
 }

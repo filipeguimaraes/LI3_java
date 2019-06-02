@@ -104,7 +104,7 @@ public class CatFiliais {
               .append(r_gastos_total[i]);
             l.add(sb.toString());
         }
-        return l;//getListaComprasProdsDifsGasto();
+        return l;
     }
 
 
@@ -154,5 +154,47 @@ public class CatFiliais {
         if(this.filial_clientes.containsKey(filial))
             return this.filial_clientes.get(filial).getTop3Faturacao();
         else return "N/A";
+    }
+
+    public List<Map.Entry<String,Integer>> getClienteNumProdsCompDiferentes(){
+        List<Map.Entry<String,Integer>> l = new ArrayList<>();
+        Map<String,Set<String>> map = new HashMap<>();
+        int k;
+        for(ClientesFilial cf : this.filial_clientes.values()){
+            for(Map.Entry<String,Set<String>> me : cf.getClienteProdsDiferentes().entrySet() ){
+                if(map.containsKey(me.getKey())){
+                    Set<String> aux = new HashSet<>(map.get(me.getKey()));
+                    aux.addAll(me.getValue());
+                    map.put(me.getKey(),aux);
+                }
+                else{
+                    map.put(me.getKey(),me.getValue());
+                }
+            }
+        }
+        for (Map.Entry<String,Set<String>> me : map.entrySet()){
+            l.add(new AbstractMap.SimpleEntry<>(me.getKey(),me.getValue().size()));
+        }
+        return l;
+    }
+
+    public List<Map.Entry<String,Double>> getClientesFaturacaoProd(String prod){
+        List<Map.Entry<String,Double>> l = new ArrayList<>();
+        Map<String,Double> map = new HashMap<>();
+        int k;
+        for(ClientesFilial cf : this.filial_clientes.values()){
+            for(Map.Entry<String,Double> me : cf.getClisFatProd(prod).entrySet() ){
+                if(map.containsKey(me.getKey())){
+                    map.put(me.getKey(),map.get(me.getKey())+me.getValue());
+                }
+                else{
+                    map.put(me.getKey(),me.getValue());
+                }
+            }
+        }
+        for (Map.Entry<String,Double> me : map.entrySet()){
+            l.add(new AbstractMap.SimpleEntry<>(me.getKey(),me.getValue()));
+        }
+        return l;
     }
 }

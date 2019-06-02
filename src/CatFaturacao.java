@@ -3,26 +3,22 @@ import java.util.stream.Collectors;
 
 public class CatFaturacao {
     private Map<Integer, ProdutosFilial> vendidos;
-    private List<String> n_vendidos;
 
     public CatFaturacao() {
         this.vendidos = new HashMap<>();
-        this.n_vendidos = new ArrayList<>();
     }
 
     //alterado
-    public CatFaturacao(Map<Integer, ProdutosFilial> vendidos, List<String> n_vendidos) {
+    public CatFaturacao(Map<Integer, ProdutosFilial> vendidos) {
         this.vendidos = vendidos;
-        this.n_vendidos = n_vendidos;
     }
 
     public CatFaturacao(CatFaturacao cf) {
         this.vendidos = cf.getVendidos();
-        this.n_vendidos = cf.getN_vendidos();
     }
 
-    public List<String> getListaNaoComprados() {
-        return this.n_vendidos.stream().sorted().collect(Collectors.toList());
+    public List<String> getListaNaoComprados(List<String> l) {
+        return this.adicionaFatNComp(l).stream().sorted().collect(Collectors.toList());
     }
 
     //alt
@@ -40,22 +36,13 @@ public class CatFaturacao {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CatFaturacao that = (CatFaturacao) o;
-        return vendidos.equals(that.vendidos) &&
-                n_vendidos.equals(that.n_vendidos);
+        return vendidos.equals(that.vendidos);
     }
 
-    private List<String> getN_vendidos() {
-        return n_vendidos;
-    }
-
-    public void setN_vendidos(List<String> n_vendidos) {
-        this.n_vendidos = n_vendidos;
-    }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Vendidos" + this.vendidos.toString());
-        sb.append("Não vendidos" + this.n_vendidos.toString());
         return sb.toString();
     }
 
@@ -81,13 +68,15 @@ public class CatFaturacao {
     }
 
 
-    public void adicionaFatNComp(List<String> l) {
+    public TreeSet<String> adicionaFatNComp(List<String> l) {
+        TreeSet<String> nao_vendidos = new TreeSet<>();
         TreeSet<String> prods_comprados = this.getSetVendidos();
         for (String s : l) {
             if (!prods_comprados.contains(s)) {
-                this.addNaoVendidos(s);
+                nao_vendidos.add(s);
             }
         }
+        return nao_vendidos;
     }
 
 
@@ -156,8 +145,15 @@ public class CatFaturacao {
         return map;
     }
 
-   public void addNaoVendidos(String cod){
-        this.n_vendidos.add(cod);
+
+
+   public Map<Integer,Double> getFatsProdMesFiliais(String prod, int filial){
+        if(this.vendidos.containsKey(filial)){
+            return this.vendidos.get(filial).getFatsProdMes(prod);
+        }
+        else{
+            return null;
+        }
    }
 
 }

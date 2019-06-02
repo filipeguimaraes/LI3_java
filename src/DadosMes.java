@@ -128,4 +128,8 @@ public class DadosMes {
         this.registo_vendas++;
     }
 
+    public double getFaturacaoTotal(){
+        return this.faturacao_N+this.faturacao_P;
+    }
+
 }
