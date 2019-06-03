@@ -21,28 +21,29 @@ public class Main {
         return l;
     }*/
 
-public static List<String> readLinesWithBuff(String fich){
-    List<String> linhas = new ArrayList<>();
-    String linha = null;
+/*
+    public static List<String> readLinesWithBuff(String fich){
+        List<String> linhas = new ArrayList<>();
+        String linha = null;
 
-    try(
-        BufferedReader inStream = new BufferedReader(new FileReader(fich))){
-        while((linha= inStream.readLine())!=null){
-           ////// if linha.metodo verifica-se
-            linhas.add(linha);
-        }
-    }
-    catch(IOException e){
+        try(
+            BufferedReader inStream = new BufferedReader(new FileReader(fich))){
+                while((linha= inStream.readLine())!=null){
+                ////// if linha.metodo verifica-se
+                linhas.add(linha);
+                }
+            }
+        catch(IOException e){
         System.out.println(e);
+        }
+        return linhas;
     }
-    return linhas;
-}
 
-public static void main(String[] args){
-    Crono.start();
-    List<String> clientes = readLinesWithBuff("clientes.txt");
+ */
 
-}
+    public static void main(String[] args){
+
+    }
 
 
 
