@@ -1,6 +1,6 @@
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  * Write a description of class GereVendasView here.
@@ -10,49 +10,65 @@ import java.util.Scanner;
  */
 public class GereVendasView implements InterfGereVendasView {
 
-    private static final int COLUNAS=182;
-    private static final int LINHAS=42;
+    private static final int COLUNAS=182; //Número de colunas
+    private static final int LINHAS=42; //Número de linhas
 
     private static final String RESET = "\033[0m";  // Text Reset
     private static final String RED = "\033[0;31m";     // RED
     private static final String CYAN = "\033[1;36m";   // Cyan Bold
     private static final String CYAN_UNDERLINE = "\033[4;36m";   // Cyan underline
 
+    /**
+     * Imprime a quantidade recebida de espaços
+     * @param quantidade Quantidade e espaços
+     */
     private void espacos(int quantidade){
         for(int i=0;i<quantidade;i++) System.out.print(" ");
     }
 
+    /**
+     * Imprime linhas em branco
+     * @param quantidade Quantidade de linhas
+     */
     private void linhas(int quantidade){
-        for(int i = quantidade; i>0; i--);
+        for(int i = quantidade; i>0; i--) System.out.println();
     }
 
     /**
      * Texto a azul
      */
     private void cyan(){
-        System.out.println(CYAN);
+        System.out.print(CYAN);
     }
 
     /**
      * Volta a colocar a cor "normal"
      */
     private void resetColor(){
-        System.out.println(RESET);
+        System.out.print(RESET);
     }
 
+    /**
+     * Faz uma linha de #
+     */
     private void line(){
         cyan();
         for(int i=COLUNAS;i>0;i--) System.out.print("#");
         resetColor();
-        System.out.println();
     }
 
+    /**
+     * Avança para a próxima linha
+     */
     private void mudarDeLinha(){
         System.out.println();
     }
 
+    /**
+     * Limpa o ecrã
+     */
     private void clear(){
-        for(int i=COLUNAS;i>0;i--) System.out.println();
+        for(int i=LINHAS;i>0;i--) System.out.println();
     }
 
     /**
@@ -64,20 +80,38 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.println("     "+CYAN+i+")"+RESET+"  "+s);
     }
 
+    /**
+     * Formata uma opção para um produto
+     * @param i Numero da opção
+     * @param m Opção
+     */
     private void printOpcao(int i,Map.Entry<String,Integer> m){
-        System.out.println("     "+CYAN+i+")"+RESET+" Produto: "+m.getKey()+CYAN+" | Quantidade: "+RESET+m.getValue());
+        System.out.println("     "+CYAN+i+")"+" Produto: "+RESET+m.getKey()+CYAN+" | Quantidade: "+RESET+m.getValue());
     }
 
+    /**
+     * Formata uma opção para um cliente e a quantidade
+     * @param i Numero da opção
+     * @param m Opção
+     */
     private void printOpcaoCli(int i,Map.Entry<String,Integer> m){
         System.out.println("     "+CYAN+i+") Cliente: "+RESET+m.getKey()+CYAN+" | Quantidade: "+RESET+m.getValue());
     }
 
+    /**
+     * Formata uma opção para um cliente e o valor gasto
+     * @param i Numero da opção
+     * @param m Opção
+     */
     private void printOpcaoC(int i,Map.Entry<String,Double> m){
         System.out.println("     "+CYAN+i+") Cliente: "+RESET+m.getKey()+CYAN+" | Valor gasto: "+RESET+m.getValue());
     }
 
-
-    public void imprimeLista(List<String> ls){
+    /**
+     * Imprime uma lista de opcões
+     * @param ls Lista de opções
+     */
+    private void imprimeLista(List<String> ls){
         System.out.println();
         int i=1;
         for (String s : ls) {
@@ -87,7 +121,11 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.println();
     }
 
-    public void imprimeListaProdutos (List<String> ls){
+    /**
+     * Imprime uma lista de produtos bem como os clientes distintos que o compraram
+     * @param ls Lista de opções
+     */
+    private void imprimeListaProdutos (List<String> ls){
         System.out.println();
         int i=1;
         for (String s : ls){
@@ -99,7 +137,11 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.println();
     }
 
-    public void imprimeProdutos(List<Map.Entry<String,Integer>> lm){
+    /**
+     * Imprime uma lista de produtos
+     * @param lm Lista de produtos
+     */
+    private void imprimeProdutos(List<Map.Entry<String,Integer>> lm){
         System.out.println();
         int i=1;
         for(Map.Entry<String,Integer> e : lm){
@@ -109,7 +151,11 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.println();
     }
 
-    public void imprimeClientes(List<Map.Entry<String,Integer>> ls){
+    /**
+     * Imprime uma lista de clientes
+     * @param ls Lista de clientes
+     */
+    private void imprimeClientes(List<Map.Entry<String,Integer>> ls){
         System.out.println();
         int i=1;
         for(Map.Entry<String,Integer> e : ls){
@@ -119,7 +165,11 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.println();
     }
 
-    public void imprimeClis(List<Map.Entry<String,Double>> ls){
+    /**
+     * Imprime uma lista de clientes
+     * @param ls Lista de clientes
+     */
+    private void imprimeClis(List<Map.Entry<String,Double>> ls){
         System.out.println();
         int i=1;
         for(Map.Entry<String,Double> e : ls){
@@ -131,38 +181,39 @@ public class GereVendasView implements InterfGereVendasView {
 
 
     private void ban(){
-        line();
+        line(); mudarDeLinha();
         cyan();
-        espacos((COLUNAS/2)-15);
-        System.out.println(" $$$$$$\\\\   $$$$$$\\  $$\\    $$\\ ");
-        espacos((COLUNAS/2)-15);
-        System.out.println("$$  __$$\\ $$  __$$\\ $$ |   $$ |");
-        espacos((COLUNAS/2)-15);
-        System.out.println("$$ /  \\__|$$ /  \\__|$$ |   $$ |");
-        espacos((COLUNAS/2)-15);
-        System.out.println("\\$$$$$$\\  $$ |$$$$\\ \\$$\\  $$  |");
-        espacos((COLUNAS/2)-15);
-        System.out.println(" \\____$$\\ $$ |\\_$$ | \\$$\\$$  / ");
-        espacos((COLUNAS/2)-15);
-        System.out.println("$$\\   $$ |$$ |  $$ |  \\$$$  /  ");
-        espacos((COLUNAS/2)-15);
-        System.out.println("\\$$$$$$  |\\$$$$$$  |   \\$  /   ");
-        espacos((COLUNAS/2)-15);
-        System.out.println(" \\______/  \\______/     \\_/");
+        espacos((COLUNAS-99)/2);
+        System.out.println(" $$$$$$\\                        $$\\   $$\\    $$\\                           $$\\                     ");
+        espacos((COLUNAS-99)/2);
+        System.out.println("$$  __$$\\                       $$ |  $$ |   $$ |                          $$ |                    ");
+        espacos((COLUNAS-99)/2);
+        System.out.println("$$ /  \\__| $$$$$$\\   $$$$$$$\\ $$$$$$\\ $$ |   $$ | $$$$$$\\  $$$$$$$\\   $$$$$$$ | $$$$$$\\   $$$$$$$\\ ");
+        espacos((COLUNAS-99)/2);
+        System.out.println("$$ |$$$$\\ $$  __$$\\ $$  _____|\\_$$  _|\\$$\\  $$  |$$  __$$\\ $$  __$$\\ $$  __$$ | \\____$$\\ $$  _____|");
+        espacos((COLUNAS-99)/2);
+        System.out.println("$$ |\\_$$ |$$$$$$$$ |\\$$$$$$\\    $$ |   \\$$\\$$  / $$$$$$$$ |$$ |  $$ |$$ /  $$ | $$$$$$$ |\\$$$$$$\\  ");
+        espacos((COLUNAS-99)/2);
+        System.out.println("$$ |  $$ |$$   ____| \\____$$\\   $$ |$$\\ \\$$$  /  $$   ____|$$ |  $$ |$$ |  $$ |$$  __$$ | \\____$$\\ ");
+        espacos((COLUNAS-99)/2);
+        System.out.println("\\$$$$$$  |\\$$$$$$$\\ $$$$$$$  |  \\$$$$  | \\$  /   \\$$$$$$$\\ $$ |  $$ |\\$$$$$$$ |\\$$$$$$$ |$$$$$$$  |");
+        espacos((COLUNAS-99)/2);
+        System.out.println(" \\______/  \\_______|\\_______/    \\____/   \\_/     \\_______|\\__|  \\__| \\_______| \\_______|\\_______/ ");
         resetColor();
         line();
     }
-/*
-    public void imprimeTabela(int[] f1,int[] f2, int[] f3, int numero_elementos){
 
-        int numero=(COLUNAS-20);
-        int largura=0;
-        if (COLUNAS%2 != 0) largura=((numero-7)/4);
-        else largura=((numero-6)/4);
+    @SuppressWarnings("Duplicates")
+    private void imprimeTabela(String[] f1,String[] f2, String[] f3){
+        int numero_elementos =12;
+        DecimalFormat df = new DecimalFormat("#.##");
+        int numero=(COLUNAS-30);
+        int largura= ((numero-16)/4);
         int i;
-        espacos(10);for(i=0;i<numero;i++) System.out.println("-");
-        espacos(10);for(i=0;i<numero;i++) System.out.println("-");
-
+        espacos(10);for(i=0;i<numero;i++) System.out.print("-");
+        mudarDeLinha();
+        espacos(10);for(i=0;i<numero;i++) System.out.print("-");
+        mudarDeLinha();
         espacos(10);
         System.out.print("||");
         espacos((largura/2)-6);
@@ -181,59 +232,72 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.print(RED+"3"+RESET);
         espacos(largura/2);
         System.out.println("||");
-        espacos(10); for(i=0;i<numero;i++){System.out.println("-");};
-        int j;
-        for(j=0;j<numero_elementos;j++){
-            int a1=f1[j];
-            int a2=f2[j];
-            int a3=f3[j];
-            int i1=0,i2=0,i3=0;
-            if(a1==0) i1=1;
-            if(a2==0) i2=1;
-            if(a3==0) i3=1;
-            for(; a1!=0;i1++) a1=a1/10;
-            for(; a2!=0;i2++) a2=a2/10;
-            for(; a3!=0;i3++) a3=a3/10;
+        espacos(10);
+        for(i=0;i<numero;i++) System.out.print("-");
+        mudarDeLinha();
+        for(int j=0;j<numero_elementos;j++){
             int aux=1;
             if(j>=9) aux=2;
 
             espacos(10); System.out.print("||");
-            espacos((largura/2)-aux);
-            System.out.printf(RED+"%d"+RESET,(j+1));
+            espacos((largura/2)-aux); System.out.printf(RED+"%d"+RESET,(j+1));
             espacos((largura/2));System.out.print("|");
-            espacos((largura/2)-i1);
-            System.out.printf("%d",f1[j]);
-            espacos(largura/2);
+
+            String aux1 = df.format(Double.valueOf(f1[j]));
+            int espacos1 = aux1.length();
+            espacos((largura/2)-(espacos1/2));
+            System.out.print(aux1);
+            espacos((largura/2)-(espacos1/2));
+
             System.out.print("|");
-            espacos((largura/2)-i2);
-            System.out.printf("%d",f2[j]);
-            espacos(largura/2);
+
+            String aux2 = df.format(Double.valueOf(f2[j]));
+            int espacos2 = aux2.length();
+            espacos((largura/2)-(espacos2/2));
+            System.out.print(aux2);
+            espacos(largura/2-(espacos2/2));
+
             System.out.print("|");
-            espacos((largura/2)-i3);
-            System.out.printf("%d",f3[j]);
-            espacos(largura/2);
+
+            String aux3 = df.format(Double.valueOf(f3[j]));
+            int espacos3 = aux3.length();
+            espacos((largura/2)-(espacos3/2));
+            System.out.print(aux3);
+            espacos(largura/2-(espacos3/2));
+
             System.out.println("||");
-            espacos(10);
-            for(i=0;i<numero;i++) System.out.println("-");
-            for(i=0;i<numero;i++) System.out.println("-");
+
+            espacos(10); for(i=0;i<numero;i++) System.out.print("-");
+            mudarDeLinha();
         }
+        espacos(10); for(i=0;i<numero;i++) System.out.print("-");
+        mudarDeLinha();
     }
 
- */
 
     public void fim(){
         cyan();
         int number=(LINHAS-10)/2;
         linhas(number);
         line();
-        System.out.println("                      $$$$$$\\        $$\\                               $$\\ ");
+        cyan();
+        espacos((COLUNAS-54)/2);
+        System.out.println("                     $$$$$$\\        $$\\                               $$\\ ");
+        espacos((COLUNAS-54)/2);
         System.out.println("                     $$  __$$\\       $$ |                              $$ |");
+        espacos((COLUNAS-54)/2);
         System.out.println("                     $$ /  $$ | $$$$$$$ | $$$$$$\\  $$\\   $$\\  $$$$$$$\\ $$ |");
+        espacos((COLUNAS-54)/2);
         System.out.println("                     $$$$$$$$ |$$  __$$ |$$  __$$\\ $$ |  $$ |$$  _____|$$ |");
+        espacos((COLUNAS-54)/2);
         System.out.println("                     $$  __$$ |$$ /  $$ |$$$$$$$$ |$$ |  $$ |\\$$$$$$\\  \\__|");
+        espacos((COLUNAS-54)/2);
         System.out.println("                     $$ |  $$ |$$ |  $$ |$$   ____|$$ |  $$ | \\____$$\\     ");
+        espacos((COLUNAS-54)/2);
         System.out.println("                     $$ |  $$ |\\$$$$$$$ |\\$$$$$$$\\ \\$$$$$$  |$$$$$$$  |$$\\ ");
+        espacos((COLUNAS-54)/2);
         System.out.println("                     \\__|  \\__| \\_______| \\_______| \\______/ \\_______/ \\__|");
+        resetColor();
         line();
         linhas(number);
         resetColor();
@@ -241,7 +305,7 @@ public class GereVendasView implements InterfGereVendasView {
 
     private void banMensagem(String descricao){
         cyan();
-        line();
+        line(); mudarDeLinha();
         int size = descricao.length();
         espacos((COLUNAS-size)/2);
         System.out.println(descricao);
@@ -252,7 +316,7 @@ public class GereVendasView implements InterfGereVendasView {
     public void menuOpcoes(String[] opcoes){
         clear();
         ban();
-        int number= ((LINHAS - 18) - opcoes.length) / 2;
+        int number= ((LINHAS - 12) - opcoes.length) / 2;
         int i=1;
         linhas(number);
         for(String s: opcoes){
@@ -261,54 +325,52 @@ public class GereVendasView implements InterfGereVendasView {
         }
         linhas(number);
         line();
+        mudarDeLinha();
         System.out.print("     Opção pretendida: ");
     }
 
     public void query1(List<String> produtos){
         clear();
         banMensagem("QUERY 1");
-        System.out.println(CYAN+"     Lista ordenada alfabeticamente com os códigos dos produtos nunca comprados"
-                +RESET);
+        System.out.println(
+                CYAN+"     Lista ordenada alfabeticamente com os códigos dos produtos nunca comprados" +RESET);
         imprimeLista(produtos);
         line();
+        mudarDeLinha();
         System.out.println(CYAN+"     Número de produtos nunca comprados: "+RESET+produtos.size());
     }
 
+    @SuppressWarnings("Duplicates")
     public void query2(int[] global, int[] filial1,int[] filial2,int[] filial3){
         clear();
         banMensagem("QUERY 2");
         mudarDeLinha();
-        espacos((COLUNAS-6)/2);
+        linhas(3);
         System.out.println(CYAN_UNDERLINE+"Global"+RESET);
         System.out.println(CYAN+"     Número total de vendas global: "+RESET+global[0]);
         System.out.println(CYAN+"     Número total de clientes envolvidos: "+RESET+global[1]);
-        mudarDeLinha();
+        linhas(3);
         line();
-        mudarDeLinha();
-        espacos((COLUNAS-8)/2);
+        linhas(3);
         System.out.println(CYAN_UNDERLINE+"Filial 1"+RESET);
         System.out.println(CYAN+"     Número total de vendas global: "+RESET+filial1[0]);
         System.out.println(CYAN+"     Número total de clientes envolvidos: "+RESET+filial1[1]);
-        mudarDeLinha();
+        linhas(3);
         line();
-        mudarDeLinha();
-        espacos((COLUNAS-8)/2);
+        linhas(3);
         System.out.println(CYAN_UNDERLINE+"Filial 2"+RESET);
         System.out.println(CYAN+"     Número total de vendas global: "+RESET+filial2[0]);
         System.out.println(CYAN+"     Número total de clientes envolvidos: "+RESET+filial2[1]);
-        mudarDeLinha();
+        linhas(3);
         line();
-        mudarDeLinha();
-        espacos((COLUNAS-8)/2);
+        linhas(3);
         System.out.println(CYAN_UNDERLINE+"Filial 3"+RESET);
         System.out.println(CYAN+"     Número total de vendas global: "+RESET+filial3[0]);
         System.out.println(CYAN+"     Número total de clientes envolvidos: "+RESET+filial3[1]);
+        linhas(3);
         cyan();
         line();
         mudarDeLinha();
-
-
-
     }
 
     @SuppressWarnings("Duplicates")
@@ -426,6 +488,7 @@ public class GereVendasView implements InterfGereVendasView {
         mudarDeLinha();
     }
 
+    @SuppressWarnings("Duplicates")
     public void query4(List<String> dados){
         clear();
         banMensagem("QUERY 4");
@@ -547,24 +610,24 @@ public class GereVendasView implements InterfGereVendasView {
         imprimeProdutos(dados);
         line();
         System.out.println(CYAN+"     Número de produtos: "+RESET+dados.size());
-        line();
+        line(); mudarDeLinha();
     }
 
     public void query6(List<String> dados){
         clear();
+        int number = (LINHAS-dados.size()-6)/2;
         banMensagem("QUERY 6");
+        linhas(number);
         imprimeListaProdutos(dados);
-        line();
+        linhas(number);
+        line(); mudarDeLinha();
     }
 
-    public void top3(String clientes){
+    private void top3(String clientes){
         mudarDeLinha();
         String[] aux = clientes.split(" ");
-        espacos((COLUNAS-12)/2);
         printOpcao(1,aux[0]);
-        espacos((COLUNAS-12)/2);
         printOpcao(2,aux[1]);
-        espacos((COLUNAS-12)/2);
         printOpcao(3,aux[2]);
         mudarDeLinha();
     }
@@ -572,74 +635,97 @@ public class GereVendasView implements InterfGereVendasView {
     public void query7(List<String> dados){
         clear();
         banMensagem("QUERY 7");
-        mudarDeLinha();
-        espacos((COLUNAS-8)/2);
+        linhas(3);
         System.out.println(CYAN_UNDERLINE+"Filial 1"+RESET);
         top3(dados.get(0));
-        mudarDeLinha();
+        linhas(3);
         line();
-        espacos((COLUNAS-8)/2);
+        linhas(3);
         System.out.println(CYAN_UNDERLINE+"Filial 2"+RESET);
         top3(dados.get(1));
-        mudarDeLinha();
+        linhas(3);
         line();
-        espacos((COLUNAS-8)/2);
+        linhas(3);
         System.out.println(CYAN_UNDERLINE+"Filial 3"+RESET);
         top3(dados.get(2));
-        mudarDeLinha();
+        linhas(3);
         line();
         mudarDeLinha();
-
     }
 
     public void query8(List<Map.Entry<String,Integer>> dados){
         clear();
         banMensagem("QUERY 8");
-        mudarDeLinha();
+        int number = (LINHAS -dados.size()-6)/2;
+        linhas(number);
         imprimeClientes(dados);
-        line();
-
+        linhas(number);
+        line(); mudarDeLinha();
     }
 
     public void query9(List<Map.Entry<String,Double>> dados){
         clear();
         banMensagem("QUERY 9");
-        mudarDeLinha();
+        int number = (LINHAS-dados.size()-6)/2;
+        linhas(number);
         imprimeClis(dados);
-        line();
+        linhas(number);
+        line(); mudarDeLinha();
     }
 
+    public void query10(String dados){
+        clear();
+        banMensagem("QUERY 10");
+        linhas(3);
+        String[] aux = dados.split(":");
+        String produto = aux[0];
+        String[] dadosMes = aux[1].split("#");
+        String[] filial1 = new String[12];
+        String[] filial2 = new String[12];
+        String[] filial3 = new String[12];
+        for (int i=0; i<12; i++){
+            String[] dadosMesFilial = dadosMes[i].split(";");
+            filial1[i]=dadosMesFilial[0];
+            filial2[i]=dadosMesFilial[1];
+            filial3[i]=dadosMesFilial[2];
+        }
+        System.out.println("          "+CYAN_UNDERLINE+"Produto:"+RESET+" "+produto);
+        imprimeTabela(filial1,filial2,filial3);
+        linhas(3);
+        line();
+        mudarDeLinha();
+        System.out.println("Pagina Anterior "+RED+"(1)"+RESET+" | Pagina Seguinte "+RED+"(2)"+RESET+" | Sair "+RED+"(0)"+RESET);
+    }
 
     public void carregaVendas(){
-        clear();
+        mudarDeLinha();
+        mudarDeLinha();
         banMensagem("Introduzir nome do ficheiro de vendas");
-        System.out.println();
+        mudarDeLinha();
         System.out.print("Nome do ficheiro"+RED+"(por defeito: \"Vendas_1M.txt\")"+RESET+": ");
-
     }
 
     public void carregaProdutos(){
-        clear();
+        mudarDeLinha();
+        mudarDeLinha();
         banMensagem("Introduzir nome do ficheiro de vendas");
-        System.out.println();
+        mudarDeLinha();
         System.out.print("Nome do ficheiro"+RED+"(por defeito: \"Produtos.txt\")"+RESET+": ");
-
     }
 
     public void carregaClientes(){
-        clear();
+        mudarDeLinha();
+        mudarDeLinha();
         banMensagem("Introduzir nome do ficheiro de vendas");
-        System.out.println();
+        mudarDeLinha();
         System.out.print("Nome do ficheiro"+RED+"(por defeito: \"Clientes.txt\")"+RESET+": ");
-
     }
 
     public void carregaPreDefinidos(){
         clear();
         banMensagem("Carregar ficheiros");
-        System.out.println();
+        mudarDeLinha();
         System.out.println("Deseja carregar ficheiros pré-definidos? "+ RED +"(Sim: 1 | Não: 0)" + RESET);
-
     }
 
     public void recebeMes(){

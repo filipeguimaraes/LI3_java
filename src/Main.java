@@ -1,14 +1,3 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Main {
 /*    public static List<String> readFilesWithNIO(String filePath){
         Path p = Paths.get(filePath);
@@ -42,7 +31,20 @@ public class Main {
  */
 
     public static void main(String[] args){
-
+        //GereVendasModel model = createData();
+        GereVendasModel model = new GereVendasModel();
+        /*
+        if(model == null) {
+            System.out.println("ERRO INICIALIZACAO");  // throw exception ?
+            System.exit(-1);
+        }
+         */
+        InterfGereVendasView view = new GereVendasView();
+        GereVendasController control = new GereVendasController();
+        control.setModel(model);
+        control.setView(view);
+        control.run();
+        System.exit(0);
     }
 
 
