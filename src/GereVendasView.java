@@ -13,10 +13,10 @@ public class GereVendasView implements InterfGereVendasView {
     private static final int COLUNAS=182; //Número de colunas
     private static final int LINHAS=42; //Número de linhas
 
-    private static final String RESET = "\033[0m";  // Text Reset
-    private static final String RED = "\033[0;31m";     // RED
-    private static final String CYAN = "\033[1;36m";   // Cyan Bold
-    private static final String CYAN_UNDERLINE = "\033[4;36m";   // Cyan underline
+    private static final String RESET = "\033[0m"; // Text Reset
+    private static final String RED = "\033[0;31m"; // RED
+    private static final String CYAN = "\033[1;36m"; // Cyan Bold
+    private static final String CYAN_UNDERLINE = "\033[4;36m"; // Cyan underline
 
     /**
      * Imprime a quantidade recebida de espaços
