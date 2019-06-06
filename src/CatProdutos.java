@@ -57,6 +57,20 @@ public class CatProdutos{
         return this.produtos.contains(ip);
     }
 
+    public void loadProdutos(String fich){
+        String linha;
+
+        try(
+                BufferedReader inStream = new BufferedReader(new FileReader(fich))){
+            while((linha= inStream.readLine())!=null){
+                this.produtos.add(new Produto(linha));
+            }
+        }
+        catch(IOException e){
+            System.out.println(e);
+        }
+    }
+
     public static List<String> readFilesWithNIO(String filePath) {
         Path p = Paths.get(filePath);
         List<String> l = null;

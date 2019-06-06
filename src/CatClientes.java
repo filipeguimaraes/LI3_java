@@ -58,6 +58,19 @@ public class CatClientes{
         return this.clientes.contains(ic);
     }
 
+    public void loadClientes(String fich){
+        String linha;
+        try(
+                BufferedReader inStream = new BufferedReader(new FileReader(fich))){
+            while((linha= inStream.readLine())!=null){
+                this.clientes.add(new Cliente(linha));
+            }
+        }
+        catch(IOException e){
+            System.out.println(e);
+        }
+    }
+
     public static List<String> readFilesWithNIO(String filePath) {
         Path p = Paths.get(filePath);
         List<String> l = null;
