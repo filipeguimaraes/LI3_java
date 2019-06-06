@@ -25,6 +25,12 @@ public interface InterfGereVendasView {
 
     void query10(String dados);
 
+    void totalComprasMes(List<Integer> dados);
+
+    void fatTotal(List<Double> dados);
+
+    void distintosCli(List<String> dados);
+
     void carregaVendas();
 
     void carregaProdutos();

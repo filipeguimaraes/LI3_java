@@ -70,10 +70,21 @@ public class CatFiliais {
                 this.filial_clientes.get(filial).getHashSetClientesCompramMes(mes,clis_compra_mes);
             }
             else{
-                return 0; // throw...
+                return 0;
             }
         }
         return clis_compra_mes.size();
+    }
+
+    public Map<Integer,Integer> getMesClientesDiferentes(int filial){
+        Map<Integer,Integer> map = new HashMap<>();
+        int i;
+        for (i=1; i<13; i++){
+            if(this.filial_clientes.containsKey(filial)){
+                map.put(i,this.filial_clientes.get(filial).getSetClientesCompramMes(i).size());
+            }
+        }
+        return map;
     }
 
     public List<String> getQuantosProdsDifsEGastos(String cliente){

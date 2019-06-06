@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -93,5 +94,39 @@ public class ProdutosFilial {
         else{
             return null; // throw
         }
+    }
+
+    public Map<Integer,Integer> getComprasMesFilial(){
+        Map<Integer,Integer> map = new HashMap<>();
+        int k;
+        for(DadosAnual da : this.produtos_filial.values()){
+            for(Map.Entry<Integer,Integer> me : da.getComprasMesProduto().entrySet() ){
+                if(map.containsKey(me.getKey())){
+                    k = map.get(me.getKey()) + me.getValue();
+                    map.put(me.getKey(),k);
+                }
+                else{
+                    map.put(me.getKey(),me.getValue());
+                }
+            }
+        }
+        return map;
+    }
+
+    public Map<Integer,Double> getFatMesFilial(){
+        Map<Integer,Double> map = new HashMap<>();
+        double k;
+        for(DadosAnual da : this.produtos_filial.values()){
+            for(Map.Entry<Integer,Double> me : da.getFaturacaoFilial().entrySet() ){
+                if(map.containsKey(me.getKey())){
+                    k = map.get(me.getKey()) + me.getValue();
+                    map.put(me.getKey(),k);
+                }
+                else{
+                    map.put(me.getKey(),me.getValue());
+                }
+            }
+        }
+        return map;
     }
 }

@@ -74,4 +74,19 @@ public class DadosAnual {
         return map;
     }
 
+    public Map<Integer,Integer> getComprasMesProduto(){
+        Map<Integer,Integer> map = new HashMap<>();
+        for(DadosMes dm : this.dados_mensais.values()){
+            map.put(dm.getMes(),dm.getRegisto_vendas());
+        }
+        return map;
+    }
+
+    public Map<Integer,Double> getFaturacaoFilial(){
+        Map<Integer,Double> map = new HashMap<>();
+        for(DadosMes dm : this.dados_mensais.values()){
+            map.put(dm.getMes(),dm.getFaturacaoTotal());
+        }
+        return map;
+    }
 }

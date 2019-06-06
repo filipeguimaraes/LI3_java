@@ -107,7 +107,11 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.println("     "+CYAN+i+") Cliente: "+RESET+m.getKey()+CYAN+" | Valor gasto: "+RESET+m.getValue());
     }
 
-    /**
+    private void printOpcao(int i, int s){
+        System.out.println("     "+CYAN+i+") Mês: "+RESET+i+CYAN+" | Total de compras: "+RESET+s);
+    }
+
+   /**
      * Imprime uma lista de opcões
      * @param ls Lista de opções
      */
@@ -115,6 +119,16 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.println();
         int i=1;
         for (String s : ls) {
+            printOpcao(i, s);
+            i++;
+        }
+        System.out.println();
+    }
+
+    private void imprimeListaInteiros(List<Integer> ls){
+        System.out.println();
+        int i=1;
+        for (Integer s : ls) {
             printOpcao(i, s);
             i++;
         }
@@ -208,7 +222,7 @@ public class GereVendasView implements InterfGereVendasView {
         int numero_elementos =12;
         DecimalFormat df = new DecimalFormat("#.##");
         int numero=(COLUNAS-30);
-        int largura= ((numero-16)/4);
+        int largura= ((numero-8)/4);
         int i;
         espacos(10);for(i=0;i<numero;i++) System.out.print("-");
         mudarDeLinha();
@@ -220,15 +234,15 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.print(CYAN_UNDERLINE+"MÊS \\ FILIAL"+RESET);
         espacos((largura/2)-6);
         System.out.print("|");
-        espacos((largura/2)-1);
+        espacos((largura/2));
         System.out.print(RED+"1"+RESET);
         espacos(largura/2);
         System.out.print("|");
-        espacos((largura/2)-1);
+        espacos((largura/2));
         System.out.print(RED+"2"+RESET);
         espacos(largura/2);
         System.out.print("|");
-        espacos((largura/2)-1);
+        espacos((largura/2));
         System.out.print(RED+"3"+RESET);
         espacos(largura/2);
         System.out.println("||");
@@ -695,6 +709,53 @@ public class GereVendasView implements InterfGereVendasView {
         line();
         mudarDeLinha();
         System.out.println("Pagina Anterior "+RED+"(1)"+RESET+" | Pagina Seguinte "+RED+"(2)"+RESET+" | Sair "+RED+"(0)"+RESET);
+    }
+
+    public void totalComprasMes(List<Integer> dados){
+        clear();
+        banMensagem("Número total de compras por mês");
+        mudarDeLinha();
+        imprimeListaInteiros(dados);
+        line();
+        mudarDeLinha();
+    }
+
+    public void fatTotal(List<Double> dados){
+        clear();
+        banMensagem("Faturação total por mês para cada filial e o valor total global");
+        mudarDeLinha();
+        System.out.println(CYAN_UNDERLINE+"Global"+RESET);
+        System.out.println(dados.get(0));
+        linhas(3);
+        line();
+        linhas(3);
+        System.out.println(CYAN_UNDERLINE+"Filial 1"+RESET);
+        System.out.println(dados.get(1));
+        linhas(3);
+        line();
+        linhas(3);
+        System.out.println(CYAN_UNDERLINE+"Filial 2"+RESET);
+        System.out.println(dados.get(2));
+        linhas(3);
+        line();
+        linhas(3);
+        System.out.println(CYAN_UNDERLINE+"Filial 3"+RESET);
+        System.out.println(dados.get(3));
+        linhas(3);
+        line();
+        mudarDeLinha();
+
+    }
+
+    public void distintosCli(List<String> dados){
+        clear();
+        banMensagem("Número de clientes distintos que compraram em cada mês filial a filial");
+        String[] f1 = dados.get(0).split(" ");
+        String[] f2 = dados.get(1).split(" ");
+        String[] f3 = dados.get(2).split(" ");
+        imprimeTabela(f1,f2,f3);
+        line();
+        mudarDeLinha();
     }
 
     public void carregaVendas(){

@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
+import static java.lang.Double.doubleToLongBits;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
@@ -303,6 +304,59 @@ public class GereVendasModel{
                 if(j<12 )sb.append("#");
             }
             sb.append("\n");
+            l.add(sb.toString());
+        }
+        return l;
+    }
+
+    public List<Integer> getComprasMes(){
+        Map<Integer,Integer> m = this.CatFat.comprasMes();
+        List<Integer> l = new ArrayList<>();
+        int i;
+        for(i=1; i<13; i++){
+            if(m.containsKey(i)){
+                l.add(m.get(i));
+            }
+            else {
+                l.add(0);
+            }
+        }
+        return l;
+    }
+
+
+    public List<Double> getFaturacaoFiliais(){
+        List<Double> l = new ArrayList<>();
+        double d1 = this.CatFat.fatFilial(1).values().stream()
+                               .mapToDouble(Double::doubleValue)
+                               .sum();
+        double d2= this.CatFat.fatFilial(2).values().stream()
+                              .mapToDouble(Double::doubleValue)
+                              .sum();
+        double d3 = this.CatFat.fatFilial(3).values().stream()
+                               .mapToDouble(Double::doubleValue)
+                               .sum();
+        l.add(0,d1+d2+d3);
+        l.add(1,d1);
+        l.add(2,d2);
+        l.add(3,d3);
+        return l;
+    }
+
+    public List<String> getDistintosCli(){
+        List<String> l = new ArrayList<>();
+        Map<Integer,Integer> map;
+        StringBuilder sb;
+        int k;
+        for(int j=1; j<4; j++){
+            map = this.CatFiliais.getMesClientesDiferentes(j);
+            sb = new StringBuilder();
+            for (int i=1;i<12;i++) {
+                k = map.getOrDefault(i, 0);
+                sb.append(k).append(" ");
+            }
+            k = map.getOrDefault(j, 0);
+            sb.append(k);
             l.add(sb.toString());
         }
         return l;

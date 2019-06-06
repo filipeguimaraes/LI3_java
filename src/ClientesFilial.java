@@ -51,6 +51,13 @@ public class ClientesFilial {
         //return clis;
     }
 
+    public Set<String> getSetClientesCompramMes(int mes){
+        HashSet<String> aux = new HashSet<>();
+        for(ProdutosCompradosCliente pcc : this.clientes_com_compras.values())
+            if((!aux.contains(pcc.getCliente())) && pcc.clienteCompraNoMes(mes)) aux.add(pcc.getCliente());
+        return aux;
+    }
+
     public void addClientesCompramProdMes(String prod, Map<Integer,Set<String>> prods_mes){
         for(ProdutosCompradosCliente pcc : this.clientes_com_compras.values())
             pcc.addProdsCompramMes(prod,prods_mes);

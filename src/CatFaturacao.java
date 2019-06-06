@@ -156,4 +156,41 @@ public class CatFaturacao {
         }
    }
 
+   public Map<Integer,Integer> comprasMes(){
+        Map<Integer,Integer> map = new HashMap<>();
+        int k;
+        for(ProdutosFilial pf : this.vendidos.values()){
+            for(Map.Entry<Integer,Integer> me : pf.getComprasMesFilial().entrySet() ){
+                if(map.containsKey(me.getKey())){
+                    k = map.get(me.getKey()) + me.getValue();
+                    map.put(me.getKey(),k);
+                }
+                else{
+                    map.put(me.getKey(),me.getValue());
+                }
+            }
+        }
+        return map;
+   }
+
+   public Map<Integer,Double> fatFilial(int filial){
+        Map<Integer,Double> map = new HashMap<>();
+       double k;
+       if(this.vendidos.containsKey(filial)){
+           for(Map.Entry<Integer,Double> me : this.vendidos.get(filial).getFatMesFilial().entrySet() ){
+               if(map.containsKey(me.getKey())){
+                   k = map.get(me.getKey()) + me.getValue();
+                   map.put(me.getKey(),k);
+               }
+               else{
+                   map.put(me.getKey(),me.getValue());
+               }
+           }
+           return map;
+       }
+       else{
+           return null;
+       }
+   }
+
 }

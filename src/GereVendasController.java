@@ -58,6 +58,9 @@ public class GereVendasController {
                      Crono.print();
                      escolha=0;
                      break;
+                 case 2:
+                     escolha = runEstatisticas();
+                     break;
                  case 3:
                      escolha = runQueries();
                      break;
@@ -170,6 +173,44 @@ public class GereVendasController {
          }while(escolha!=11);
          return 0;
     }
+
+    private int runEstatisticas(){
+        String[] opcoes = {"Informações sobre o último ficheiro de vendas lido",
+                "Número total de compras por mês",
+                "Faturação total por mês para cada filial e o valor total global",
+                "Número de clientes distintos que compraram em cada mês filial a filial",
+                "Menu principal"
+        };
+        int escolha;
+        do{
+            view.menuOpcoes(opcoes);
+            escolha = Input.lerInt();
+            switch (escolha){
+                case 1:
+                    enterContinuar();
+                case 2:
+                    view.totalComprasMes(model.getComprasMes());
+                    enterContinuar();
+                    break;
+                case 3:
+                    view.fatTotal(model.getFaturacaoFiliais());
+                    enterContinuar();
+                    break;
+                case 4:
+                    view.distintosCli(model.getDistintosCli());
+                    enterContinuar();
+                    break;
+                case 5:
+                    break;
+                default:
+                    System.out.println("Ocorreu um erro.");
+                    enterContinuar();
+                    break;
+            }
+        }while(escolha!=5);
+        return 0;
+    }
+
 
     private void enterContinuar() {
         Scanner s=new Scanner(System.in);
