@@ -1,3 +1,4 @@
+import java.io.OptionalDataException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -54,8 +55,8 @@ public class GereVendasController {
                      }
                      Crono.start();
                      model.load(pathClientes, pathProdutos, pathVendas);
-                     Crono.stop();
-                     Crono.print();
+                     view.tempo(Crono.stop());
+                     enterContinuar();
                      escolha=0;
                      break;
                  case 2:
@@ -97,48 +98,64 @@ public class GereVendasController {
              escolha = Input.lerInt();
              switch (escolha){
                  case 1:
+                     Crono.start();
                      view.query1(model.getListaDeProdutosNaoComprados());
+                     view.tempoSimples(Crono.stop());
                      enterContinuar();
                      break;
                  case 2:
                      view.recebeMes();
                      int mes = Input.lerInt();
+                     Crono.start();
                      view.query2(model.getQuerie2(mes,0),model.getQuerie2(mes,1),
                                  model.getQuerie2(mes,2),model.getQuerie2(mes,3));
+                     view.tempoSimples(Crono.stop());
                      enterContinuar();
                      break;
                  case 3:
                      view.recebeCliente();
                      String cliente3 = Input.lerString();
+                     Crono.start();
                      view.query3(model.getQuerie3(cliente3));
+                     view.tempoSimples(Crono.stop());
                      enterContinuar();
                      break;
                  case 4:
                      view.recebeProduto();
                      String prod = Input.lerString();
+                     Crono.start();
                      view.query4(model.getQuerie4(prod));
+                     view.tempoSimples(Crono.stop());
                      enterContinuar();
                      break;
                  case 5:
                      view.recebeCliente();
                      String cliente5 = Input.lerString();
+                     Crono.start();
                      view.query5(model.getQuerie5(cliente5));
+                     view.tempoSimples(Crono.stop());
                      enterContinuar();
                      break;
                  case 6:
                      view.recebeIntProd();
                      int numprod = Input.lerInt();
+                     Crono.start();
                      view.query6(model.getQuerie6(numprod));
+                     view.tempoSimples(Crono.stop());
                      enterContinuar();
                      break;
                  case 7:
+                     Crono.start();
                      view.query7(model.getQuerie7());
+                     view.tempoSimples(Crono.stop());
                      enterContinuar();
                      break;
                  case 8:
                      view.recebeIntCli();
                      int numcli8 = Input.lerInt();
+                     Crono.start();
                      view.query8(model.getQuerie8(numcli8));
+                     view.tempoSimples(Crono.stop());
                      enterContinuar();
                      break;
                  case 9:
@@ -146,20 +163,34 @@ public class GereVendasController {
                      String codprod = Input.lerString();
                      view.recebeIntCli();
                      int numcli9 = Input.lerInt();
+                     Crono.start();
                      view.query9(model.getQuerie9(codprod,numcli9));
+                     view.tempoSimples(Crono.stop());
                      enterContinuar();
                      break;
                  case 10:
                      int nav=-1;
+                     Crono.start();
                      List<String> lista= model.getQuerie10();
+                     view.tempoSimples(Crono.stop());
                      int i = 0;
                      while (nav!=0) {
                          view.query10(lista.get(i));
                          nav = Input.lerInt();
                          if (nav == 1 && i>0) {
                              i--;
-                         } else if (nav == 2 && i < lista.size())
+                         } else if (nav == 2 && i < lista.size()){
                              i++;
+                         } else if (nav == 3){
+                             view.recebeProduto();
+                             String produto = Input.lerString();
+                             String a = lista.stream()
+                                         .filter(l -> l.contains(produto))
+                                         .findFirst()
+                                         .orElseThrow();
+                             view.query10(a);
+                             nav = Input.lerInt();
+                         }
                      }
 
                      break;

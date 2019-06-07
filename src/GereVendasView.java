@@ -1,6 +1,7 @@
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CyclicBarrier;
 
 /**
  * Write a description of class GereVendasView here.
@@ -111,7 +112,7 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.println("     "+CYAN+i+") Mês: "+RESET+i+CYAN+" | Total de compras: "+RESET+s);
     }
 
-   /**
+    /**
      * Imprime uma lista de opcões
      * @param ls Lista de opções
      */
@@ -292,7 +293,7 @@ public class GereVendasView implements InterfGereVendasView {
         cyan();
         int number=(LINHAS-10)/2;
         linhas(number);
-        line();
+        line(); mudarDeLinha();
         cyan();
         espacos((COLUNAS-54)/2);
         System.out.println("                     $$$$$$\\        $$\\                               $$\\ ");
@@ -358,7 +359,7 @@ public class GereVendasView implements InterfGereVendasView {
         clear();
         banMensagem("QUERY 2");
         mudarDeLinha();
-        linhas(3);
+        linhas(2);
         System.out.println(CYAN_UNDERLINE+"Global"+RESET);
         System.out.println(CYAN+"     Número total de vendas global: "+RESET+global[0]);
         System.out.println(CYAN+"     Número total de clientes envolvidos: "+RESET+global[1]);
@@ -380,7 +381,7 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.println(CYAN_UNDERLINE+"Filial 3"+RESET);
         System.out.println(CYAN+"     Número total de vendas global: "+RESET+filial3[0]);
         System.out.println(CYAN+"     Número total de clientes envolvidos: "+RESET+filial3[1]);
-        linhas(3);
+        linhas(2);
         cyan();
         line();
         mudarDeLinha();
@@ -628,7 +629,7 @@ public class GereVendasView implements InterfGereVendasView {
 
     public void query6(List<String> dados){
         clear();
-        int number = (LINHAS-dados.size()-6)/2;
+        int number = (LINHAS-dados.size()-9)/2;
         banMensagem("QUERY 6");
         linhas(number);
         imprimeListaProdutos(dados);
@@ -651,17 +652,17 @@ public class GereVendasView implements InterfGereVendasView {
         linhas(3);
         System.out.println(CYAN_UNDERLINE+"Filial 1"+RESET);
         top3(dados.get(0));
-        linhas(3);
+        linhas(2);
         line();
         linhas(3);
         System.out.println(CYAN_UNDERLINE+"Filial 2"+RESET);
         top3(dados.get(1));
-        linhas(3);
+        linhas(2);
         line();
         linhas(3);
         System.out.println(CYAN_UNDERLINE+"Filial 3"+RESET);
         top3(dados.get(2));
-        linhas(3);
+        linhas(2);
         line();
         mudarDeLinha();
     }
@@ -669,7 +670,7 @@ public class GereVendasView implements InterfGereVendasView {
     public void query8(List<Map.Entry<String,Integer>> dados){
         clear();
         banMensagem("QUERY 8");
-        int number = (LINHAS -dados.size()-6)/2;
+        int number = (LINHAS -dados.size()-9)/2;
         linhas(number);
         imprimeClientes(dados);
         linhas(number);
@@ -679,7 +680,7 @@ public class GereVendasView implements InterfGereVendasView {
     public void query9(List<Map.Entry<String,Double>> dados){
         clear();
         banMensagem("QUERY 9");
-        int number = (LINHAS-dados.size()-6)/2;
+        int number = (LINHAS-dados.size()-9)/2;
         linhas(number);
         imprimeClis(dados);
         linhas(number);
@@ -707,14 +708,18 @@ public class GereVendasView implements InterfGereVendasView {
         linhas(3);
         line();
         mudarDeLinha();
-        System.out.println("Pagina Anterior "+RED+"(1)"+RESET+" | Pagina Seguinte "+RED+"(2)"+RESET+" | Sair "+RED+"(0)"+RESET);
+        System.out.println("Pagina Anterior "+RED+"(1)"+RESET+" | Pagina Seguinte "+RED+"(2)"+RESET
+                +" | Avançar para um produto "+RED+"(3)"+RESET+" | Sair "+RED+"(0)"+RESET);
     }
 
     public void totalComprasMes(List<Integer> dados){
         clear();
         banMensagem("Número total de compras por mês");
         mudarDeLinha();
+        int numero = (LINHAS-dados.size()-7)/2;
+        linhas(numero);
         imprimeListaInteiros(dados);
+        linhas(numero);
         line();
         mudarDeLinha();
     }
@@ -739,6 +744,7 @@ public class GereVendasView implements InterfGereVendasView {
         clear();
         banMensagem("Faturação total por mês para cada filial e o valor total global");
         mudarDeLinha();
+        linhas(3);
         System.out.println(CYAN_UNDERLINE+"Global"+RESET);
         System.out.println(dados.get(0));
         linhas(3);
@@ -768,7 +774,10 @@ public class GereVendasView implements InterfGereVendasView {
         String[] f1 = dados.get(0).split(" ");
         String[] f2 = dados.get(1).split(" ");
         String[] f3 = dados.get(2).split(" ");
+        linhas(2);
+        mudarDeLinha();
         imprimeTabela(f1,f2,f3);
+        linhas(2);
         line();
         mudarDeLinha();
     }
@@ -838,6 +847,23 @@ public class GereVendasView implements InterfGereVendasView {
         banMensagem("Introduzir número de clientes");
         mudarDeLinha();
         System.out.print("Introduza o número de clientes: ");
+    }
+
+    public void tempo(Double tempo){
+        mudarDeLinha();
+        banMensagem("Tempo de execuçao");
+        mudarDeLinha();
+        mudarDeLinha();
+        System.out.println(CYAN +"     Demorou "+RESET+tempo+" segundos.");
+        mudarDeLinha();
+        line();
+        mudarDeLinha();
+    }
+
+    public void tempoSimples(Double tempo){
+        mudarDeLinha();
+        System.out.println(CYAN +"     Demorou "+RESET+tempo+" segundos.");
+        mudarDeLinha();
     }
 
 }
