@@ -78,4 +78,8 @@ public class CatProdutos{
 
     }
 
+    public int getTamanho(){
+        return this.produtos.size();
+    }
+
 }

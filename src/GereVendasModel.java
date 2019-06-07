@@ -14,12 +14,14 @@ public class GereVendasModel{
     private CatClientes CatClis;
     private CatFaturacao CatFat;
     private CatFiliais CatFiliais;
+    private int numero_de_vendas_lidas;
 
     public GereVendasModel() {
         CatProds = new CatProdutos();
         CatClis = new CatClientes();
         CatFat = new CatFaturacao();
         CatFiliais = new CatFiliais();
+        numero_de_vendas_lidas = 0;
     }
 
     private static boolean validaVenda(String s){
@@ -49,8 +51,10 @@ public class GereVendasModel{
 
     private void readLinesWithBuff(String fich) {
         String[] divd = new String[7];
+        this.numero_de_vendas_lidas = 0;
 
         for (String s : readFilesWithNIO(fich)) {
+            this.numero_de_vendas_lidas++;
             divd = s.split(" ");
             if (divd.length == 7
                     && this.CatClis.existeCliente(divd[4])
@@ -361,6 +365,30 @@ public class GereVendasModel{
         }
         return l;
     }
+
+    public List<Integer> getInfoProdutos(){
+        List<Integer> l = new ArrayList<>();
+        l.add(this.CatProds.getTamanho());
+        l.add(this.CatFat.getDifs());
+        l.add(this.CatFat.getNComprados(this.CatProds.getListProds()));
+        return l;
+    }
+
+    public List<Integer> getInfoClis(){
+        List<Integer> l = new ArrayList<>();
+        l.add(this.CatClis.getTamanho());
+        l.add(this.CatFiliais.getNumeroClientesQueCompram());
+        l.add(this.CatFiliais.getNumeroClientesQueNaoCompram(this.CatClis.getListClientes()));
+        return l;
+    }
+
+    public List<Double> getInfoFat(){
+        List<Double> l = new ArrayList<>();
+
+        l.add(this.CatFat.getFaturacaoGlobal());
+        return l;
+    }
+
 
     /**
      * Método que lê os ficheiros dando parse a informação útil para os modúlos.

@@ -188,6 +188,7 @@ public class GereVendasController {
             switch (escolha){
                 case 1:
                     enterContinuar();
+                    break;
                 case 2:
                     view.totalComprasMes(model.getComprasMes());
                     enterContinuar();
