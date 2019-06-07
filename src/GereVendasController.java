@@ -1,3 +1,4 @@
+import java.io.OptionalDataException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -178,8 +179,18 @@ public class GereVendasController {
                          nav = Input.lerInt();
                          if (nav == 1 && i>0) {
                              i--;
-                         } else if (nav == 2 && i < lista.size())
+                         } else if (nav == 2 && i < lista.size()){
                              i++;
+                         } else if (nav == 3){
+                             view.recebeProduto();
+                             String produto = Input.lerString();
+                             String a = lista.stream()
+                                         .filter(l -> l.contains(produto))
+                                         .findFirst()
+                                         .orElseThrow();
+                             view.query10(a);
+                             nav = Input.lerInt();
+                         }
                      }
 
                      break;
@@ -208,6 +219,7 @@ public class GereVendasController {
             switch (escolha){
                 case 1:
                     enterContinuar();
+                    break;
                 case 2:
                     view.totalComprasMes(model.getComprasMes());
                     enterContinuar();

@@ -653,17 +653,17 @@ public class GereVendasView implements InterfGereVendasView {
         linhas(3);
         System.out.println(CYAN_UNDERLINE+"Filial 1"+RESET);
         top3(dados.get(0));
-        linhas(3);
+        linhas(2);
         line();
         linhas(3);
         System.out.println(CYAN_UNDERLINE+"Filial 2"+RESET);
         top3(dados.get(1));
-        linhas(3);
+        linhas(2);
         line();
         linhas(3);
         System.out.println(CYAN_UNDERLINE+"Filial 3"+RESET);
         top3(dados.get(2));
-        linhas(3);
+        linhas(2);
         line();
         mudarDeLinha();
     }
@@ -671,7 +671,7 @@ public class GereVendasView implements InterfGereVendasView {
     public void query8(List<Map.Entry<String,Integer>> dados){
         clear();
         banMensagem("QUERY 8");
-        int number = (LINHAS -dados.size()-6)/2;
+        int number = (LINHAS -dados.size()-9)/2;
         linhas(number);
         imprimeClientes(dados);
         linhas(number);
@@ -681,7 +681,7 @@ public class GereVendasView implements InterfGereVendasView {
     public void query9(List<Map.Entry<String,Double>> dados){
         clear();
         banMensagem("QUERY 9");
-        int number = (LINHAS-dados.size()-6)/2;
+        int number = (LINHAS-dados.size()-9)/2;
         linhas(number);
         imprimeClis(dados);
         linhas(number);
@@ -709,7 +709,8 @@ public class GereVendasView implements InterfGereVendasView {
         linhas(3);
         line();
         mudarDeLinha();
-        System.out.println("Pagina Anterior "+RED+"(1)"+RESET+" | Pagina Seguinte "+RED+"(2)"+RESET+" | Sair "+RED+"(0)"+RESET);
+        System.out.println("Pagina Anterior "+RED+"(1)"+RESET+" | Pagina Seguinte "+RED+"(2)"+RESET
+                +" | Avançar para um produto "+RED+"(3)"+RESET+" | Sair "+RED+"(0)"+RESET);
     }
 
     public void totalComprasMes(List<Integer> dados){
