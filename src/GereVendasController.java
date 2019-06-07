@@ -106,35 +106,55 @@ public class GereVendasController {
                  case 2:
                      view.recebeMes();
                      int mes = Input.lerInt();
-                     Crono.start();
-                     view.query2(model.getQuerie2(mes,0),model.getQuerie2(mes,1),
-                                 model.getQuerie2(mes,2),model.getQuerie2(mes,3));
-                     view.tempoSimples(Crono.stop());
-                     enterContinuar();
+                     try {
+                         Crono.start();
+                         view.query2(model.getQuerie2(mes, 0), model.getQuerie2(mes, 1),
+                                 model.getQuerie2(mes, 2), model.getQuerie2(mes, 3));
+                         view.tempoSimples(Crono.stop());
+                     }catch(MesException e){
+                         System.out.println(e.getMessage());
+                         enterContinuar();
+                         continue;
+                     }
                      break;
                  case 3:
                      view.recebeCliente();
                      String cliente3 = Input.lerString();
-                     Crono.start();
-                     view.query3(model.getQuerie3(cliente3));
-                     view.tempoSimples(Crono.stop());
-                     enterContinuar();
+                     try {
+                         Crono.start();
+                         view.query3(model.getQuerie3(cliente3));
+                         view.tempoSimples(Crono.stop());
+                     }catch (ClienteException e){
+                         System.out.println(e.getMessage());
+                         enterContinuar();
+                         continue;
+                     }
                      break;
                  case 4:
                      view.recebeProduto();
                      String prod = Input.lerString();
-                     Crono.start();
-                     view.query4(model.getQuerie4(prod));
-                     view.tempoSimples(Crono.stop());
-                     enterContinuar();
+                     try {
+                         Crono.start();
+                         view.query4(model.getQuerie4(prod));
+                         view.tempoSimples(Crono.stop());
+                     }catch(ProdutoException e){
+                         System.out.println(e.getMessage());
+                         enterContinuar();
+                         continue;
+                     }
                      break;
                  case 5:
                      view.recebeCliente();
                      String cliente5 = Input.lerString();
-                     Crono.start();
-                     view.query5(model.getQuerie5(cliente5));
-                     view.tempoSimples(Crono.stop());
-                     enterContinuar();
+                     try {
+                         Crono.start();
+                         view.query5(model.getQuerie5(cliente5));
+                         view.tempoSimples(Crono.stop());
+                     }catch (ClienteException e){
+                         System.out.println(e.getMessage());
+                         enterContinuar();
+                         continue;
+                     }
                      break;
                  case 6:
                      view.recebeIntProd();
@@ -163,10 +183,15 @@ public class GereVendasController {
                      String codprod = Input.lerString();
                      view.recebeIntCli();
                      int numcli9 = Input.lerInt();
-                     Crono.start();
-                     view.query9(model.getQuerie9(codprod,numcli9));
-                     view.tempoSimples(Crono.stop());
-                     enterContinuar();
+                     try {
+                         Crono.start();
+                         view.query9(model.getQuerie9(codprod, numcli9));
+                         view.tempoSimples(Crono.stop());
+                     }catch(ProdutoException e){
+                         System.out.println(e.getMessage());
+                         enterContinuar();
+                         continue;
+                     }
                      break;
                  case 10:
                      int nav=-1;
@@ -187,7 +212,7 @@ public class GereVendasController {
                              String a = lista.stream()
                                          .filter(l -> l.contains(produto))
                                          .findFirst()
-                                         .orElseThrow();
+                                         .orElse("N/A");
                              view.query10(a);
                              nav = Input.lerInt();
                          }

@@ -139,11 +139,14 @@ public class GereVendasModel implements IGereVendasModel {
      * @param filial Número de filial (int);
      * @return Array(de inteiros) de duas posições.
      */
-    public int [] getQuerie2(int mes, int filial){
-        int [] r = new int[2];
-        r[0] = this.CatFat.getNumVendasRegMesFilial(filial,mes);
-        r[1] = this.CatFiliais.getNumClientesCompramMesFilial(filial,mes);
-        return r;
+    public int [] getQuerie2(int mes, int filial) throws MesException{
+        if(mes<1 || mes>12) throw new MesException("Esse mês não é válido!");
+        else {
+            int[] r = new int[2];
+            r[0] = this.CatFat.getNumVendasRegMesFilial(filial, mes);
+            r[1] = this.CatFiliais.getNumClientesCompramMesFilial(filial, mes);
+            return r;
+        }
     }
 
 
@@ -154,8 +157,11 @@ public class GereVendasModel implements IGereVendasModel {
      * @param cliente Código de cliente (String).
      * @return Lista de Strings. Exemplo: ["3 3 523.23202", ...]
      */
-    public List<String> getQuerie3(String cliente){
-        return this.CatFiliais.getQuantosProdsDifsEGastos(cliente);
+    public List<String> getQuerie3(String cliente) throws ClienteException{
+        if(!this.CatClis.getListClientes().contains(cliente)) throw new ClienteException("Esse cliente não existe!");
+        else {
+            return this.CatFiliais.getQuantosProdsDifsEGastos(cliente);
+        }
     }
 
 
@@ -166,25 +172,28 @@ public class GereVendasModel implements IGereVendasModel {
      * @param produto Código produto (String).
      * @return Lista de Strings. Exemplo: ["3 3 523.23202", ...]
      */
-    public List<String> getQuerie4(String produto){
-        List<String> l = new ArrayList<>();
-        StringBuilder sb;
-        int i;
-        int [] num_clis;
-        int [] reg_vendas;
-        double [] faturado_vendas;
-        num_clis = this.CatFiliais.getClisDifsCompramProdMeses(produto);
-        reg_vendas = this.CatFat.getVendasRegMeses(produto);
-        faturado_vendas = this.CatFat.getVendasFaturadoMeses(produto);
-        for (i=0;i<12;i++) {
-            sb = new StringBuilder();
-            sb.append(reg_vendas[i]).append(" ")
-                    .append(num_clis[i])
-                    .append(" ")
-                    .append(faturado_vendas[i]);
-            l.add(sb.toString());
+    public List<String> getQuerie4(String produto) throws ProdutoException{
+        if(!this.CatProds.getListProds().contains(produto)) throw new ProdutoException("Esse produto não existe!");
+        else {
+            List<String> l = new ArrayList<>();
+            StringBuilder sb;
+            int i;
+            int [] num_clis;
+            int [] reg_vendas;
+            double [] faturado_vendas;
+            num_clis = this.CatFiliais.getClisDifsCompramProdMeses(produto);
+            reg_vendas = this.CatFat.getVendasRegMeses(produto);
+            faturado_vendas = this.CatFat.getVendasFaturadoMeses(produto);
+            for (i = 0; i < 12; i++) {
+                sb = new StringBuilder();
+                sb.append(reg_vendas[i]).append(" ")
+                        .append(num_clis[i])
+                        .append(" ")
+                        .append(faturado_vendas[i]);
+                l.add(sb.toString());
+            }
+            return l;
         }
-        return l;
     }
 
     /**
@@ -195,24 +204,25 @@ public class GereVendasModel implements IGereVendasModel {
      * @param cliente Código de cliente.
      * @return Lista de pares exemplo: [("AF1184",5321), ("ZA3421",3213), ...]
      */
-    public List<Map.Entry<String,Integer>> getQuerie5(String cliente){
-        Map<String,Integer> m = this.CatFiliais.getProdutoQuantidadeDeUmCliente(cliente);
-        List<Map.Entry<String,Integer>> l = new ArrayList<>(m.entrySet());
-        Comparator<Map.Entry<String,Integer>> c = (o1, o2) -> {
-            if(o1.getValue()<o2.getValue()) {
-                return 1;
-            }
-            else{
-                if(o1.getValue()>o2.getValue()){
-                    return -1;
+    public List<Map.Entry<String,Integer>> getQuerie5(String cliente) throws ClienteException{
+        if(!this.CatClis.getListClientes().contains(cliente)) throw new ClienteException("Esse cliente não existe!");
+        else {
+            Map<String, Integer> m = this.CatFiliais.getProdutoQuantidadeDeUmCliente(cliente);
+            List<Map.Entry<String, Integer>> l = new ArrayList<>(m.entrySet());
+            Comparator<Map.Entry<String, Integer>> c = (o1, o2) -> {
+                if (o1.getValue() < o2.getValue()) {
+                    return 1;
+                } else {
+                    if (o1.getValue() > o2.getValue()) {
+                        return -1;
+                    } else {
+                        return (o1.getKey().compareTo(o2.getKey()));
+                    }
                 }
-                else{
-                    return (o1.getKey().compareTo(o2.getKey()));
-                }
-            }
-        };
-        l.sort(c);
-        return l;
+            };
+            l.sort(c);
+            return l;
+        }
     }
 
     /**
@@ -292,27 +302,28 @@ public class GereVendasModel implements IGereVendasModel {
      * @param tamanho Número de produtos que pertende na lista de retorno.
      * @return Lista de pares exemplo: [("A1184", 1233321.32123), ("K2311", 23398.34027), ...]
      */
-    public List<Map.Entry<String,Double>> getQuerie9(String produto, int tamanho){
-        List<Map.Entry<String,Double>> l = this.CatFiliais.getClientesFaturacaoProd(produto);
-        Comparator<Map.Entry<String,Double>> c = (o1, o2) -> {
-            double k = o1.getValue()-o2.getValue();
-            if (k != 0){
-                if (k > 0){
-                    return -1;
+    public List<Map.Entry<String,Double>> getQuerie9(String produto, int tamanho) throws ProdutoException{
+        if(!this.CatProds.getListProds().contains(produto)) throw new ProdutoException("Esse produto não existe!");
+        else {
+            List<Map.Entry<String, Double>> l = this.CatFiliais.getClientesFaturacaoProd(produto);
+            Comparator<Map.Entry<String, Double>> c = (o1, o2) -> {
+                double k = o1.getValue() - o2.getValue();
+                if (k != 0) {
+                    if (k > 0) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                } else {
+                    return o1.getKey().compareTo(o2.getKey());
                 }
-                else{
-                    return 1;
-                }
+            };
+            l.sort(c);
+            if (l.size() > tamanho) {
+                l = l.subList(0, tamanho);
             }
-            else{
-                return o1.getKey().compareTo(o2.getKey());
-            }
-        };
-        l.sort(c);
-        if(l.size()>tamanho){
-            l = l.subList(0,tamanho);
+            return l;
         }
-        return l;
     }
 
 

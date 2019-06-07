@@ -16,7 +16,7 @@ public interface IGereVendasModel {
      * @param filial Número de filial (int);
      * @return Array(de inteiros) de duas posições.
      */
-    int [] getQuerie2(int mes, int filial);
+    int [] getQuerie2(int mes, int filial) throws MesException;
 
     /**
      * Método que recebe um código de cliente, retorna uma lista em que cada elemento é uma String com o número de
@@ -25,7 +25,7 @@ public interface IGereVendasModel {
      * @param cliente Código de cliente (String).
      * @return Lista de Strings. Exemplo: ["3 3 523.23202", ...]
      */
-    List<String> getQuerie3(String cliente);
+    List<String> getQuerie3(String cliente) throws ClienteException;
 
     /**
      * Método que recebe um código de produto, retorna uma lista de Strings, em que cada String tem o número de vendas
@@ -34,7 +34,7 @@ public interface IGereVendasModel {
      * @param produto Código produto (String).
      * @return Lista de Strings. Exemplo: ["3 3 523.23202", ...]
      */
-    List<String> getQuerie4(String produto);
+    List<String> getQuerie4(String produto) throws ProdutoException;
 
     /**
      * Método que dado um código de cliente retorna uma lista(Top) dos produtos que comprou em
@@ -44,7 +44,7 @@ public interface IGereVendasModel {
      * @param cliente Código de cliente.
      * @return Lista de pares exemplo: [("AF1184",5321), ("ZA3421",3213), ...]
      */
-    List<Map.Entry<String,Integer>> getQuerie5(String cliente);
+    List<Map.Entry<String,Integer>> getQuerie5(String cliente) throws ClienteException;
 
     /**
      * Método que dado um x, retorna um Top(x) de produtos por mais unidades vendidas, e tendo também o
@@ -82,7 +82,7 @@ public interface IGereVendasModel {
      * @param tamanho Número de produtos que pertende na lista de retorno.
      * @return Lista de pares exemplo: [("A1184", 1233321.32123), ("K2311", 23398.34027), ...]
      */
-    List<Map.Entry<String,Double>> getQuerie9(String produto, int tamanho);
+    List<Map.Entry<String,Double>> getQuerie9(String produto, int tamanho) throws ProdutoException;
 
     /**
      * Método que retorna uma lista de Strings com a informação mês a mês, e para cada mês filial a filial,
