@@ -12,8 +12,8 @@ import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
 public class GereVendasModel implements IGereVendasModel {
-    private CatProdutos CatProds;
-    private CatClientes CatClis;
+    private ICatProdutos CatProds;
+    private ICatClientes CatClis;
     private ICatFaturacao CatFat;
     private ICatFiliais CatFiliais;
     private int numero_de_vendas_lidas;

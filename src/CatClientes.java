@@ -8,11 +8,11 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class CatClientes{
+public class CatClientes implements ICatClientes{
     private Set<ICliente> clientes;
 
     public CatClientes(){
-        this.clientes=new TreeSet<>();
+        this.clientes=new HashSet<>();
     }
 
     public CatClientes(Set<ICliente> clientes) {
@@ -27,11 +27,11 @@ public class CatClientes{
         return this.clientes.stream().map(ICliente::getCodCli).collect(Collectors.toList());
     }
 
-    public Set<ICliente> getClientes() {
+    private Set<ICliente> getClientes() {
         return clientes;
     }
 
-    public void setClientes(Set<ICliente> clientes) {
+    private void setClientes(Set<ICliente> clientes) {
         this.clientes = clientes;
     }
 
@@ -71,7 +71,7 @@ public class CatClientes{
         }
     }
 
-    public static List<String> readFilesWithNIO(String filePath) {
+    private static List<String> readFilesWithNIO(String filePath) {
         Path p = Paths.get(filePath);
         List<String> l = null;
         try {

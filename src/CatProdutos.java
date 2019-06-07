@@ -8,11 +8,11 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class CatProdutos{
+public class CatProdutos implements ICatProdutos{
     private Set<IProduto> produtos;
 
     public CatProdutos(){
-        this.produtos = new TreeSet<>();
+        this.produtos = new HashSet<>();
     }
 
     public CatProdutos(Set<IProduto> produtos) {
@@ -23,11 +23,11 @@ public class CatProdutos{
         this.produtos=cat.getProdutos();
     }
 
-    public Set<IProduto> getProdutos() {
+    private Set<IProduto> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(Set<IProduto> produtos) {
+    private void setProdutos(Set<IProduto> produtos) {
         this.produtos = produtos;
     }
 
@@ -71,7 +71,7 @@ public class CatProdutos{
         }
     }
 
-    public static List<String> readFilesWithNIO(String filePath) {
+    private static List<String> readFilesWithNIO(String filePath) {
         Path p = Paths.get(filePath);
         List<String> l = null;
         try {
