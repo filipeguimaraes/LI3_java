@@ -6,5 +6,5 @@ public interface IVenda {
     String getTipo();
     int getMes();
     int getFilial();
-    Venda clone();
+    IVenda clone();
 }
