@@ -21,6 +21,10 @@ public class CatFaturacao {
         return this.adicionaFatNComp(l).stream().sorted().collect(Collectors.toList());
     }
 
+    public int getNComprados(List<String> l){
+        return this.getListaNaoComprados(l).size();
+    }
+
     //alt
     private Map<Integer, ProdutosFilial> getVendidos() {
         return vendidos;
@@ -61,14 +65,18 @@ public class CatFaturacao {
 
     private TreeSet<String> getSetVendidos() {
         TreeSet<String> clis_compram = new TreeSet<String>();
-        for (ProdutosFilial pf : new ArrayList<>(this.vendidos.values())) {
+        for (ProdutosFilial pf : this.vendidos.values()) {
             clis_compram.addAll(pf.getCodClisFilial());
         }
         return clis_compram;
     }
 
+    public int getDifs(){
+        return this.getSetVendidos().size();
+    }
 
-    public TreeSet<String> adicionaFatNComp(List<String> l) {
+
+    private TreeSet<String> adicionaFatNComp(List<String> l) {
         TreeSet<String> nao_vendidos = new TreeSet<>();
         TreeSet<String> prods_comprados = this.getSetVendidos();
         for (String s : l) {
@@ -191,6 +199,14 @@ public class CatFaturacao {
        else{
            return null;
        }
+   }
+
+   public double getFaturacaoGlobal(){
+        double r = 0;
+        for(ProdutosFilial pf : this.vendidos.values()){
+            r += pf.getFaturacaoTotalFilial();
+        }
+        return r;
    }
 
 }

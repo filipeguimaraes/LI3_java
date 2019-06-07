@@ -16,12 +16,18 @@ public class GereVendasModel implements IGereVendasModel {
     private CatClientes CatClis;
     private CatFaturacao CatFat;
     private CatFiliais CatFiliais;
+    private int numero_de_vendas_lidas;
+    private int vendas_gratis;
+    private String nomeFich;
 
     public GereVendasModel() {
         CatProds = new CatProdutos();
         CatClis = new CatClientes();
         CatFat = new CatFaturacao();
         CatFiliais = new CatFiliais();
+        numero_de_vendas_lidas = 0;
+        vendas_gratis = 0;
+        nomeFich = "";
     }
 
     private static boolean validaVenda(String s){
@@ -52,9 +58,12 @@ public class GereVendasModel implements IGereVendasModel {
     private void loadFatFil(String fich){
         String s;
         String[] divd;
+        this.numero_de_vendas_lidas = 0;
+        this.vendas_gratis = 0;
         try(
                 BufferedReader inStream = new BufferedReader(new FileReader(fich))){
             while((s= inStream.readLine())!=null){
+                this.numero_de_vendas_lidas++;
                 divd = s.split(" ");
                 if (divd.length == 7
                         && this.CatClis.existeCliente(divd[4])
@@ -71,6 +80,9 @@ public class GereVendasModel implements IGereVendasModel {
                     this.CatFiliais.addClienteFilial(filial,
                             divd[0], divd[4], preco,
                             quant, divd[3], mes);
+                    if((double) quant * preco == 0)
+                        this.vendas_gratis++;
+
                 }
             }
         }
@@ -80,9 +92,12 @@ public class GereVendasModel implements IGereVendasModel {
     }
 
     private void readLinesWithBuff(String fich) {
+        this.numero_de_vendas_lidas = 0;
+        this.vendas_gratis = 0;
         String[] divd;
 
         for (String s : readFilesWithNIO(fich)) {
+            this.numero_de_vendas_lidas++;
             divd = s.split(" ");
             if (divd.length == 7
                     && this.CatClis.existeCliente(divd[4])
@@ -394,6 +409,37 @@ public class GereVendasModel implements IGereVendasModel {
         return l;
     }
 
+    public List<Integer> getInfoProdutos(){
+        List<Integer> l = new ArrayList<>();
+        l.add(this.CatProds.getTamanho());
+        l.add(this.CatFat.getDifs());
+        l.add(this.CatFat.getNComprados(this.CatProds.getListProds()));
+        return l;
+    }
+
+    public List<Integer> getInfoClis(){
+        List<Integer> l = new ArrayList<>();
+        l.add(this.CatClis.getTamanho());
+        l.add(this.CatFiliais.getNumeroClientesQueCompram());
+        l.add(this.CatFiliais.getNumeroClientesQueNaoCompram(this.CatClis.getListClientes()));
+        return l;
+    }
+
+    public List<Double> getInfoFat(){
+        List<Double> l = new ArrayList<>();
+        l.add((double)this.vendas_gratis);
+        l.add(this.CatFat.getFaturacaoGlobal());
+        return l;
+    }
+
+    public List<String> getInfoVendas(){
+        List<String> l = new ArrayList<>();
+        int errados = this.numero_de_vendas_lidas - this.CatFiliais.getNumProdCompras();
+        l.add(nomeFich);
+        l.add(String.valueOf(errados));
+        return l;
+    }
+
     /**
      * Método que lê os ficheiros dando parse a informação útil para os modúlos.
      * @param clientestxt Ficheiro de Clientes.
@@ -401,6 +447,7 @@ public class GereVendasModel implements IGereVendasModel {
      * @param vendastxt Ficheiro de Vendas.
      */
     public void load(String clientestxt, String produtostxt, String vendastxt){
+        this.nomeFich = vendastxt;
         this.CatClis.loadClientes(clientestxt);
         this.CatProds.loadProdutos(produtostxt);
         this.loadFatFil(vendastxt);

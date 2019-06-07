@@ -39,6 +39,33 @@ public class CatFiliais implements ICatFiliais {
         return Objects.hash(filial_clientes);
     }
 
+    private Set<String> getSetClientesQueCompram(){
+        Set<String> clis_compram = new HashSet<>();
+        for(ClientesFilial cf : this.filial_clientes.values()){
+            clis_compram.addAll(cf.getClisCompramFilial());
+        }
+        return clis_compram;
+    }
+
+    public int getNumeroClientesQueCompram(){
+        return this.getSetClientesQueCompram().size();
+    }
+
+    private Set<String> getSetClientesQueNaoCompram(List<String> l) {
+        Set<String> nao_vendidos = new HashSet<>();
+        Set<String> prods_comprados = this.getSetClientesQueCompram();
+        for (String s : l) {
+            if (!prods_comprados.contains(s)) {
+                nao_vendidos.add(s);
+            }
+        }
+        return nao_vendidos;
+    }
+
+    public int getNumeroClientesQueNaoCompram(List<String> l){
+        return this.getSetClientesQueNaoCompram(l).size();
+    }
+
     public void addClienteFilial(int filial, String codProd, String codCli, double preco, int quant, String tipo, int mes){
         if(!this.filial_clientes.containsKey(filial)){
             ClientesFilial cf = new ClientesFilial();

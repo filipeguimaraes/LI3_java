@@ -129,4 +129,12 @@ public class ProdutosFilial {
         }
         return map;
     }
+
+    public double getFaturacaoTotalFilial(){
+        double r = 0;
+        for(DadosAnual da : this.produtos_filial.values()){
+            r += da.getFaturacaoTotalProd();
+        }
+        return r;
+    }
 }
