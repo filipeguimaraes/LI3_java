@@ -1,9 +1,10 @@
 public interface IVenda {
-    public String getCodProd();
-    public String getCodCli();
-    public double getPreco();
-    public int getQuantidade();
-    public String getTipo();
-    public int getMes();
-    public int getFilial();
+    String getCodProd();
+    String getCodCli();
+    double getPreco();
+    int getQuantidade();
+    String getTipo();
+    int getMes();
+    int getFilial();
+    Venda clone();
 }
