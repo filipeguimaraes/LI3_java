@@ -3,14 +3,14 @@ import java.util.stream.Collectors;
 
 public class ComprasProduto {
     private String codProd;
-    private List<IVenda> lista;
+    private List<Venda> lista;
 
     public ComprasProduto(){
         this.codProd="";
         this.lista= new ArrayList<>();
     }
 
-    public ComprasProduto(String codProd, List<IVenda> lista) {
+    public ComprasProduto(String codProd, List<Venda> lista) {
         this.codProd = codProd;
         this.lista=lista;
     }
@@ -28,8 +28,8 @@ public class ComprasProduto {
         this.codProd = codProd;
     }
 
-    public List<IVenda> getLista() {
-        return lista.stream().map(IVenda::clone).collect(Collectors.toList());
+    public List<Venda> getLista() {
+        return lista.stream().map(Venda::clone).collect(Collectors.toList());
     }
 
     public int getNumVendasProd(){
@@ -38,7 +38,7 @@ public class ComprasProduto {
 
     public int [] getNumComprasMes(){
         int [] r = new int [12];
-        for(IVenda v : this.lista){
+        for(Venda v : this.lista){
             r[v.getMes()-1]++;
         }
         return r;
@@ -46,7 +46,7 @@ public class ComprasProduto {
 
     public double [] getGastoMes(){
         double [] r = new double [12];
-        for(IVenda v : this.lista){
+        for(Venda v : this.lista){
             r[v.getMes()-1] += v.getPreco() * v.getQuantidade();
         }
         return r;
@@ -54,7 +54,7 @@ public class ComprasProduto {
 
     public double getGastoProd(){
         double r = 0;
-        for(IVenda v : this.lista){
+        for(Venda v : this.lista){
             r += v.getPreco() * v.getQuantidade();
         }
         return r;
@@ -67,7 +67,7 @@ public class ComprasProduto {
     }
 
     public boolean vendeMes(int mes){
-        for(IVenda v : lista){
+        for(Venda v : lista){
             if(v.getMes()==mes){
                 return true;
             }
@@ -77,13 +77,13 @@ public class ComprasProduto {
 
     public List<Integer> getMesesEmQueVendeProd(){
         List<Integer> l = new ArrayList<>();
-        for(IVenda v : this.lista){
+        for(Venda v : this.lista){
             l.add(v.getMes());
         }
         return l;
     }
 
-    public void setLista(List<IVenda> lista) {
+    public void setLista(List<Venda> lista) {
         this.lista = lista;
     }
 
@@ -105,14 +105,14 @@ public class ComprasProduto {
     }
 
     public void compraProdutoMes(Map<Integer, Set<String>> clis_mes){
-        for(IVenda v : this.lista){
+        for(Venda v : this.lista){
             clis_mes.get(v.getMes()).add(v.getCodCli());
         }
     }
 
     public int getQuantidadeTotalVendidaProduto(){
         int r = 0;
-        for(IVenda v : this.lista){
+        for(Venda v : this.lista){
             r += v.getQuantidade();
         }
         return r;
