@@ -106,4 +106,12 @@ public interface IGereVendasModel {
     List<Double> getFaturacaoFiliais();
 
     List<String> getDistintosCli();
+
+    List<Double> getInfoFat();
+
+    List<Integer> getInfoClis();
+
+    List<Integer> getInfoProdutos();
+
+    List<String> getInfoVendas();
 }

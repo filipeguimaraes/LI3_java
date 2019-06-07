@@ -7,15 +7,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-import static java.lang.Double.doubleToLongBits;
+
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
 public class GereVendasModel implements IGereVendasModel {
     private CatProdutos CatProds;
     private CatClientes CatClis;
-    private CatFaturacao CatFat;
-    private CatFiliais CatFiliais;
+    private ICatFaturacao CatFat;
+    private ICatFiliais CatFiliais;
     private int numero_de_vendas_lidas;
     private int vendas_gratis;
     private String nomeFich;
@@ -54,6 +54,7 @@ public class GereVendasModel implements IGereVendasModel {
         }
         return l;
     }
+
     @SuppressWarnings("Duplicates")
     private void loadFatFil(String fich){
         String s;
@@ -67,7 +68,8 @@ public class GereVendasModel implements IGereVendasModel {
                 divd = s.split(" ");
                 if (divd.length == 7
                         && this.CatClis.existeCliente(divd[4])
-                        && this.CatProds.existeProduto(divd[0])) {
+                        && this.CatProds.existeProduto(divd[0])
+                        && validaVenda(s)) {
                     int mes = parseInt(divd[5]);
                     int filial = parseInt(divd[6]);
                     double preco = parseDouble(divd[1]);
@@ -91,6 +93,7 @@ public class GereVendasModel implements IGereVendasModel {
         }
     }
 
+    @SuppressWarnings("Duplicates")
     private void readLinesWithBuff(String fich) {
         this.numero_de_vendas_lidas = 0;
         this.vendas_gratis = 0;
@@ -101,7 +104,8 @@ public class GereVendasModel implements IGereVendasModel {
             divd = s.split(" ");
             if (divd.length == 7
                     && this.CatClis.existeCliente(divd[4])
-                    && this.CatProds.existeProduto(divd[0])) {
+                    && this.CatProds.existeProduto(divd[0])
+                    && validaVenda(s)) {
                 int mes = parseInt(divd[5]);
                 int filial = parseInt(divd[6]);
                 double preco = parseDouble(divd[1]);
@@ -193,19 +197,17 @@ public class GereVendasModel implements IGereVendasModel {
      */
     public List<Map.Entry<String,Integer>> getQuerie5(String cliente){
         Map<String,Integer> m = this.CatFiliais.getProdutoQuantidadeDeUmCliente(cliente);
-        List<Map.Entry<String,Integer>> l = new ArrayList<Map.Entry<String,Integer>>(m.entrySet());
-        Comparator<Map.Entry<String,Integer>> c = new Comparator<Map.Entry<String,Integer>>() {
-            public int compare(Map.Entry<String,Integer> o1, Map.Entry<String,Integer> o2) {
-                if(o1.getValue()<o2.getValue()) {
-                    return 1;
+        List<Map.Entry<String,Integer>> l = new ArrayList<>(m.entrySet());
+        Comparator<Map.Entry<String,Integer>> c = (o1, o2) -> {
+            if(o1.getValue()<o2.getValue()) {
+                return 1;
+            }
+            else{
+                if(o1.getValue()>o2.getValue()){
+                    return -1;
                 }
                 else{
-                    if(o1.getValue()>o2.getValue()){
-                        return -1;
-                    }
-                    else{
-                        return (o1.getKey().compareTo(o2.getKey()));
-                    }
+                    return (o1.getKey().compareTo(o2.getKey()));
                 }
             }
         };
@@ -224,11 +226,9 @@ public class GereVendasModel implements IGereVendasModel {
         List<String> lreturn = new ArrayList<>();
         Map m = this.CatFat.getListaProdutosEQuantidadeVendida();
         List<Map.Entry<String,Integer>> l = new ArrayList<>(m.entrySet());
-        Comparator<Map.Entry<String,Integer>> c = new Comparator<Map.Entry<String,Integer>>() {
-            public int compare(Map.Entry<String,Integer> o1, Map.Entry<String,Integer> o2) {
-                if (o1.getValue()-o2.getValue() == 0) return o1.getKey().compareTo(o2.getKey());
-                else return o2.getValue()-o1.getValue();
-            }
+        Comparator<Map.Entry<String,Integer>> c = (o1, o2) -> {
+            if (o1.getValue()-o2.getValue() == 0) return o1.getKey().compareTo(o2.getKey());
+            else return o2.getValue()-o1.getValue();
         };
         l.sort(c);
         l = l.subList(0,x+1);
@@ -272,11 +272,9 @@ public class GereVendasModel implements IGereVendasModel {
      */
     public List<Map.Entry<String,Integer>> getQuerie8(int x){
         List<Map.Entry<String,Integer>> l = this.CatFiliais.getClienteNumProdsCompDiferentes();
-        Comparator<Map.Entry<String,Integer>> c = new Comparator<Map.Entry<String,Integer>>() {
-            public int compare(Map.Entry<String,Integer> o1, Map.Entry<String,Integer> o2) {
-                if (o1.getValue()-o2.getValue() != 0) return o2.getValue()-o1.getValue();
-                else return o1.getKey().compareTo(o2.getKey());
-            }
+        Comparator<Map.Entry<String,Integer>> c = (o1, o2) -> {
+            if (o1.getValue() - o2.getValue() != 0) return o2.getValue() - o1.getValue();
+            else return o1.getKey().compareTo(o2.getKey());
         };
         l.sort(c);
         if(l.size()>x) {
@@ -296,20 +294,18 @@ public class GereVendasModel implements IGereVendasModel {
      */
     public List<Map.Entry<String,Double>> getQuerie9(String produto, int tamanho){
         List<Map.Entry<String,Double>> l = this.CatFiliais.getClientesFaturacaoProd(produto);
-        Comparator<Map.Entry<String,Double>> c = new Comparator<Map.Entry<String,Double>>() {
-            public int compare(Map.Entry<String,Double> o1, Map.Entry<String,Double> o2) {
-                double k = o1.getValue()-o2.getValue();
-                if (k != 0){
-                    if (k > 0){
-                        return -1;
-                    }
-                    else{
-                        return 1;
-                    }
+        Comparator<Map.Entry<String,Double>> c = (o1, o2) -> {
+            double k = o1.getValue()-o2.getValue();
+            if (k != 0){
+                if (k > 0){
+                    return -1;
                 }
                 else{
-                    return o1.getKey().compareTo(o2.getKey());
+                    return 1;
                 }
+            }
+            else{
+                return o1.getKey().compareTo(o2.getKey());
             }
         };
         l.sort(c);
@@ -361,12 +357,7 @@ public class GereVendasModel implements IGereVendasModel {
         List<Integer> l = new ArrayList<>();
         int i;
         for(i=1; i<13; i++){
-            if(m.containsKey(i)){
-                l.add(m.get(i));
-            }
-            else {
-                l.add(0);
-            }
+            l.add(m.getOrDefault(i, 0));
         }
         return l;
     }

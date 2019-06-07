@@ -3,6 +3,10 @@ import java.util.Map;
 
 public interface ICatFiliais {
 
+    int getNumeroClientesQueCompram();
+
+    int getNumeroClientesQueNaoCompram(List<String> l);
+
     void addClienteFilial(int filial, String codProd, String codCli, double preco, int quant, String tipo, int mes);
 
     int getNumProdCompras();

@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class CatFaturacao {
+public class CatFaturacao implements  ICatFaturacao{
     private Map<Integer, ProdutosFilial> vendidos;
 
     public CatFaturacao() {
