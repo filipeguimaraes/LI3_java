@@ -143,6 +143,10 @@ public class ClientesFilial {
         }
         return map;
     }
+
+    public Set<String> getClisCompramFilial(){
+        return this.clientes_com_compras.keySet();
+    }
 }
 
 

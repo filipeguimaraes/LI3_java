@@ -92,4 +92,8 @@ public class CatClientes{
         }
     }
 
+    public int getTamanho(){
+        return this.clientes.size();
+    }
+
 }

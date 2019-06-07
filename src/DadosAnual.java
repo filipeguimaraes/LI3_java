@@ -89,4 +89,12 @@ public class DadosAnual {
         }
         return map;
     }
+
+    public double getFaturacaoTotalProd(){
+        double r = 0;
+        for(DadosMes dm : this.dados_mensais.values()){
+            r += dm.getFaturacaoTotal();
+        }
+        return r;
+    }
 }
