@@ -11,7 +11,7 @@ import static java.lang.Double.doubleToLongBits;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
-public class GereVendasModel{
+public class GereVendasModel implements IGereVendasModel {
     private CatProdutos CatProds;
     private CatClientes CatClis;
     private CatFaturacao CatFat;
@@ -48,8 +48,8 @@ public class GereVendasModel{
         }
         return l;
     }
-
-    public void loadFatFil(String fich){
+    @SuppressWarnings("Duplicates")
+    private void loadFatFil(String fich){
         String s;
         String[] divd;
         try(

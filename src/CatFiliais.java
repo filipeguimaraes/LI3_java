@@ -3,7 +3,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.stream.Collectors;
 
-public class CatFiliais {
+public class CatFiliais implements ICatFiliais {
     private Map<Integer,ClientesFilial> filial_clientes;
 
     public CatFiliais(){
@@ -14,11 +14,11 @@ public class CatFiliais {
         this.filial_clientes = filial_clientes;
     }
 
-    public Map<Integer, ClientesFilial> getFilial_clientes() {
+    private Map<Integer, ClientesFilial> getFilial_clientes() {
         return filial_clientes;
     }
 
-    public void setFilial_clientes(Map<Integer, ClientesFilial> filial_clientes) {
+    private void setFilial_clientes(Map<Integer, ClientesFilial> filial_clientes) {
         this.filial_clientes = filial_clientes;
     }
 
@@ -89,7 +89,7 @@ public class CatFiliais {
 
     public List<String> getQuantosProdsDifsEGastos(String cliente){
         Map<Integer,Set<String>> prods_mes = new HashMap<>();
-        List<String> l = new ArrayList<String>();
+        List<String> l = new ArrayList<>();
         StringBuilder sb;
         int [] r_quant_reg_total = new int [12];
         double [] r_gastos_total = new double [12];
@@ -170,7 +170,6 @@ public class CatFiliais {
     public List<Map.Entry<String,Integer>> getClienteNumProdsCompDiferentes(){
         List<Map.Entry<String,Integer>> l = new ArrayList<>();
         Map<String,Set<String>> map = new HashMap<>();
-        int k;
         for(ClientesFilial cf : this.filial_clientes.values()){
             for(Map.Entry<String,Set<String>> me : cf.getClienteProdsDiferentes().entrySet() ){
                 if(map.containsKey(me.getKey())){
@@ -192,7 +191,6 @@ public class CatFiliais {
     public List<Map.Entry<String,Double>> getClientesFaturacaoProd(String prod){
         List<Map.Entry<String,Double>> l = new ArrayList<>();
         Map<String,Double> map = new HashMap<>();
-        int k;
         for(ClientesFilial cf : this.filial_clientes.values()){
             for(Map.Entry<String,Double> me : cf.getClisFatProd(prod).entrySet() ){
                 if(map.containsKey(me.getKey())){
