@@ -49,5 +49,9 @@ public interface InterfGereVendasView {
 
     void recebeIntCli();
 
+    void tempo(Double tempo);
+
+    void tempoSimples(Double tempo);
+
     void fim();
 }
