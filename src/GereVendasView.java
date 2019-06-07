@@ -193,7 +193,6 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.println();
     }
 
-
     private void ban(){
         line(); mudarDeLinha();
         cyan();
@@ -718,6 +717,22 @@ public class GereVendasView implements InterfGereVendasView {
         imprimeListaInteiros(dados);
         line();
         mudarDeLinha();
+    }
+
+    public void info(List<Integer> prods, List<Integer> clis, List<Double> fat, List<String> vendas){
+        clear();
+        banMensagem("Informações sobre o último ficheiro de vendas lido");
+        mudarDeLinha();
+        System.out.println(CYAN+"Nome do ficheiro: "+RESET+vendas.get(0));
+        System.out.println(CYAN+"Número total de registos de venda errados: "+RESET+vendas.get(1));
+        System.out.println(CYAN+"Número total de produtos: "+RESET+prods.get(0));
+        System.out.println(CYAN+"Número total de diferentes produtos comprados: "+RESET+prods.get(1));
+        System.out.println(CYAN+"Número total de produtos não comprados: "+RESET+prods.get(2));
+        System.out.println(CYAN+"Número total de clientes: "+RESET+clis.get(0));
+        System.out.println(CYAN+"Número total de clientes que realizaram compras: "+RESET+clis.get(1));
+        System.out.println(CYAN+"Número total de clientes que nada compraram: "+RESET+clis.get(2));
+        System.out.println(CYAN+"Número total de compras de valor total igual a 0: "+RESET+fat.get(0));
+        System.out.println(CYAN+"Faturação total: "+RESET+fat.get(1));
     }
 
     public void fatTotal(List<Double> dados){

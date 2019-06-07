@@ -27,6 +27,8 @@ public interface InterfGereVendasView {
 
     void totalComprasMes(List<Integer> dados);
 
+    public void info(List<Integer> prods, List<Integer> clis, List<Double> fat, List<String> vendas);
+
     void fatTotal(List<Double> dados);
 
     void distintosCli(List<String> dados);

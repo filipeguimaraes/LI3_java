@@ -187,6 +187,7 @@ public class GereVendasController {
             escolha = Input.lerInt();
             switch (escolha){
                 case 1:
+                    view.info(model.getInfoProdutos(),model.getInfoClis(),model.getInfoFat(),model.getInfoVendas());
                     enterContinuar();
                     break;
                 case 2:
