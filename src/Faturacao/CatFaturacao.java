@@ -19,10 +19,20 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
         this.vendidos = cf.getVendidos();
     }
 
+    /**
+     * Método retorna a lista de códigos de produtos não comprados, dada a lista de códigos de produtos existentes.
+     * @param l Lista de todos os códigos de produtos existentes.
+     * @return Lista de códigos de produtos não comprados.
+     */
     public List<String> getListaNaoComprados(List<String> l) {
         return this.adicionaFatNComp(l).stream().sorted().collect(Collectors.toList());
     }
 
+    /**
+     * Método que calcula o número de produtos que não são vendidos, dada a lista de códigos de produtos existentes.
+     * @param l Lista de todos os códigos de produtos existentes.
+     * @return Inteiro número de produtos não comprados
+     */
     public int getNComprados(List<String> l){
         return this.getListaNaoComprados(l).size();
     }

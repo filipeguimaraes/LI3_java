@@ -263,7 +263,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable{
      */
     public List<String> getQuerie6(int x) {
         List<String> lreturn = new ArrayList<>();
-        Map m = this.CatFat.getListaProdutosEQuantidadeVendida();
+        Map m = this.CatFat.getMapProdutosEQuantidadeVendida();
         List<Map.Entry<String,Integer>> l = new ArrayList<>(m.entrySet());
         Comparator<Map.Entry<String,Integer>> c = (o1, o2) -> {
             if (o1.getValue()-o2.getValue() == 0) return o1.getKey().compareTo(o2.getKey());
