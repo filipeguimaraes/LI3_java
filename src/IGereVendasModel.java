@@ -91,8 +91,8 @@ public interface IGereVendasModel {
      * Método que retorna uma lista de Strings com a informação mês a mês, e para cada mês filial a filial,
      * a facturação total a cada produto.
      * @return Lista de Strings as quais têm o seguinte
-     * formato "<cod_prod>:<filial 1 mes 1 faturado>;<filial 2 mes 1 faturado>;<filial 3 mes 1 filial> faturado>#<filial 1 mes 2 faturado>;<filial 2 mes 2 faturado>;<filial 3 mes 2 faturado>#..."
-     * sendo ":" -> divisão cod_prod e dados; "#" divisão entre meses; ";" divisão entre dados por filial.
+     * formato "cod_prod:[filial 1 mes 1 faturado];[filial 2 mes 1 faturado];[filial 3 mes 1 faturado]#[filial 1 mes 2 faturado];[filial 2 mes 2 faturado];[filial 3 mes 2 faturado]#..."
+     * sendo ":" divisão cod_prod e dados; "#" divisão entre meses; ";" divisão entre dados por filial.
      */
     List<String> getQuerie10();
 
