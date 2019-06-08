@@ -110,11 +110,27 @@ public interface IGereVendasModel {
 
     List<String> getDistintosCli();
 
+    /**
+     * Método que devolve as informações relativas à faturação
+     * @return lista cuja primeira posição corresponde ao número de compras de valor total igual a 0 e a segunda à faturação total
+     */
     List<Double> getInfoFat();
 
+    /**
+     * Método que devolve as informações relativas a um cliente
+     * @return lista cuja primeira posição corresponde ao número total de clientes, a segunda ao total de clientes que realizaram compras e a terceira ao total de clientes que nada compram
+     */
     List<Integer> getInfoClis();
 
+    /**
+     * Método que devolve as informações relativas a um produto
+     * @return lista cuja primeira posição corresponde ao número total de produtos, a segunda ao total de diferentes produtos comprados e a terceira ao total de não comprados
+     */
     List<Integer> getInfoProdutos();
 
+    /**
+     * Método que devolve as informações relativas a uma venda.
+     * @return lista cuja primeira posição corresponde ao nome do ficheiro e a segunda ao número de vendas erradas
+     */
     List<String> getInfoVendas();
 }

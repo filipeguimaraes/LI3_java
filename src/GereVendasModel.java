@@ -492,6 +492,12 @@ public class GereVendasModel implements IGereVendasModel {
      * @param vendastxt Ficheiro de Vendas.
      */
     public void load(String clientestxt, String produtostxt, String vendastxt){
+        CatProds = new CatProdutos();
+        CatClis = new CatClientes();
+        CatFat = new CatFaturacao();
+        CatFiliais = new CatFiliais();
+        numero_de_vendas_lidas = 0;
+        vendas_gratis = 0;
         this.nomeFich = vendastxt;
         this.CatClis.loadClientes(clientestxt);
         this.CatProds.loadProdutos(produtostxt);
