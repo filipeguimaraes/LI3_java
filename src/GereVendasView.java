@@ -307,6 +307,98 @@ public class GereVendasView implements InterfGereVendasView {
     }
 
     /**
+     * Imprime tabela com dados das 3 filiais e global, mês a mês
+     * @param f1 lista com dados referentes à filial 1
+     * @param f2 lista com dados referentes à filial 2
+     * @param f3 lista com dados referentes à filial 3
+     * @param fg lista com dados globais
+     */
+    @SuppressWarnings("Duplicates")
+    private void imprimeTabela(List<Double> f1,List<Double> f2, List<Double> f3, List<Double> fg){
+        int numero_elementos =12;
+        DecimalFormat df = new DecimalFormat("#.##");
+        int numero=(COLUNAS-30);
+        int largura= ((numero-8)/5);
+        int i;
+        espacos(10);for(i=0;i<numero;i++) System.out.print("-");
+        mudarDeLinha();
+        espacos(10);for(i=0;i<numero;i++) System.out.print("-");
+        mudarDeLinha();
+        espacos(10);
+        System.out.print("||");
+        espacos((largura/2)-6);
+        System.out.print(CYAN_UNDERLINE+"MÊS \\ FILIAL"+RESET);
+        espacos((largura/2)-6);
+        System.out.print("|");
+        espacos(largura/2);
+        System.out.print(RED+"1"+RESET);
+        espacos(largura/2);
+        System.out.print("|");
+        espacos(largura/2);
+        System.out.print(RED+"2"+RESET);
+        espacos(largura/2);
+        System.out.print("|");
+        espacos(largura/2);
+        System.out.print(RED+"3"+RESET);
+        espacos((largura/2)-3);
+        System.out.print("|");
+        espacos(largura/2);
+        System.out.print(RED+"Global"+RESET);
+        espacos((largura/2)-3);
+        System.out.println("||");
+        espacos(10);
+        for(i=0;i<numero;i++) System.out.print("-");
+        mudarDeLinha();
+        for(int j=0;j<numero_elementos;j++){
+            int aux=1;
+            if(j>=9) aux=2;
+
+            espacos(10); System.out.print("||");
+            espacos((largura/2)-aux); System.out.printf(RED+"%d"+RESET,(j+1));
+            espacos((largura/2));
+
+            System.out.print("|");
+
+            String aux1 = df.format(f1.get(j));
+            int espacos1 = aux1.length();
+            espacos((largura/2)-(espacos1/2));
+            System.out.print(aux1);
+            espacos((largura/2)-(espacos1/2));
+
+            System.out.print("|");
+
+            String aux2 = df.format(f2.get(j));
+            int espacos2 = aux2.length();
+            espacos((largura/2)-(espacos2/2));
+            System.out.print(aux2);
+            espacos(largura/2-(espacos2/2));
+
+            System.out.print("|");
+
+            String aux3 = df.format(f3.get(j));
+            int espacos3 = aux3.length();
+            espacos((largura/2)-(espacos3/2));
+            System.out.print(aux3);
+            espacos(largura/2-(espacos3/2));
+
+            System.out.print("|");
+
+            String aux4 = df.format(fg.get(j));
+            int espacos4 = aux4.length();
+            espacos((largura/2)-(espacos4/2));
+            System.out.print(aux4);
+            espacos(largura/2-(espacos4/2));
+
+            System.out.println("||");
+
+            espacos(10); for(i=0;i<numero;i++) System.out.print("-");
+            mudarDeLinha();
+        }
+        espacos(10); for(i=0;i<numero;i++) System.out.print("-");
+        mudarDeLinha();
+    }
+
+    /**
      * Ecrã final
      */
     public void fim(){
@@ -830,29 +922,22 @@ public class GereVendasView implements InterfGereVendasView {
         mudarDeLinha();
     }
 
-    public void fatTotal(List<Double> dados){
+    /**
+     *  Imprime a faturação total por mês para cada filial e o valor total global
+     * @param dados Faturação total por mês para cada filial e o valor total global
+     */
+    public void fatTotal(List<List<Double>> dados){
         clear();
         banMensagem("Faturação total por mês para cada filial e o valor total global");
+        linhas(3);
         mudarDeLinha();
-        linhas(5);
-        System.out.println(CYAN_UNDERLINE+"Global"+RESET);
-        System.out.println(dados.get(0));
+        imprimeTabela(dados.get(1),dados.get(2),dados.get(3),dados.get(0));
+        double global = dados.get(0).stream()
+                .mapToDouble(Double::doubleValue)
+                .sum();
+        mudarDeLinha();
+        System.out.println(CYAN+"     Faturação total global: "+RESET+global);
         linhas(3);
-        line();
-        linhas(3);
-        System.out.println(CYAN_UNDERLINE+"Filial 1"+RESET);
-        System.out.println(dados.get(1));
-        linhas(3);
-        line();
-        linhas(3);
-        System.out.println(CYAN_UNDERLINE+"Filial 2"+RESET);
-        System.out.println(dados.get(2));
-        linhas(3);
-        line();
-        linhas(3);
-        System.out.println(CYAN_UNDERLINE+"Filial 3"+RESET);
-        System.out.println(dados.get(3));
-        linhas(5);
         line();
         mudarDeLinha();
 
