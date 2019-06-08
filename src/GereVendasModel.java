@@ -10,7 +10,13 @@ import java.util.*;
 
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
-
+/**
+ * GereVendasModel, contém todos os dados do sistema.
+ *
+ * @author Beatriz Rocha A84003
+ * @author Filipe Guimarães A85308
+ * @author Gonçalo Ferreira A84073
+ */
 public class GereVendasModel implements IGereVendasModel {
     private ICatProdutos CatProds;
     private ICatClientes CatClis;
@@ -30,6 +36,11 @@ public class GereVendasModel implements IGereVendasModel {
         nomeFich = "";
     }
 
+    /**
+     * Método que valida uma venda.
+     * @param s venda
+     * @return verdadeiro se a venda for válida, falso caso contrário.
+     */
     private static boolean validaVenda(String s){
         String[] split = s.split(" ");
         double preco = parseDouble(split[1]);
@@ -44,6 +55,11 @@ public class GereVendasModel implements IGereVendasModel {
                 && 0 < quantidade && quantidade < 201;
     }
 
+    /**
+     * Método que lê um ficheiro.
+     * @param filePath path do ficheiro
+     * @return lista com todas as linhas lidas
+     */
     private static List<String> readFilesWithNIO(String filePath) {
         Path p = Paths.get(filePath);
         List<String> l = null;
@@ -411,6 +427,10 @@ public class GereVendasModel implements IGereVendasModel {
         return l;
     }
 
+    /**
+     * Método que devolve as informações relativas a um produto
+     * @return lista cuja primeira posição corresponde ao número total de produtos, a segunda ao total de diferentes produtos comprados e a terceira ao total de não comprados
+     */
     public List<Integer> getInfoProdutos(){
         List<Integer> l = new ArrayList<>();
         l.add(this.CatProds.getTamanho());
@@ -419,6 +439,10 @@ public class GereVendasModel implements IGereVendasModel {
         return l;
     }
 
+    /**
+     * Método que devolve as informações relativas a um cliente
+     * @return lista cuja primeira posição corresponde ao número total de clientes, a segunda ao total de clientes que realizaram compras e a terceira ao total de clientes que nada compram
+     */
     public List<Integer> getInfoClis(){
         List<Integer> l = new ArrayList<>();
         l.add(this.CatClis.getTamanho());
@@ -427,6 +451,10 @@ public class GereVendasModel implements IGereVendasModel {
         return l;
     }
 
+    /**
+     * Método que devolve as informações relativas à faturação
+     * @return lista cuja primeira posição corresponde ao número de compras de valor total igual a 0 e a segunda à faturação total
+     */
     public List<Double> getInfoFat(){
         List<Double> l = new ArrayList<>();
         l.add((double)this.vendas_gratis);
@@ -434,6 +462,10 @@ public class GereVendasModel implements IGereVendasModel {
         return l;
     }
 
+    /**
+     * Método que devolve as informações relativas a uma venda.
+     * @return lista cuja primeira posição corresponde ao nome do ficheiro e a segunda ao número de vendas erradas
+     */
     public List<String> getInfoVendas(){
         List<String> l = new ArrayList<>();
         int errados = this.numero_de_vendas_lidas - this.CatFiliais.getNumProdCompras();
