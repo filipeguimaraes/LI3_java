@@ -87,8 +87,11 @@ public interface InterfGereVendasView {
      */
     void info(List<Integer> prods, List<Integer> clis, List<Double> fat, List<String> vendas);
 
-
-    void fatTotal(List<Double> dados);
+    /**
+     *  Imprime a faturação total por mês para cada filial e o valor total global
+     * @param dados Faturação total por mês para cada filial e o valor total global
+     */
+    void fatTotal(List<List<Double>> dados);
 
     /**
      * Imprime uma tabela valores referentes a clientes
