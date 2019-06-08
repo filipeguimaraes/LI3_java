@@ -117,7 +117,7 @@ public class ProdutosFilial implements Serializable {
         Map<Integer,Double> map = new TreeMap<>();
         double k;
         for(DadosAnual da : this.produtos_filial.values()){
-            for(Map.Entry<Integer,Double> me : da.getFaturacaoFilial().entrySet() ){
+            for(Map.Entry<Integer,Double> me : da.getFaturacaoPorMes().entrySet() ){
                 if(map.containsKey(me.getKey())){
                     k = map.get(me.getKey()) + me.getValue();
                     map.put(me.getKey(),k);
