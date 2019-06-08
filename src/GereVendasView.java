@@ -1,7 +1,6 @@
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CyclicBarrier;
 
 /**
  * Write a description of class GereVendasView here.
@@ -772,7 +771,7 @@ public class GereVendasView implements InterfGereVendasView {
 
     }
 
-    public void distintosCli(List<String> dados){
+    public void distintosCli(List<String> dados) {
         clear();
         banMensagem("Número de clientes distintos que compraram em cada mês filial a filial");
         String[] f1 = dados.get(0).split(" ");
@@ -780,41 +779,24 @@ public class GereVendasView implements InterfGereVendasView {
         String[] f3 = dados.get(2).split(" ");
         linhas(4);
         mudarDeLinha();
-        imprimeTabela(f1,f2,f3);
+        imprimeTabela(f1, f2, f3);
         linhas(4);
         line();
         mudarDeLinha();
     }
 
-    public void carregaVendas(){
-        mudarDeLinha();
-        mudarDeLinha();
-        banMensagem("Introduzir nome do ficheiro de vendas");
-        mudarDeLinha();
-        System.out.print("Nome do ficheiro"+RED+"(por defeito: \"Vendas_1M.txt\")"+RESET+": ");
-    }
-
-    public void carregaProdutos(){
-        mudarDeLinha();
-        mudarDeLinha();
-        banMensagem("Introduzir nome do ficheiro de vendas");
-        mudarDeLinha();
-        System.out.print("Nome do ficheiro"+RED+"(por defeito: \"Produtos.txt\")"+RESET+": ");
-    }
-
-    public void carregaClientes(){
-        mudarDeLinha();
-        mudarDeLinha();
-        banMensagem("Introduzir nome do ficheiro de vendas");
-        mudarDeLinha();
-        System.out.print("Nome do ficheiro"+RED+"(por defeito: \"Clientes.txt\")"+RESET+": ");
-    }
-
-    public void carregaPreDefinidos(){
+    public void carregaFicheiros(){
         clear();
-        banMensagem("Carregar ficheiros");
+        banMensagem("Escolher ficheiro de vendas");
         mudarDeLinha();
-        System.out.println("Deseja carregar ficheiros pré-definidos? "+ RED +"(Sim: 1 | Não: 0)" + RESET);
+        mudarDeLinha();
+        System.out.println(CYAN+"1)"+RESET+"Ficheiro de 1M de vendas ");
+        System.out.println(CYAN+"2)"+RESET+"Ficheiro de 3M de vendas ");
+        System.out.println(CYAN+"3)"+RESET+"Ficheiro de 5M de vendas ");
+        mudarDeLinha();
+        line();
+        mudarDeLinha();
+        System.out.println("Introduza a opção: ");
     }
 
     public void recebeMes(){

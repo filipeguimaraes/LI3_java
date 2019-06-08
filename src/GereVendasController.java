@@ -15,6 +15,13 @@ public class GereVendasController {
     private IGereVendasModel model;
     private InterfGereVendasView view;
 
+    private static final String CLIENTES = "Clientes.txt";
+    private static final String PRODUTOS = "Produtos.txt";
+    private static final String VENDAS_1M = "Vendas_1M.txt";
+    private static final String VENDAS_3M = "Vendas_3M.txt";
+    private static final String VENDAS_5M = "Vendas_5M.txt";
+
+
     public void setModel(IGereVendasModel model) {
         this.model = model;
     }
@@ -39,25 +46,18 @@ public class GereVendasController {
                      escolha=Input.lerInt();
                      break;
                  case 1:
-                     view.carregaPreDefinidos();
+                     view.carregaFicheiros();
                      int def = Input.lerInt();
-                     String pathProdutos;
-                     String pathClientes;
-                     String pathVendas;
-                     if (def==0) {
-                         view.carregaProdutos();
-                         pathProdutos = Input.lerString();
-                         view.carregaClientes();
-                         pathClientes = Input.lerString();
-                         view.carregaVendas();
-                         pathVendas = Input.lerString();
-                     }else {
-                         pathProdutos = "Produtos.txt";
-                         pathClientes = "Clientes.txt";
-                         pathVendas = "Vendas_1M.txt";
+                     String vendas;
+                     if(def==2){
+                         vendas =VENDAS_3M;
+                     } else if (def == 3) {
+                         vendas = VENDAS_5M;
+                     } else {
+                         vendas = VENDAS_1M;
                      }
                      Crono.start();
-                     model.load(pathClientes, pathProdutos, pathVendas);
+                     model.load(CLIENTES, PRODUTOS, vendas);
                      view.tempo(Crono.stop());
                      enterContinuar();
                      escolha=0;
