@@ -1,9 +1,10 @@
 package Produtos;
 
+import java.io.Serializable;
 import java.util.Objects;
 import static java.lang.Integer.parseInt;
 
-public class Produto implements Comparable<Produto>, IProduto {
+public class Produto implements Comparable<Produto>, IProduto, Serializable {
     private String codProd;
 
     public Produto(){

@@ -1,9 +1,10 @@
 package Filiais;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ComprasProduto {
+public class ComprasProduto implements Serializable {
     private String codProd;
     private List<Venda> lista;
 

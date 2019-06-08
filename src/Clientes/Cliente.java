@@ -1,9 +1,10 @@
 package Clientes;
 
+import java.io.Serializable;
 import java.util.Objects;
 import static java.lang.Integer.parseInt;
 
-public class Cliente implements Comparable<Cliente>, ICliente {
+public class Cliente implements Comparable<Cliente>, ICliente, Serializable {
     private String codCli;
 
     public Cliente(){

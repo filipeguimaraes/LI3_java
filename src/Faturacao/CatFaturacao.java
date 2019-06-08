@@ -1,9 +1,10 @@
 package Faturacao;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class CatFaturacao implements ICatFaturacao {
+public class CatFaturacao implements ICatFaturacao, Serializable {
     private Map<Integer, ProdutosFilial> vendidos;
 
     public CatFaturacao() {

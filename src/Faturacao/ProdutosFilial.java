@@ -1,9 +1,10 @@
 package Faturacao;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ProdutosFilial {
+public class ProdutosFilial implements Serializable {
     private int filial;
     private Map<String, DadosAnual> produtos_filial;
 

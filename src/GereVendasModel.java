@@ -17,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.io.Serializable;
 import java.util.stream.Collectors;
 
 
@@ -29,7 +30,7 @@ import static java.lang.Integer.parseInt;
  * @author Filipe Guimarães A85308
  * @author Gonçalo Ferreira A84073
  */
-public class GereVendasModel implements IGereVendasModel {
+public class GereVendasModel implements IGereVendasModel,Serializable{
     private ICatProdutos CatProds;
     private ICatClientes CatClis;
     private ICatFaturacao CatFat;

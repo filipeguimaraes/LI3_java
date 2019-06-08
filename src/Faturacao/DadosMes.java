@@ -1,8 +1,9 @@
 package Faturacao;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class DadosMes {
+public class DadosMes implements Serializable {
     private int mes;
     private int quantidade;
     private double faturacao_N;
