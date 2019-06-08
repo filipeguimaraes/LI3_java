@@ -19,7 +19,7 @@ public interface ICatFaturacao {
 
     double [] getVendasFaturadoMeses(String produto);
 
-    Map<String,Integer> getListaProdutosEQuantidadeVendida();
+    Map<String,Integer> getMapProdutosEQuantidadeVendida();
 
     Map<Integer,Double> getFatsProdMesFiliais(String prod, int filial);
 

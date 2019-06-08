@@ -122,9 +122,10 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
     }
 
     /**
-     * Método que dado um código de produto, retorna um array de inteiros que contem o número
-     * @param produto
-     * @return
+     * Método que dado um código de produto, retorna um array de inteiros que contem o número de registo
+     * de vendas, respetivamente ao mês.
+     * @param produto String código do produto.
+     * @return Array de inteiros que contem o número de registo de vendas, respetivamente ao mês.
      * Sendo que o índice 0 do array corresponde ao mês 1, e assim sucessivamente.
      */
     public int [] getVendasRegMeses(String produto){
@@ -143,9 +144,10 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
     }
 
     /**
-     *
-     * @param produto
-     * @return
+     * Método que dado um código de produto, retorna um array de doubles que contem o total faturado no mês
+     * das vendas desse produto, respetivamente ao mês.
+     * @param produto String código do produto.
+     * @return Array de doubles que contem o total faturado no mês das vendas desse produto, respetivamente ao mês.
      * Sendo que o índice 0 do array corresponde ao mês 1, e assim sucessivamente.
      */
     public double [] getVendasFaturadoMeses(String produto){
@@ -164,10 +166,11 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
     }
 
     /**
-     *
-     * @return
+     * Método percorre todas as filiais, retornando um Map<String,Integer> contendo a quantidade vendida(value)
+     * de um produto(key).
+     * @return Map<String, Integer> contendo a quantidade vendida(value) de um produto(key).
      */
-    public Map<String,Integer> getListaProdutosEQuantidadeVendida(){
+    public Map<String,Integer> getMapProdutosEQuantidadeVendida(){
         Map<String,Integer> map = new HashMap<>();
         int k;
         for(ProdutosFilial pf : this.vendidos.values()){
@@ -185,10 +188,11 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
     }
 
     /**
-     *
-     * @param prod
-     * @param filial
-     * @return
+     * Método que dado um código de produto e uma filial, retorna um Map<Integer,Double> contendo um total faturado(value)
+     * num determinado mês(key) do produto na filial indicada.
+     * @param prod String do código de produto.
+     * @param filial Inteiro que representa a filial.
+     * @return Map<Integer, Double> contendo um total faturado(value) num determinado mês(key) do produto na filial indicada.
      */
     public Map<Integer,Double> getFatsProdMesFiliais(String prod, int filial){
         if(this.vendidos.containsKey(filial)){
@@ -200,8 +204,9 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
     }
 
     /**
-     *
-     * @return
+     * Método percorre todas as filiais, retornando um Map<Integer,Integer> contendo a número de vendas registadas(value)
+     * num determinado mês(key).
+     * @return Map<Integer, Integer> contendo a número de vendas registadas(value) num determinado mês(key).
      */
     public Map<Integer,Integer> comprasMes(){
         Map<Integer,Integer> map = new HashMap<>();
@@ -221,9 +226,10 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
     }
 
     /**
-     *
-     * @param filial
-     * @return
+     * Método que dada uma filial, retorna um Map<Integer,Double> contendo um total faturado(value)
+     * num determinado mês(key) na filial indicada.
+     * @param filial Inteiro que representa a filial.
+     * @return Map<Integer, Double> contendo um total faturado(value) num determinado mês(key) na filial indicada.
      */
     public Map<Integer,Double> fatFilial(int filial){
         Map<Integer,Double> map = new TreeMap<>();
@@ -246,8 +252,8 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
     }
 
     /**
-     *
-     * @return
+     * Método que retorna a faturação global.
+     * @return double a faturação global.
      */
     public double getFaturacaoGlobal(){
         double r = 0;
