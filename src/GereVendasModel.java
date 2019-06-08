@@ -500,9 +500,9 @@ public class GereVendasModel implements IGereVendasModel,Serializable{
         numero_de_vendas_lidas = 0;
         vendas_gratis = 0;
         this.nomeFich = vendastxt;
-        this.CatClis.loadClientes(clientestxt);
-        this.CatProds.loadProdutos(produtostxt);
-        this.loadFatFil(vendastxt);
+        this.CatClis.readClientes(clientestxt);
+        this.CatProds.readProdutos(produtostxt);
+        this.readLinesWithBuff(vendastxt);//FatFil(vendastxt);
     }
 
 
