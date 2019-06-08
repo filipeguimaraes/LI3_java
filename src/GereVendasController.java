@@ -9,10 +9,10 @@ import java.util.Scanner;
  * @version (a version number or a date)
  */
 public class GereVendasController {
-    private GereVendasModel model;
+    private IGereVendasModel model;
     private InterfGereVendasView view;
 
-    public void setModel(GereVendasModel model) {
+    public void setModel(IGereVendasModel model) {
         this.model = model;
     }
 
