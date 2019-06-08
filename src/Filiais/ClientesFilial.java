@@ -72,7 +72,7 @@ public class ClientesFilial implements Serializable {
      * @param aux Set<String> de clientes que já foram verificados.
      * @return Set<String> de clientes que ainda não foram verificados e que compram no mês passado por argumento.
      */
-    public Set<String> getHashSetClientesCompramMes(int mes, Set<String> aux){
+    public HashSet<String> getHashSetClientesCompramMes(int mes, Set<String> aux){
         HashSet<String> clis = new HashSet<>();
         for(ProdutosCompradosCliente pcc : this.clientes_com_compras.values())
             if((!aux.contains(pcc.getCliente())) && pcc.clienteCompraNoMes(mes)) clis.add(pcc.getCliente());
@@ -170,7 +170,7 @@ public class ClientesFilial implements Serializable {
 
     /**
      * Método que percorre todos os clientes para o obter o par (código cliente,gasto total), ordenando assim por
-     * gastos totais e revolvendo uma string com os Top 3 de clientes que mais gastam nesta filial.
+     * gastos totais e devolvendo uma string com os Top 3 de clientes que mais gastam nesta filial.
      * @return String com os Top 3 de clientes que mais gastam nesta filial.
      * Exemplo: "(1º que mais gastou) (2º que mais gastou) (3º que mais gastou)"
      */
