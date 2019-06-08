@@ -6,7 +6,7 @@ import java.util.Objects;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
-public class Venda implements IVenda, Serializable {
+public class DadosVenda implements IDadosVenda, Serializable {
     private String codProd;
     private String codCli;
     private double preco;
@@ -15,7 +15,7 @@ public class Venda implements IVenda, Serializable {
     private int mes;
     private int filial;
 
-    public Venda(){
+    public DadosVenda(){
         this.codProd = "";
         this.codCli = "";
         this.preco = 0;
@@ -25,7 +25,7 @@ public class Venda implements IVenda, Serializable {
         this.filial = 1;
     }
 
-    public Venda(String codProd, String codCli, double preco, int quantidade, String tipo, int mes, int filial) {
+    public DadosVenda(String codProd, String codCli, double preco, int quantidade, String tipo, int mes, int filial) {
         this.codProd = codProd;
         this.codCli = codCli;
         this.preco = preco;
@@ -35,7 +35,7 @@ public class Venda implements IVenda, Serializable {
         this.filial = filial;
     }
 
-    public Venda (Venda v){
+    public DadosVenda(DadosVenda v){
         this.codProd = v.getCodProd();
         this.codCli = v.getCodCli();
         this.preco = v.getPreco();
@@ -45,7 +45,7 @@ public class Venda implements IVenda, Serializable {
         this.filial = v.getFilial();
     }
 
-    public Venda (String[] s){
+    public DadosVenda(String[] s){
         this.codProd=s[0];
         this.preco=parseDouble(s[1]);
         this.quantidade=parseInt(s[2]);
@@ -55,7 +55,7 @@ public class Venda implements IVenda, Serializable {
         this.filial=parseInt(s[6]);
     }
 
-    public Venda (String v){
+    public DadosVenda(String v){
         String [] s = v.split(" ");
         this.codProd=s[0];
         this.preco=parseDouble(s[1]);
@@ -125,7 +125,7 @@ public class Venda implements IVenda, Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Venda venda = (Venda) o;
+        DadosVenda venda = (DadosVenda) o;
         return Double.compare(venda.preco, preco) == 0 &&
                 quantidade == venda.quantidade &&
                 mes == venda.mes &&
@@ -149,8 +149,8 @@ public class Venda implements IVenda, Serializable {
         return sb.toString();
     }
 
-    public Venda clone(){
-        return new Venda(this);
+    public DadosVenda clone(){
+        return new DadosVenda(this);
     }
 
     /**

@@ -6,14 +6,14 @@ import java.util.stream.Collectors;
 
 public class ComprasProduto implements Serializable {
     private String codProd;
-    private List<Venda> lista;
+    private List<DadosVenda> lista;
 
     public ComprasProduto(){
         this.codProd="";
         this.lista= new ArrayList<>();
     }
 
-    public ComprasProduto(String codProd, List<Venda> lista) {
+    public ComprasProduto(String codProd, List<DadosVenda> lista) {
         this.codProd = codProd;
         this.lista=lista;
     }
@@ -39,8 +39,8 @@ public class ComprasProduto implements Serializable {
         this.codProd = codProd;
     }
 
-    private List<Venda> getLista() {
-        return lista.stream().map(Venda::clone).collect(Collectors.toList());
+    private List<DadosVenda> getLista() {
+        return lista.stream().map(DadosVenda::clone).collect(Collectors.toList());
     }
 
     /**
@@ -58,7 +58,7 @@ public class ComprasProduto implements Serializable {
      */
     public int [] getNumComprasMes(){
         int [] r = new int [12];
-        for(Venda v : this.lista){
+        for(DadosVenda v : this.lista){
             r[v.getMes()-1]++;
         }
         return r;
@@ -71,7 +71,7 @@ public class ComprasProduto implements Serializable {
      */
     public double [] getGastoMes(){
         double [] r = new double [12];
-        for(Venda v : this.lista){
+        for(DadosVenda v : this.lista){
             r[v.getMes()-1] += v.getPreco() * v.getQuantidade();
         }
         return r;
@@ -83,7 +83,7 @@ public class ComprasProduto implements Serializable {
      */
     public double getGastoProd(){
         double r = 0;
-        for(Venda v : this.lista){
+        for(DadosVenda v : this.lista){
             r += v.getPreco() * v.getQuantidade();
         }
         return r;
@@ -103,7 +103,7 @@ public class ComprasProduto implements Serializable {
      *         false caso contrário.
      */
     public boolean vendeMes(int mes){
-        for(Venda v : lista){
+        for(DadosVenda v : lista){
             if(v.getMes()==mes){
                 return true;
             }
@@ -117,13 +117,13 @@ public class ComprasProduto implements Serializable {
      */
     public Set<Integer> getMesesEmQueVendeProd(){
         Set<Integer> l = new HashSet<>();
-        for(Venda v : this.lista){
+        for(DadosVenda v : this.lista){
             l.add(v.getMes());
         }
         return l;
     }
 
-    private void setLista(List<Venda> lista) {
+    private void setLista(List<DadosVenda> lista) {
         this.lista = lista;
     }
 
@@ -150,7 +150,7 @@ public class ComprasProduto implements Serializable {
      * @param mes int corresponde ao mês.
      */
     public void addDados(int filial, String codProd, String codCli, double preco, int quant, String tipo, int mes){
-        Venda v = new Venda(codProd,codCli,preco,quant,tipo,mes,filial);
+        DadosVenda v = new DadosVenda(codProd,codCli,preco,quant,tipo,mes,filial);
         if(v.validaVenda())this.lista.add(v);
     }
 
@@ -160,7 +160,7 @@ public class ComprasProduto implements Serializable {
      * @param clis_mes
      */
     public void compraProdutoMes(Map<Integer, Set<String>> clis_mes){
-        for(Venda v : this.lista){
+        for(DadosVenda v : this.lista){
             clis_mes.get(v.getMes()).add(v.getCodCli());
         }
     }
@@ -171,7 +171,7 @@ public class ComprasProduto implements Serializable {
      */
     public int getQuantidadeTotalVendidaProduto(){
         int r = 0;
-        for(Venda v : this.lista){
+        for(DadosVenda v : this.lista){
             r += v.getQuantidade();
         }
         return r;

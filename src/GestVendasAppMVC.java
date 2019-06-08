@@ -19,7 +19,7 @@ public class GestVendasAppMVC {
         }
          */
         InterfGereVendasView view = new GereVendasView();
-        GereVendasController control = new GereVendasController();
+        IGereVendasController control = new GereVendasController();
         control.setModel(model);
         control.setView(view);
         control.run();
