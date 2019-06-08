@@ -4,6 +4,13 @@ import java.io.Serializable;
 import java.util.Objects;
 import static java.lang.Integer.parseInt;
 
+/**
+ * Produto, Class que contém o código de produto.
+ *
+ * @author Beatriz Rocha A84003
+ * @author Filipe Guimarães A85308
+ * @author Gonçalo Ferreira A84073
+ */
 public class Produto implements Comparable<Produto>, IProduto, Serializable {
     private String codProd;
 

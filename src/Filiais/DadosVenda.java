@@ -6,6 +6,13 @@ import java.util.Objects;
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
+/**
+ * DadosVenda, Class que estrutura uma relação entre cliente e compras.
+ *
+ * @author Beatriz Rocha A84003
+ * @author Filipe Guimarães A85308
+ * @author Gonçalo Ferreira A84073
+ */
 public class DadosVenda implements IDadosVenda, Serializable {
     private String codProd;
     private String codCli;

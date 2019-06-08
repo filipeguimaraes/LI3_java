@@ -4,7 +4,13 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
+/**
+ * ClientesFilial, Class que estrutura uma relação entre cliente e compras.
+ *
+ * @author Beatriz Rocha A84003
+ * @author Filipe Guimarães A85308
+ * @author Gonçalo Ferreira A84073
+ */
 public class ClientesFilial implements Serializable {
     private int filial;
     private Map<String,ProdutosCompradosCliente> clientes_com_compras;

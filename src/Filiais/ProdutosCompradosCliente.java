@@ -4,7 +4,13 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
+/**
+ * ProdutosCompradosCliente, Class que estrutura uma relação entre cliente e compras.
+ *
+ * @author Beatriz Rocha A84003
+ * @author Filipe Guimarães A85308
+ * @author Gonçalo Ferreira A84073
+ */
 public class ProdutosCompradosCliente implements Serializable {
     private String cliente;
     private Map<String, ComprasProduto> produtos_comprados;

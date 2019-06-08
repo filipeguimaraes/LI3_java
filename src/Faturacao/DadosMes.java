@@ -3,6 +3,13 @@ package Faturacao;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * DadosMes, Class que estrutura uma relação de produto e vendas.
+ *
+ * @author Beatriz Rocha A84003
+ * @author Filipe Guimarães A85308
+ * @author Gonçalo Ferreira A84073
+ */
 public class DadosMes implements Serializable {
     private int mes;
     private int quantidade;
@@ -44,60 +51,79 @@ public class DadosMes implements Serializable {
 
     }
 
+    /**
+     * Método que retorna a quantidade vendida.
+     * @return int quantidade vendida.
+     */
     public int getQuantidade() {
         return quantidade;
     }
 
+    /**
+     * Método que retorna a mês.
+     * @return int mês.
+     */
     public int getMes() {
         return mes;
     }
 
-    public void setMes(int mes) {
+    private void setMes(int mes) {
         this.mes = mes;
     }
 
-    public void setQuantidade(int quantidade) {
+    private void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
 
-    public void addQuantidade(int quantidade) {
+    private void addQuantidade(int quantidade) {
         this.quantidade += quantidade;
     }
 
+    /**
+     * Método que retorna a faturação em normal.
+     * @return double faturação em normal.
+     */
     public double getFaturacao_N() {
         return faturacao_N;
     }
 
-    public void setFaturacao_N(double faturacao_N) {
+    private void setFaturacao_N(double faturacao_N) {
         this.faturacao_N = faturacao_N;
     }
 
-    public void addFaturacao_N(double faturacao_N) {
+    private void addFaturacao_N(double faturacao_N) {
         this.faturacao_N += faturacao_N;
     }
 
+    /**
+     * Método que retorna a faturação em promoção.
+     * @return double faturação em promoção.
+     */
     public double getFaturacao_P() {
         return faturacao_P;
     }
 
-    public void setFaturacao_P(double faturacao_P) {
+    private void setFaturacao_P(double faturacao_P) {
         this.faturacao_P = faturacao_P;
     }
 
-    public void addFaturacao_P(double faturacao_P) {
+    private void addFaturacao_P(double faturacao_P) {
         this.faturacao_P += faturacao_P;
     }
 
-
+    /**
+     * Método que retorna a número de registo de vendas.
+     * @return int número de registo de vendas.
+     */
     public int getRegisto_vendas() {
         return registo_vendas;
     }
 
-    public void setRegisto_vendas(int registo_vendas) {
+    private void setRegisto_vendas(int registo_vendas) {
         this.registo_vendas = registo_vendas;
     }
 
-    public void addRegisto_vendas(int registo_vendas) {
+    private void addRegisto_vendas(int registo_vendas) {
         this.registo_vendas += registo_vendas;
     }
 
@@ -124,6 +150,12 @@ public class DadosMes implements Serializable {
         return new DadosMes(this);
     }
 
+    /**
+     * Método que com os dados de faturação referentes a um mês adiciona os dados aos já existentes.
+     * @param quant int que representa a quantidade vendida.
+     * @param fat_N double que representa o faturado em normal.
+     * @param fat_P double que representa o faturado em promoção.
+     */
     public void addDadosMes(int quant, double fat_N, double fat_P){
         this.addQuantidade(quant);
         this.addFaturacao_N(fat_N);
@@ -131,6 +163,10 @@ public class DadosMes implements Serializable {
         this.registo_vendas++;
     }
 
+    /**
+     * Método que retorna o total faturado neste mês.
+     * @return double total faturado neste mês.
+     */
     public double getFaturacaoTotal(){
         return this.faturacao_N+this.faturacao_P;
     }
