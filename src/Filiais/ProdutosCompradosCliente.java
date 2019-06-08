@@ -1,13 +1,15 @@
+package Filiais;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 
 public class ProdutosCompradosCliente {
     private String cliente;
-    private Map<String,ComprasProduto> produtos_comprados;
+    private Map<String, ComprasProduto> produtos_comprados;
 
     public ProdutosCompradosCliente() {
-        this.produtos_comprados = new HashMap<String,ComprasProduto>();
+        this.produtos_comprados = new HashMap<String, ComprasProduto>();
         this.cliente = "";
     }
 
@@ -111,7 +113,7 @@ public class ProdutosCompradosCliente {
 
     public List<AbstractMap.SimpleEntry<String,Integer>> getListaProdutoQuantidade(){
         List<AbstractMap.SimpleEntry<String,Integer>> l = new ArrayList<>();
-        for(Map.Entry<String,ComprasProduto> me : this.produtos_comprados.entrySet()){
+        for(Map.Entry<String, ComprasProduto> me : this.produtos_comprados.entrySet()){
             l.add(new AbstractMap.SimpleEntry<>(me.getKey(),me.getValue().getQuantidadeTotalVendidaProduto()));
         }
         return l;

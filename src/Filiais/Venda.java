@@ -1,9 +1,11 @@
+package Filiais;
+
 import java.util.Objects;
 
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
-public class Venda implements IVenda{
+public class Venda implements IVenda {
     private String codProd;
     private String codCli;
     private double preco;
@@ -146,6 +148,14 @@ public class Venda implements IVenda{
         return sb.toString();
     }
 
+    public Venda clone(){
+        return new Venda(this);
+    }
+
+    /**
+     * Método que verifica se uma venda é válida
+     * @return true se for válida, false caso contrário
+     */
     public boolean validaVenda(){
         return this.validaFilial()
                 && this.validaMes()
@@ -154,30 +164,50 @@ public class Venda implements IVenda{
                 && this.validaTipo();
     }
 
-    public Venda clone(){
-        return new Venda(this);
-    }
-
+    /**
+     * Método que valida o preço de uma venda
+     * @return true se estiver entre 0 e 999.99, false caso contrário
+     */
     private boolean validaPreco(){
         return 0 <= this.preco && this.preco <=999.99 ;
     }
 
+    /**
+     * Método que valida o mês de uma venda
+     * @return true se estiver entre 1 e 12, false caso contrário
+     */
     private boolean validaMes(){
         return 0 < this.mes  && this.mes < 13;
     }
 
+    /**
+     * Método que valida a filial de uma venda
+     * @return true se estiver entre 1 e 3, false caso contrário
+     */
     private boolean validaFilial(){
         return 0 < this.filial && this.filial < 4;
     }
 
+    /**
+     * Método que valida o tipo de uma venda
+     * @return true se for N ou P, false caso contrário
+     */
     private boolean validaTipo(){
         return this.tipo.equals("N") || this.tipo.equals("P");
     }
 
+    /**
+     * Método que valida a quantidade de uma venda
+     * @return true se estiver entre 1 e 200, false caso contrário
+     */
     private boolean validaQuant() {
         return 0 < this.quantidade && this.quantidade < 201;
     }
 
+    /**
+     * Método que calcula o total faturado
+     * @return total faturado
+     */
     public double totalFaturado(){
         return this.quantidade*this.preco;
     }

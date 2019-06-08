@@ -1,7 +1,9 @@
+package Clientes;
+
 import java.util.Objects;
 import static java.lang.Integer.parseInt;
 
-public class Cliente implements Comparable<Cliente>, ICliente{
+public class Cliente implements Comparable<Cliente>, ICliente {
     private String codCli;
 
     public Cliente(){
@@ -41,12 +43,20 @@ public class Cliente implements Comparable<Cliente>, ICliente{
         return new Cliente(this);
     }
 
+    /**
+     * Método que verifica se a primeira letra de um código de cliente é maiúscula
+     * @return true se for maiúscula, false caso contrário
+     */
     public boolean validaLetras_Cli (){
         boolean r = true;
         r=Character.isUpperCase(this.codCli.charAt(0));
         return r;
     }
 
+    /**
+     * Método que verifica se os 4 elementos a seguir à primeira letra de um código de cliente são dígitos
+     * @return true se forem dígitos, false caso contrário
+     */
     public boolean validaInt_Cli (){
         boolean r=true;
         for(int i=1;r && i<5;i++){
@@ -55,12 +65,19 @@ public class Cliente implements Comparable<Cliente>, ICliente{
         return r;
     }
 
+    /**
+     * Método que verifica se o comprimento de um código de cliente é 5
+     * @return true se for 5, false caso contrário
+     */
     public boolean compCliente_Cli(){
         return this.codCli.length()==5;
     }
 
 
-
+    /**
+     * Método que verifica se os 4 dígitos a seguir à primeira letra de um código de cliente representam um inteiro entre 1000 e 5000
+     * @return true se representarem um inteiro entre 1000 e 5000, false caso contrário
+     */
     public boolean validaIntCliente(){
         if(this.validaInt_Cli()){
             return (1000 <= parseInt(this.codCli.substring(1))  && parseInt(this.codCli.substring(1)) <= 5000);
@@ -69,7 +86,12 @@ public class Cliente implements Comparable<Cliente>, ICliente{
     }
 
 
-   public static boolean validaCliente(String s){
+    /**
+     * Método que verifica se um cliente é válido
+     * @param s código de cliente
+     * @return true se for válido, false caso contrário
+     */
+    public static boolean validaCliente(String s){
         boolean r;
         r=s.length()==5;
         r=Character.isUpperCase(s.charAt(0));
@@ -78,13 +100,22 @@ public class Cliente implements Comparable<Cliente>, ICliente{
         }
         r= r && (1000 <= parseInt(s.substring(1))  && parseInt(s.substring(1)) <= 5000);
         return r;
-   }
-        
-   public int hashCode(){
-        return this.codCli.hashCode();
-   }
+    }
 
-   public int compareTo(Cliente c){return this.codCli.compareTo(c.getCodCli());}
+    /**
+     * Método que calcula o hashCode de um código de cliente
+     * @return hashCode de um código de cliente
+     */
+    public int hashCode(){
+        return this.codCli.hashCode();
+    }
+
+    /**
+     * Método que compara dois clientes segundo a ordem alfabética
+     * @param c cliente
+     * @return 0 se forem iguais, 1 se o primeiro for lexicograficamente maior que o segundo e -1 caso contrário
+     */
+    public int compareTo(Cliente c){return this.codCli.compareTo(c.getCodCli());}
 
 
 }

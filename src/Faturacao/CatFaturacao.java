@@ -1,7 +1,9 @@
+package Faturacao;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class CatFaturacao implements  ICatFaturacao{
+public class CatFaturacao implements ICatFaturacao {
     private Map<Integer, ProdutosFilial> vendidos;
 
     public CatFaturacao() {
@@ -155,16 +157,16 @@ public class CatFaturacao implements  ICatFaturacao{
 
 
 
-   public Map<Integer,Double> getFatsProdMesFiliais(String prod, int filial){
+    public Map<Integer,Double> getFatsProdMesFiliais(String prod, int filial){
         if(this.vendidos.containsKey(filial)){
             return this.vendidos.get(filial).getFatsProdMes(prod);
         }
         else{
             return null;
         }
-   }
+    }
 
-   public Map<Integer,Integer> comprasMes(){
+    public Map<Integer,Integer> comprasMes(){
         Map<Integer,Integer> map = new HashMap<>();
         int k;
         for(ProdutosFilial pf : this.vendidos.values()){
@@ -179,34 +181,34 @@ public class CatFaturacao implements  ICatFaturacao{
             }
         }
         return map;
-   }
+    }
 
-   public Map<Integer,Double> fatFilial(int filial){
+    public Map<Integer,Double> fatFilial(int filial){
         Map<Integer,Double> map = new HashMap<>();
-       double k;
-       if(this.vendidos.containsKey(filial)){
-           for(Map.Entry<Integer,Double> me : this.vendidos.get(filial).getFatMesFilial().entrySet() ){
-               if(map.containsKey(me.getKey())){
-                   k = map.get(me.getKey()) + me.getValue();
-                   map.put(me.getKey(),k);
-               }
-               else{
-                   map.put(me.getKey(),me.getValue());
-               }
-           }
-           return map;
-       }
-       else{
-           return null;
-       }
-   }
+        double k;
+        if(this.vendidos.containsKey(filial)){
+            for(Map.Entry<Integer,Double> me : this.vendidos.get(filial).getFatMesFilial().entrySet() ){
+                if(map.containsKey(me.getKey())){
+                    k = map.get(me.getKey()) + me.getValue();
+                    map.put(me.getKey(),k);
+                }
+                else{
+                    map.put(me.getKey(),me.getValue());
+                }
+            }
+            return map;
+        }
+        else{
+            return null;
+        }
+    }
 
-   public double getFaturacaoGlobal(){
+    public double getFaturacaoGlobal(){
         double r = 0;
         for(ProdutosFilial pf : this.vendidos.values()){
             r += pf.getFaturacaoTotalFilial();
         }
         return r;
-   }
+    }
 
 }

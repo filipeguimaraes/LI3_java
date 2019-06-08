@@ -1,3 +1,5 @@
+package Exceptions;
+
 /**
  * Class Exception para os clientes
  *

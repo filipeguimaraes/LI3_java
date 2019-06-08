@@ -1,3 +1,5 @@
+package Produtos;
+
 import java.util.List;
 
 public interface ICatProdutos {

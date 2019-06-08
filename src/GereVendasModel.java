@@ -1,3 +1,14 @@
+import Exceptions.MesException;
+import Exceptions.ProdutoException;
+import Exceptions.ClienteException;
+import Clientes.CatClientes;
+import Clientes.ICatClientes;
+import Produtos.CatProdutos;
+import Produtos.ICatProdutos;
+import Faturacao.CatFaturacao;
+import Faturacao.ICatFaturacao;
+import Filiais.CatFiliais;
+import Filiais.ICatFiliais;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -39,7 +50,7 @@ public class GereVendasModel implements IGereVendasModel {
     /**
      * Método que valida uma venda.
      * @param s venda
-     * @return verdadeiro se a venda for válida, falso caso contrário.
+     * @return true se a venda for válida, false caso contrário.
      */
     private static boolean validaVenda(String s){
         String[] split = s.split(" ");

@@ -1,3 +1,5 @@
+package Clientes;
+
 import java.util.List;
 
 public interface ICatClientes {
