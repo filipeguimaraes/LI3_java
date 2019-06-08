@@ -111,6 +111,7 @@ public class GereVendasController {
                          view.query2(model.getQuerie2(mes, 0), model.getQuerie2(mes, 1),
                                  model.getQuerie2(mes, 2), model.getQuerie2(mes, 3));
                          view.tempoSimples(Crono.stop());
+                         enterContinuar();
                      }catch(MesException e){
                          System.out.println(e.getMessage());
                          enterContinuar();
@@ -124,6 +125,7 @@ public class GereVendasController {
                          Crono.start();
                          view.query3(model.getQuerie3(cliente3));
                          view.tempoSimples(Crono.stop());
+                         enterContinuar();
                      }catch (ClienteException e){
                          System.out.println(e.getMessage());
                          enterContinuar();
@@ -137,6 +139,7 @@ public class GereVendasController {
                          Crono.start();
                          view.query4(model.getQuerie4(prod));
                          view.tempoSimples(Crono.stop());
+                         enterContinuar();
                      }catch(ProdutoException e){
                          System.out.println(e.getMessage());
                          enterContinuar();
@@ -150,6 +153,7 @@ public class GereVendasController {
                          Crono.start();
                          view.query5(model.getQuerie5(cliente5));
                          view.tempoSimples(Crono.stop());
+                         enterContinuar();
                      }catch (ClienteException e){
                          System.out.println(e.getMessage());
                          enterContinuar();
@@ -187,6 +191,7 @@ public class GereVendasController {
                          Crono.start();
                          view.query9(model.getQuerie9(codprod, numcli9));
                          view.tempoSimples(Crono.stop());
+                         enterContinuar();
                      }catch(ProdutoException e){
                          System.out.println(e.getMessage());
                          enterContinuar();
@@ -194,7 +199,7 @@ public class GereVendasController {
                      }
                      break;
                  case 10:
-                     int nav=-1;
+                     int nav=5;
                      Crono.start();
                      List<String> lista= model.getQuerie10();
                      view.tempoSimples(Crono.stop());
