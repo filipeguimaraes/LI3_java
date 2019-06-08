@@ -42,6 +42,11 @@ public class Produto implements Comparable<Produto>,IProduto {
         return new Produto(this);
     }
 
+    /**
+     * Método que verifica se um produto é válido
+     * @param s código de produto
+     * @return true se for válido, false caso contrário
+     */
     public static boolean validaProduto(String s){
         boolean r;
         r = s.length()==6;
@@ -53,10 +58,19 @@ public class Produto implements Comparable<Produto>,IProduto {
         return r;
     }
 
+    /**
+     * Método que calcula o hashCode de um código de produto
+     * @return hashCode de um código de produto
+     */
     public int hashCode(){
         return this.codProd.hashCode();
     }
 
+    /**
+     * Método que compara dois produtos segundo a ordem alfabética
+     * @param p produto
+     * @return 0 se forem iguais, 1 se o primeiro for lexicograficamente maior que o segundo e -1 caso contrário
+     */
     public int compareTo(Produto p){return this.codProd.compareTo(p.getCodProd());}
 
 

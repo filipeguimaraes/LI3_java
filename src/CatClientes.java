@@ -53,6 +53,11 @@ public class CatClientes implements ICatClientes{
     }
 
 
+    /**
+     * Método que verifica se um determinado cliente existe
+     * @param s código de cliente
+     * @return true se existir, false caso contrário
+     */
     public boolean existeCliente(String s){
         ICliente ic = new Cliente(s);
         return this.clientes.contains(ic);
@@ -82,7 +87,10 @@ public class CatClientes implements ICatClientes{
         return l;
     }
 
-
+    /**
+     * Método que adiciona os clientes válidos à estrutura
+     * @param fich "Clientes.txt"
+     */
     public void readClientes(String fich){
         for( String s : readFilesWithNIO(fich) ){
             if (Cliente.validaCliente(s)) {
@@ -92,6 +100,10 @@ public class CatClientes implements ICatClientes{
         }
     }
 
+    /**
+     * Método que calcula o número de clientes válidos
+     * @return número de clientes válidos
+     */
     public int getTamanho(){
         return this.clientes.size();
     }

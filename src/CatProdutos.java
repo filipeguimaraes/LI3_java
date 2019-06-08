@@ -52,6 +52,11 @@ public class CatProdutos implements ICatProdutos{
         return new CatProdutos(this);
     }
 
+    /**
+     * Método que verifica se um determinado produto existe
+     * @param s código de produto
+     * @return true se existir, false caso contrário
+     */
     public boolean existeProduto(String s){
         IProduto ip = new Produto(s);
         return this.produtos.contains(ip);
@@ -82,6 +87,10 @@ public class CatProdutos implements ICatProdutos{
         return l;
     }
 
+    /**
+     * Método que adiciona os produtos válidos à estrutura
+     * @param fich "Produtos.txt"
+     */
     public void readProdutos (String fich){
         for( String s : readFilesWithNIO(fich) ){
             if (Produto.validaProduto(s)) {
@@ -92,6 +101,10 @@ public class CatProdutos implements ICatProdutos{
 
     }
 
+    /**
+     * Método que calcula o número de produtos válidos
+     * @return número de produtos válidos
+     */
     public int getTamanho(){
         return this.produtos.size();
     }

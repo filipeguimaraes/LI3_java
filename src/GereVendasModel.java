@@ -42,7 +42,7 @@ public class GereVendasModel implements IGereVendasModel {
     /**
      * Método que valida uma venda.
      * @param s venda
-     * @return verdadeiro se a venda for válida, falso caso contrário.
+     * @return true se a venda for válida, false caso contrário.
      */
     private static boolean validaVenda(String s){
         String[] split = s.split(" ");
