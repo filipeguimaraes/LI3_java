@@ -39,6 +39,7 @@ hs_err_pid*
 *.dat
 *.obj
 Vendas_5M.txt
+*.plantuml
 
 # Out folder
 out/
