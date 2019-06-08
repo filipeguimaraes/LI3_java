@@ -104,10 +104,22 @@ public interface IGereVendasModel {
      */
     void load(String clientestxt, String produtostxt, String vendastxt);
 
+    /**
+     * Método que calcula o número total de compras por mês
+     * @return lista com as compras realizadas em cada mês
+     */
     List<Integer> getComprasMes();
 
+    /**
+     * Método que devolve uma lista cuja primeira posição corresponde à faturação total e as posições seguintes à faturação total por mês para cada filial
+     * @return lista cuja primeira posição corresponde à faturação total e as posições seguintes à faturação total por mês para cada filial
+     */
     List<List<Double>> getFaturacaoFiliais();
 
+    /**
+     * Método que calcula o número de distintos clientes que compraram em cada mês filial a filial
+     * @return lista com o número de distintos clientes que compraram em cada mês filial a filial
+     */
     List<String> getDistintosCli();
 
     /**

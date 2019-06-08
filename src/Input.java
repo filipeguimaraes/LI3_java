@@ -1,17 +1,17 @@
 /**
- * Classe que abstrai a utilização da classe Scanner, escondendo todos os
- * problemas relacionados com excepções, e que oferece métodos simples e
+ * Classe que abstrai a utilizaÃ§Ã£o da classe Scanner, escondendo todos os
+ * problemas relacionados com excepÃ§Ãµes, e que oferece mÃ©todos simples e
  * robustos para a leitura de valores de tipos simples e String.
  *
- * É uma classe de serviços, como Math e outras de Java, pelo que devem ser
- * usados os métodos de classe implementados.
+ * Ã‰ uma classe de serviÃ§os, como Math e outras de Java, pelo que devem ser
+ * usados os mÃ©todos de classe implementados.
  *
- * Utilizável em BlueJ, NetBeans, CodeBlocks ou Eclipse.
+ * UtilizÃ¡vel em BlueJ, NetBeans, CodeBlocks ou Eclipse.
  * 
- * Utilização típica:  int x = Input.lerInt();
+ * UtilizaÃ§Ã£o tÃ­pica:  int x = Input.lerInt();
  *                     String nome = Input.lerString();
  * 
- * @author F. Mário Martins
+ * @author F. MÃ¡rio Martins
  * @version 1.0 (6/2006)
  */
 import static java.lang.System.out;
@@ -22,7 +22,7 @@ import java.util.InputMismatchException;
 public class Input {
 
  /**
-  * Métodos de Classe
+  * MÃ©todos de Classe
   */
     
  public static String lerString() {

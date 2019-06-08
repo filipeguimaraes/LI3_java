@@ -73,6 +73,10 @@ public class CatClientes implements ICatClientes, Serializable {
         return this.clientes.contains(ic);
     }
 
+    /**
+     * Método que recebe um ficheiro, lê e insere
+     * @param fich nome do ficheiro
+     */
     public void loadClientes(String fich){
         String linha;
         try(
@@ -86,6 +90,11 @@ public class CatClientes implements ICatClientes, Serializable {
         }
     }
 
+    /**
+     * Método que lê um ficheiro.
+     * @param filePath path do ficheiro
+     * @return lista com todas as linhas lidas
+     */
     private static List<String> readFilesWithNIO(String filePath) {
         Path p = Paths.get(filePath);
         List<String> l = null;
