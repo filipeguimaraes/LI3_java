@@ -810,11 +810,18 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.print("Nome do ficheiro"+RED+"(por defeito: \"Clientes.txt\")"+RESET+": ");
     }
 
-    public void carregaPreDefinidos(){
+    public void carregaFicheiros(){
         clear();
-        banMensagem("Carregar ficheiros");
+        banMensagem("Escolher ficheiro de vendas");
         mudarDeLinha();
-        System.out.println("Deseja carregar ficheiros pré-definidos? "+ RED +"(Sim: 1 | Não: 0)" + RESET);
+        mudarDeLinha();
+        System.out.println(CYAN+"1)"+RESET+"Ficheiro de 1M de vendas ");
+        System.out.println(CYAN+"2)"+RESET+"Ficheiro de 3M de vendas ");
+        System.out.println(CYAN+"3)"+RESET+"Ficheiro de 5M de vendas ");
+        mudarDeLinha();
+        line();
+        mudarDeLinha();
+        System.out.println("Introduza a opção: ");
     }
 
     public void recebeMes(){

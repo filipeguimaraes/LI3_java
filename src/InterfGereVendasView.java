@@ -39,7 +39,7 @@ public interface InterfGereVendasView {
 
     void carregaClientes();
 
-    void carregaPreDefinidos();
+    void carregaFicheiros();
 
     void recebeMes();
 
