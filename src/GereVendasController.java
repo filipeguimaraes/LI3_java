@@ -1,4 +1,3 @@
-import java.io.OptionalDataException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -218,7 +217,9 @@ public class GereVendasController {
                                          .filter(l -> l.contains(produto))
                                          .findFirst()
                                          .orElse("N/A");
-                             view.query10(a);
+                             if(a.contains("N/A")){
+                                 System.out.println("Produto não existe pressione 2");
+                             } else view.query10(a);
                              nav = Input.lerInt();
                          }
                      }
