@@ -93,7 +93,7 @@ public class ProdutosCompradosCliente {
     }
 
     public void verificaCompraDeProdutosDiferentes(Map<Integer,Set<String>> prods_mes){
-        List<Integer> l;
+        Set<Integer> l;
         for(ComprasProduto cp : this.produtos_comprados.values()){
             l = cp.getMesesEmQueVendeProd();
             for(Integer i: l){
