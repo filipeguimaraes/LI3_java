@@ -1,10 +1,11 @@
 package Filiais;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
 
-public class ProdutosCompradosCliente {
+public class ProdutosCompradosCliente implements Serializable {
     private String cliente;
     private Map<String, ComprasProduto> produtos_comprados;
 

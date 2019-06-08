@@ -1,6 +1,8 @@
 import Exceptions.MesException;
 import Exceptions.ProdutoException;
 import Exceptions.ClienteException;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,7 +22,7 @@ public class GereVendasController {
     private static final String VENDAS_1M = "Vendas_1M.txt";
     private static final String VENDAS_3M = "Vendas_3M.txt";
     private static final String VENDAS_5M = "Vendas_5M.txt";
-
+    private static String OBJ_PATH = "gestVendas.dat";
 
     public void setModel(IGereVendasModel model) {
         this.model = model;
@@ -37,6 +39,8 @@ public class GereVendasController {
          String[] opcoes={"Carregar ficheiros",
                     "Consultas estatísticas",
                     "Queries interativas",
+                    "Guardar estado",
+                    "Carregar estado anterior",
                     "Sair"};
          int escolha=0;
          do {
@@ -68,16 +72,43 @@ public class GereVendasController {
                  case 3:
                      escolha = runQueries();
                      break;
+                 case 4:
+                     try {
+                         Crono.start();
+                         Carregamento.escreverFicheiroOjeto(this.model,OBJ_PATH);
+                         System.out.println("Guardado com sucesso");
+                         view.tempoSimples(Crono.stop());
+                     } catch (IOException e){
+                         System.out.println("Erro ao escrever ficheiro: "+e.getMessage());
+                     }
+                     enterContinuar();
+                     escolha=0;
+                     break;
+                 case 5:
+                     try {
+                         this.model = Carregamento.lerFicheiroObjeto(OBJ_PATH);
+                         view.menuOpcoes(opcoes);
+                         escolha=0;
+                     } catch (IOException e){
+                         System.out.println("Erro ao carregar ficheiro");
+                         escolha=0;
+                         continue;
+                     } catch (ClassNotFoundException e){
+                         System.out.println("Erro: "+e.getMessage());
+                         enterContinuar();
+                         escolha = 0;
+                         continue;
+                     }
+                     break;
                  default:
                      System.out.println("Ocorreu um erro.");
                      enterContinuar();
                      escolha=0;
                      break;
              }
-         } while (escolha!=4);
+         } while (escolha!=6);
          view.fim();
     }
-
 
     /**
     * Método que trata do menu das queries.
@@ -134,7 +165,7 @@ public class GereVendasController {
                          continue;
                      }
                      break;
-                 case 4:
+                 case 4:view.tempoSimples(Crono.stop());
                      view.recebeProduto();
                      String prod = Input.lerString();
                      try {

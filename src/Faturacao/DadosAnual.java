@@ -1,9 +1,10 @@
 package Faturacao;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DadosAnual {
+public class DadosAnual implements Serializable {
     private String codProd;
     private Map<Integer, DadosMes> dados_mensais;
 

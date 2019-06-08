@@ -2,7 +2,7 @@ package Produtos;
 
 import java.util.List;
 
-public interface ICatProdutos {
+public interface ICatProdutos{
 
     List<String> getListProds();
 

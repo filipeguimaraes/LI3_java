@@ -1,11 +1,12 @@
 package Filiais;
 
 import javax.print.DocFlavor;
+import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.stream.Collectors;
 
-public class CatFiliais implements ICatFiliais {
+public class CatFiliais implements ICatFiliais, Serializable {
     private Map<Integer, ClientesFilial> filial_clientes;
 
     public CatFiliais(){

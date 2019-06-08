@@ -1,11 +1,14 @@
 package Filiais;
 
+import org.omg.PortableInterceptor.ServerRequestInfo;
+
+import java.io.Serializable;
 import java.util.Objects;
 
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
-public class Venda implements IVenda {
+public class Venda implements IVenda, Serializable {
     private String codProd;
     private String codCli;
     private double preco;
