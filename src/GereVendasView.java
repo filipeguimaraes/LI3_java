@@ -3,10 +3,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Write a description of class GereVendasView here.
+ * View, visualizador de informação, imprime todas as informações para o ecrã
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Beatriz Rocha A84003
+ * @author Filipe Guimarães A85308
+ * @author Gonçalo Ferreira A84073
  */
 public class GereVendasView implements InterfGereVendasView {
 
@@ -107,6 +108,11 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.println("     "+CYAN+i+") Cliente: "+RESET+m.getKey()+CYAN+" | Valor gasto: "+RESET+m.getValue());
     }
 
+    /**
+     * Formata uma opção para um mes e o total de compras
+     * @param i Numero da opção
+     * @param s Opção
+     */
     private void printOpcao(int i, int s){
         System.out.println("     "+CYAN+i+") Mês: "+RESET+i+CYAN+" | Total de compras: "+RESET+s);
     }
@@ -125,6 +131,10 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.println();
     }
 
+    /**
+     * Imprime uma lista de inteiros
+     * @param ls Lista de inteiros
+     */
     private void imprimeListaInteiros(List<Integer> ls){
         System.out.println();
         int i=1;
@@ -193,6 +203,9 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.println();
     }
 
+    /**
+     * Imprime o banner do sistema
+     */
     private void ban(){
         line(); mudarDeLinha();
         cyan();
@@ -216,6 +229,12 @@ public class GereVendasView implements InterfGereVendasView {
         line();
     }
 
+    /**
+     *  Imprime tabela com dados das 3 filiais, mês a mês
+     * @param f1 lista com dados referentes à filial 1
+     * @param f2 lista com dados referentes à filial 2
+     * @param f3 lista com dados referentes à filial 3
+     */
     @SuppressWarnings("Duplicates")
     private void imprimeTabela(String[] f1,String[] f2, String[] f3){
         int numero_elementos =12;
@@ -287,7 +306,9 @@ public class GereVendasView implements InterfGereVendasView {
         mudarDeLinha();
     }
 
-
+    /**
+     * Ecrã final
+     */
     public void fim(){
         cyan();
         int number=(LINHAS-10)/2;
@@ -316,6 +337,10 @@ public class GereVendasView implements InterfGereVendasView {
         resetColor();
     }
 
+    /**
+     * Mensagem/título no topo de cada menu
+     * @param descricao Mensagem a imprimir
+     */
     private void banMensagem(String descricao){
         cyan();
         line(); mudarDeLinha();
@@ -326,6 +351,10 @@ public class GereVendasView implements InterfGereVendasView {
         resetColor();
     }
 
+    /**
+     * Imprime um menu com as informações fornecidas
+     * @param opcoes Opções do menu
+     */
     public void menuOpcoes(String[] opcoes){
         clear();
         ban();
@@ -342,6 +371,10 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.print("     Opção pretendida: ");
     }
 
+    /**
+     * Imprime as informações da query 1
+     * @param produtos Produtos nunca comprados
+     */
     public void query1(List<String> produtos){
         clear();
         banMensagem("QUERY 1");
@@ -353,6 +386,13 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.println(CYAN+"     Número de produtos nunca comprados: "+RESET+produtos.size());
     }
 
+    /**
+     *  Imprime as informações da query 2
+     * @param global Dados referentes a todas as filiais
+     * @param filial1 Dados referentes à filial 1
+     * @param filial2 Dados referentes à filial 2
+     * @param filial3 Dados referentes à filial 3
+     */
     @SuppressWarnings("Duplicates")
     public void query2(int[] global, int[] filial1,int[] filial2,int[] filial3){
         clear();
@@ -386,6 +426,10 @@ public class GereVendasView implements InterfGereVendasView {
         mudarDeLinha();
     }
 
+    /**
+     * Imprime as informações da query 3
+     * @param dados Dados como o número de compras, produtos e gasto total
+     */
     @SuppressWarnings("Duplicates")
     public void query3(List<String> dados){
         clear();
@@ -501,6 +545,10 @@ public class GereVendasView implements InterfGereVendasView {
         mudarDeLinha();
     }
 
+    /**
+     * Imprime as informações da query 4
+     * @param dados Dados como o número de vezes que um porduto foi adquirido, clientes e total faturado por mês
+     */
     @SuppressWarnings("Duplicates")
     public void query4(List<String> dados){
         clear();
@@ -617,6 +665,10 @@ public class GereVendasView implements InterfGereVendasView {
 
     }
 
+    /**
+     * Imprime as informações da query 5
+     * @param dados Dados como os produtos e a quantidade comprada de um determinado cliente
+     */
     public void query5(List<Map.Entry<String,Integer>> dados){
         clear();
         banMensagem("QUERY 5");
@@ -626,6 +678,10 @@ public class GereVendasView implements InterfGereVendasView {
         line(); mudarDeLinha();
     }
 
+    /**
+     * Imprime as informações da query 6
+     * @param dados Dados como os produtos mais vendidos bem como os clientes que os compraram
+     */
     public void query6(List<String> dados){
         clear();
         int number = (LINHAS-dados.size()-9)/2;
@@ -636,6 +692,10 @@ public class GereVendasView implements InterfGereVendasView {
         line(); mudarDeLinha();
     }
 
+    /**
+     * Imprime um ranking de 3 posições de clientes
+     * @param clientes Top3 Clientes
+     */
     private void top3(String clientes){
         mudarDeLinha();
         String[] aux = clientes.split(" ");
@@ -645,6 +705,10 @@ public class GereVendasView implements InterfGereVendasView {
         mudarDeLinha();
     }
 
+    /**
+     * Imprime as informações da query 7
+     * @param dados Dados, para cada filial, de top 3 clientes
+     */
     public void query7(List<String> dados){
         clear();
         banMensagem("QUERY 7");
@@ -666,6 +730,10 @@ public class GereVendasView implements InterfGereVendasView {
         mudarDeLinha();
     }
 
+    /**
+     * Imprime as informações da query 8
+     * @param dados Clientes
+     */
     public void query8(List<Map.Entry<String,Integer>> dados){
         clear();
         banMensagem("QUERY 8");
@@ -676,6 +744,10 @@ public class GereVendasView implements InterfGereVendasView {
         line(); mudarDeLinha();
     }
 
+    /**
+     * Imprime as informações da query 9
+     * @param dados Clientes
+     */
     public void query9(List<Map.Entry<String,Double>> dados){
         clear();
         banMensagem("QUERY 9");
@@ -686,6 +758,10 @@ public class GereVendasView implements InterfGereVendasView {
         line(); mudarDeLinha();
     }
 
+    /**
+     * Imprime as informações da query 10
+     * @param dados Informações de Produtos filial a filial, mês a mês
+     */
     public void query10(String dados){
         clear();
         banMensagem("QUERY 10");
@@ -711,6 +787,10 @@ public class GereVendasView implements InterfGereVendasView {
                 +" | Avançar para um produto "+RED+"(3)"+RESET+" | Sair "+RED+"(0)"+RESET);
     }
 
+    /**
+     * Imprime o total de compras por mês
+     * @param dados Total de compras por mês
+     */
     public void totalComprasMes(List<Integer> dados){
         clear();
         banMensagem("Número total de compras por mês");
@@ -723,6 +803,13 @@ public class GereVendasView implements InterfGereVendasView {
         mudarDeLinha();
     }
 
+    /**
+     * Imprime a informação sobre o ultimo ficheiro lido
+     * @param prods Informação sobre os produtos
+     * @param clis Informação sobre os clientes
+     * @param fat Informação sobre a faturação
+     * @param vendas Informação sobre as vendas
+     */
     public void info(List<Integer> prods, List<Integer> clis, List<Double> fat, List<String> vendas){
         clear();
         banMensagem("Informações sobre o último ficheiro de vendas lido");
@@ -771,6 +858,10 @@ public class GereVendasView implements InterfGereVendasView {
 
     }
 
+    /**
+     * Imprime uma tabela valores referentes a clientes
+     * @param dados Clientes distintos que compraram em cada mês filial a filial
+     */
     public void distintosCli(List<String> dados) {
         clear();
         banMensagem("Número de clientes distintos que compraram em cada mês filial a filial");
@@ -785,6 +876,9 @@ public class GereVendasView implements InterfGereVendasView {
         mudarDeLinha();
     }
 
+    /**
+     * Imprime o menu para escolher os ficheiros a carregar
+     */
     public void carregaFicheiros(){
         clear();
         banMensagem("Escolher ficheiro de vendas");
@@ -799,6 +893,9 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.println("Introduza a opção: ");
     }
 
+    /**
+     * Menu para receber o mês
+     */
     public void recebeMes(){
         clear();
         banMensagem("Introduzir mês");
@@ -807,6 +904,9 @@ public class GereVendasView implements InterfGereVendasView {
 
     }
 
+    /**
+     * Menu para receber o cliente
+     */
     public void recebeCliente(){
         clear();
         banMensagem("Introduzir código de cliente");
@@ -814,6 +914,9 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.print("Introduza o código de cliente: ");
     }
 
+    /**
+     * Menu para receber o produto
+     */
     public void recebeProduto(){
         clear();
         banMensagem("Introduzir código de produto");
@@ -821,6 +924,9 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.print("Introduza o código de produto: ");
     }
 
+    /**
+     * Menu para receber um numero de produtos a apresentar
+     */
     public void recebeIntProd(){
         clear();
         banMensagem("Introduzir número de produtos");
@@ -828,6 +934,9 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.print("Introduza o número de produtos: ");
     }
 
+    /**
+     * Menu para receber o numero de clientes a apresentar
+     */
     public void recebeIntCli(){
         clear();
         banMensagem("Introduzir número de clientes");
@@ -835,6 +944,10 @@ public class GereVendasView implements InterfGereVendasView {
         System.out.print("Introduza o número de clientes: ");
     }
 
+    /**
+     * Apresenta no ecrã o tempo fornecido
+     * @param tempo Tempo de execução
+     */
     public void tempo(Double tempo){
         mudarDeLinha();
         banMensagem("Tempo de execuçao");
@@ -846,6 +959,10 @@ public class GereVendasView implements InterfGereVendasView {
         mudarDeLinha();
     }
 
+    /**
+     * Apresenta no ecrã, de maneira simples, o tempo fornecido
+     * @param tempo Tempo de execução
+     */
     public void tempoSimples(Double tempo){
         mudarDeLinha();
         System.out.println(CYAN +"     Demorou "+RESET+tempo+" segundos.");
