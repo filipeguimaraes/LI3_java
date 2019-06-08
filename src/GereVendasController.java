@@ -1,3 +1,6 @@
+import Exceptions.MesException;
+import Exceptions.ProdutoException;
+import Exceptions.ClienteException;
 import java.util.List;
 import java.util.Scanner;
 

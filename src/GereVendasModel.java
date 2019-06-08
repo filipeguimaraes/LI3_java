@@ -1,3 +1,6 @@
+import Exceptions.MesException;
+import Exceptions.ProdutoException;
+import Exceptions.ClienteException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
