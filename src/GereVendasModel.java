@@ -18,7 +18,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.io.Serializable;
-import java.util.stream.Collectors;
 
 
 import static java.lang.Double.parseDouble;
@@ -147,6 +146,8 @@ public class GereVendasModel implements IGereVendasModel,Serializable{
                 this.CatFiliais.addClienteFilial(filial,
                         divd[0], divd[4], preco,
                         quant, divd[3], mes);
+                if((double) quant * preco == 0)
+                    this.vendas_gratis++;
             }
         }
     }
@@ -513,7 +514,7 @@ public class GereVendasModel implements IGereVendasModel,Serializable{
         this.nomeFich = vendastxt;
         this.CatClis.readClientes(clientestxt);
         this.CatProds.readProdutos(produtostxt);
-        this.readLinesWithBuff(vendastxt);//FatFil(vendastxt);
+        this.readLinesWithBuff(vendastxt);
     }
 
 
