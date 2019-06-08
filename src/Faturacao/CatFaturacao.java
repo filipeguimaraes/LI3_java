@@ -11,7 +11,6 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
         this.vendidos = new HashMap<>();
     }
 
-    //alterado
     public CatFaturacao(Map<Integer, ProdutosFilial> vendidos) {
         this.vendidos = vendidos;
     }
@@ -28,17 +27,14 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
         return this.getListaNaoComprados(l).size();
     }
 
-    //alt
     private Map<Integer, ProdutosFilial> getVendidos() {
         return vendidos;
     }
 
-    //alt
-    public void setVendidos(Map<Integer, ProdutosFilial> vendidos) {
+    private void setVendidos(Map<Integer, ProdutosFilial> vendidos) {
         this.vendidos = vendidos;
     }
 
-    //alt
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -57,6 +53,15 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
         return new CatFaturacao(this);
     }
 
+    /**
+     * Método que dado os dados de uma venda relativa a um produto adiciona á estrutura.
+     * @param fil Inteiro que representa a filial.
+     * @param cod String do código de produto.
+     * @param fat_P Double que representa o faturação normal.
+     * @param fat_N Double que representa o faturação promoção.
+     * @param quant Inteiro que representa a quantidade comprada.
+     * @param mes Inteiro que representa o mês.
+     */
     public void addCatFaturacao(String cod, int mes, int quant, double fat_N, double fat_P, int fil) {
         if (!this.vendidos.containsKey(fil)) {
             ProdutosFilial pf = new ProdutosFilial(fil);
@@ -64,7 +69,6 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
         }
         this.vendidos.get(fil).addProdutosFilial(cod, mes, quant, fat_N, fat_P);
     }
-
 
     private TreeSet<String> getSetVendidos() {
         TreeSet<String> clis_compram = new TreeSet<String>();
@@ -74,10 +78,13 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
         return clis_compram;
     }
 
+    /**
+     * Método que retorna o numero de produtos diferentes vendidos.
+     * @return Inteiro numero de produtos diferentes vendidos.
+     */
     public int getDifs(){
         return this.getSetVendidos().size();
     }
-
 
     private TreeSet<String> adicionaFatNComp(List<String> l) {
         TreeSet<String> nao_vendidos = new TreeSet<>();
@@ -90,7 +97,12 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
         return nao_vendidos;
     }
 
-
+    /**
+     * Método que uma dada filial e um dado mês, retorna um número de vendas registadas.
+     * @param filial Inteiro que representa a filial.
+     * @param mes Inteiro que representa o mês.
+     * @return Inteiro número de vendas registadas para a filial e o mês.
+     */
     public int getNumVendasRegMesFilial(int filial, int mes) {
         int r = 0;
         if (filial == 0) {
@@ -103,12 +115,18 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
                 r = this.vendidos.get(filial).getNumVendasRegMes(mes);
             }
             else{
-                return 0; // throw...
+                return 0;
             }
         }
         return r;
     }
 
+    /**
+     * Método que dado um código de produto, retorna um array de inteiros que contem o número
+     * @param produto
+     * @return
+     * Sendo que o índice 0 do array corresponde ao mês 1, e assim sucessivamente.
+     */
     public int [] getVendasRegMeses(String produto){
         int [] num_reg_vendas = new int [12];
         int [] reg_aux;
@@ -124,6 +142,12 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
         return num_reg_vendas;
     }
 
+    /**
+     *
+     * @param produto
+     * @return
+     * Sendo que o índice 0 do array corresponde ao mês 1, e assim sucessivamente.
+     */
     public double [] getVendasFaturadoMeses(String produto){
         double [] faturado_vendas = new double [12];
         double [] faturado_aux;
@@ -139,6 +163,10 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
         return faturado_vendas;
     }
 
+    /**
+     *
+     * @return
+     */
     public Map<String,Integer> getListaProdutosEQuantidadeVendida(){
         Map<String,Integer> map = new HashMap<>();
         int k;
@@ -156,8 +184,12 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
         return map;
     }
 
-
-
+    /**
+     *
+     * @param prod
+     * @param filial
+     * @return
+     */
     public Map<Integer,Double> getFatsProdMesFiliais(String prod, int filial){
         if(this.vendidos.containsKey(filial)){
             return this.vendidos.get(filial).getFatsProdMes(prod);
@@ -167,6 +199,10 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Map<Integer,Integer> comprasMes(){
         Map<Integer,Integer> map = new HashMap<>();
         int k;
@@ -184,6 +220,11 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
         return map;
     }
 
+    /**
+     *
+     * @param filial
+     * @return
+     */
     public Map<Integer,Double> fatFilial(int filial){
         Map<Integer,Double> map = new TreeMap<>();
         double k;
@@ -204,6 +245,10 @@ public class CatFaturacao implements ICatFaturacao, Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public double getFaturacaoGlobal(){
         double r = 0;
         for(ProdutosFilial pf : this.vendidos.values()){
