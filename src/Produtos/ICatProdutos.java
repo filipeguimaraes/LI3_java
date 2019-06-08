@@ -13,6 +13,10 @@ public interface ICatProdutos{
      */
     boolean existeProduto(String s);
 
+    /**
+     * Método que recebe um ficheiro, lê e insere
+     * @param fich nome do ficheiro
+     */
     void loadProdutos(String fich);
 
     /**

@@ -13,6 +13,10 @@ public interface ICatClientes {
      */
     boolean existeCliente(String s);
 
+    /**
+     * Método que recebe um ficheiro, lê e insere
+     * @param fich nome do ficheiro
+     */
     void loadClientes(String fich);
 
     /**
