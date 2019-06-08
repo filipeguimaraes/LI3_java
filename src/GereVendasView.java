@@ -728,23 +728,27 @@ public class GereVendasView implements InterfGereVendasView {
         clear();
         banMensagem("Informações sobre o último ficheiro de vendas lido");
         mudarDeLinha();
-        System.out.println(CYAN+"Nome do ficheiro: "+RESET+vendas.get(0));
-        System.out.println(CYAN+"Número total de registos de venda errados: "+RESET+vendas.get(1));
-        System.out.println(CYAN+"Número total de produtos: "+RESET+prods.get(0));
-        System.out.println(CYAN+"Número total de diferentes produtos comprados: "+RESET+prods.get(1));
-        System.out.println(CYAN+"Número total de produtos não comprados: "+RESET+prods.get(2));
-        System.out.println(CYAN+"Número total de clientes: "+RESET+clis.get(0));
-        System.out.println(CYAN+"Número total de clientes que realizaram compras: "+RESET+clis.get(1));
-        System.out.println(CYAN+"Número total de clientes que nada compraram: "+RESET+clis.get(2));
-        System.out.println(CYAN+"Número total de compras de valor total igual a 0: "+RESET+fat.get(0));
-        System.out.println(CYAN+"Faturação total: "+RESET+fat.get(1));
+        linhas(14);
+        System.out.println(CYAN+"     Nome do ficheiro: "+RESET+vendas.get(0));
+        System.out.println(CYAN+"     Número total de registos de venda errados: "+RESET+vendas.get(1));
+        System.out.println(CYAN+"     Número total de produtos: "+RESET+prods.get(0));
+        System.out.println(CYAN+"     Número total de diferentes produtos comprados: "+RESET+prods.get(1));
+        System.out.println(CYAN+"     Número total de produtos não comprados: "+RESET+prods.get(2));
+        System.out.println(CYAN+"     Número total de clientes: "+RESET+clis.get(0));
+        System.out.println(CYAN+"     Número total de clientes que realizaram compras: "+RESET+clis.get(1));
+        System.out.println(CYAN+"     Número total de clientes que nada compraram: "+RESET+clis.get(2));
+        System.out.println(CYAN+"     Número total de compras de valor total igual a 0: "+RESET+fat.get(0));
+        System.out.println(CYAN+"     Faturação total: "+RESET+fat.get(1));
+        linhas(13);
+        line();
+        mudarDeLinha();
     }
 
     public void fatTotal(List<Double> dados){
         clear();
         banMensagem("Faturação total por mês para cada filial e o valor total global");
         mudarDeLinha();
-        linhas(3);
+        linhas(5);
         System.out.println(CYAN_UNDERLINE+"Global"+RESET);
         System.out.println(dados.get(0));
         linhas(3);
@@ -762,7 +766,7 @@ public class GereVendasView implements InterfGereVendasView {
         linhas(3);
         System.out.println(CYAN_UNDERLINE+"Filial 3"+RESET);
         System.out.println(dados.get(3));
-        linhas(3);
+        linhas(5);
         line();
         mudarDeLinha();
 
@@ -774,10 +778,10 @@ public class GereVendasView implements InterfGereVendasView {
         String[] f1 = dados.get(0).split(" ");
         String[] f2 = dados.get(1).split(" ");
         String[] f3 = dados.get(2).split(" ");
-        linhas(2);
+        linhas(4);
         mudarDeLinha();
         imprimeTabela(f1,f2,f3);
-        linhas(2);
+        linhas(4);
         line();
         mudarDeLinha();
     }
