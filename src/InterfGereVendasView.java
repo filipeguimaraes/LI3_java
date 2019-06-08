@@ -142,6 +142,21 @@ public interface InterfGereVendasView {
     void tempoSimples(Double tempo);
 
     /**
+     * Imprime menu para carregar ficheiro de objetos
+     */
+    void carregarObjeto();
+
+    /**
+     * Imprime menu para introduzir nome do ficheiro
+     */
+    void nomeFicheiro();
+
+    /**
+     * Imprime menu para escrever ficheiro de objetos
+     */
+    void escreveObjeto();
+
+    /**
      * Ecrã final
      */
     void fim();
