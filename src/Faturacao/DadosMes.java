@@ -3,6 +3,13 @@ package Faturacao;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * DadosMes, Class que estrutura uma relação de produto e vendas.
+ *
+ * @author Beatriz Rocha A84003
+ * @author Filipe Guimarães A85308
+ * @author Gonçalo Ferreira A84073
+ */
 public class DadosMes implements Serializable {
     private int mes;
     private int quantidade;

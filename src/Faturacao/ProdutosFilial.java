@@ -4,6 +4,13 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * ProdutosFilial, Class que estrutura uma relação de produto e vendas.
+ *
+ * @author Beatriz Rocha A84003
+ * @author Filipe Guimarães A85308
+ * @author Gonçalo Ferreira A84073
+ */
 public class ProdutosFilial implements Serializable {
     private int filial;
     private Map<String, DadosAnual> produtos_filial;

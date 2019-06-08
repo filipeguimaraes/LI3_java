@@ -11,6 +11,13 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * CatClientes, Class que contém os códigos de clientes.
+ *
+ * @author Beatriz Rocha A84003
+ * @author Filipe Guimarães A85308
+ * @author Gonçalo Ferreira A84073
+ */
 public class CatClientes implements ICatClientes, Serializable {
     private Set<ICliente> clientes;
 

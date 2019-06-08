@@ -4,6 +4,13 @@ import java.io.Serializable;
 import java.util.Objects;
 import static java.lang.Integer.parseInt;
 
+/**
+ * Cliente, Class que contém o código de cliente.
+ *
+ * @author Beatriz Rocha A84003
+ * @author Filipe Guimarães A85308
+ * @author Gonçalo Ferreira A84073
+ */
 public class Cliente implements Comparable<Cliente>, ICliente, Serializable {
     private String codCli;
 

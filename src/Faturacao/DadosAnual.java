@@ -4,6 +4,13 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * DadosAnual, Class que estrutura uma relação de produto e vendas.
+ *
+ * @author Beatriz Rocha A84003
+ * @author Filipe Guimarães A85308
+ * @author Gonçalo Ferreira A84073
+ */
 public class DadosAnual implements Serializable {
     private String codProd;
     private Map<Integer, DadosMes> dados_mensais;

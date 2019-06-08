@@ -1,11 +1,17 @@
 package Filiais;
 
-import javax.print.DocFlavor;
+
 import java.io.Serializable;
 import java.util.*;
-import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.stream.Collectors;
 
+/**
+ * CatFiliais, Class que estrutura uma relação entre cliente e compras.
+ *
+ * @author Beatriz Rocha A84003
+ * @author Filipe Guimarães A85308
+ * @author Gonçalo Ferreira A84073
+ */
 public class CatFiliais implements ICatFiliais, Serializable {
     private Map<Integer, ClientesFilial> filial_clientes;
 

@@ -4,6 +4,13 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * CatFaturação, Class que estrutura uma relação de produto e vendas.
+ *
+ * @author Beatriz Rocha A84003
+ * @author Filipe Guimarães A85308
+ * @author Gonçalo Ferreira A84073
+ */
 public class CatFaturacao implements ICatFaturacao, Serializable {
     private Map<Integer, ProdutosFilial> vendidos;
 

@@ -11,6 +11,13 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * CatProdutos, Class que contém os códigos de produto.
+ *
+ * @author Beatriz Rocha A84003
+ * @author Filipe Guimarães A85308
+ * @author Gonçalo Ferreira A84073
+ */
 public class CatProdutos implements ICatProdutos, Serializable {
     private Set<IProduto> produtos;
 

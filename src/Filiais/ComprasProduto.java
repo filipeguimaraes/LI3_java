@@ -4,6 +4,13 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * ComprasProduto, Class que estrutura uma relação entre cliente e compras.
+ *
+ * @author Beatriz Rocha A84003
+ * @author Filipe Guimarães A85308
+ * @author Gonçalo Ferreira A84073
+ */
 public class ComprasProduto implements Serializable {
     private String codProd;
     private List<DadosVenda> lista;
