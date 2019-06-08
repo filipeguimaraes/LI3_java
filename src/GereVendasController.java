@@ -40,7 +40,7 @@ public class GereVendasController {
                     "Consultas estatísticas",
                     "Queries interativas",
                     "Guardar estado",
-                    "Carregar estado anterior",
+                    "Carregar estado",
                     "Sair"};
          int escolha=0;
          do {
@@ -73,24 +73,53 @@ public class GereVendasController {
                      escolha = runQueries();
                      break;
                  case 4:
+                     String path4;
+                     view.escreveObjeto();
+                     int aux4 = Input.lerInt();
+                     if( aux4 == 1 ){
+                         path4 = OBJ_PATH;
+                     } else if( aux4 == 2 ){
+                         view.nomeFicheiro();
+                         path4 = Input.lerString();
+                     } else{
+                         escolha=0;
+                         break;
+                     }
                      try {
                          Crono.start();
-                         Carregamento.escreverFicheiroOjeto(this.model,OBJ_PATH);
+                         Carregamento.escreverFicheiroOjeto(this.model,path4);
+                         view.tempo(Crono.stop());
                          System.out.println("Guardado com sucesso");
-                         view.tempoSimples(Crono.stop());
+                         enterContinuar();
                      } catch (IOException e){
                          System.out.println("Erro ao escrever ficheiro: "+e.getMessage());
+                         enterContinuar();
+                         continue;
                      }
-                     enterContinuar();
                      escolha=0;
                      break;
                  case 5:
+                     String path;
+                     view.carregarObjeto();
+                     int aux = Input.lerInt();
+                     if( aux == 1 ){
+                         path = OBJ_PATH;
+                     } else if( aux == 2 ){
+                         view.nomeFicheiro();
+                         path = Input.lerString();
+                     } else{
+                         escolha=0;
+                         break;
+                     }
                      try {
-                         this.model = Carregamento.lerFicheiroObjeto(OBJ_PATH);
-                         view.menuOpcoes(opcoes);
+                         Crono.start();
+                         this.model = Carregamento.lerFicheiroObjeto(path);
+                         view.tempo(Crono.stop());
+                         enterContinuar();
                          escolha=0;
                      } catch (IOException e){
                          System.out.println("Erro ao carregar ficheiro");
+                         enterContinuar();
                          escolha=0;
                          continue;
                      } catch (ClassNotFoundException e){

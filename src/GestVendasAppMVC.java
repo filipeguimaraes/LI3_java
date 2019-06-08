@@ -8,7 +8,6 @@
 public class GestVendasAppMVC {
     /**
      * Método que cria a aplicação
-     * @param args
      */
     public static void main(String[] args){
         //GereVendasModel model = createData();

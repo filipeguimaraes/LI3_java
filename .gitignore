@@ -36,6 +36,8 @@ hs_err_pid*
 *.iml
 *.defs
 *.TXT
+*.dat
+*.obj
 Vendas_5M.txt
 
 # Out folder
