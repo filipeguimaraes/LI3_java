@@ -2,10 +2,11 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Write a description of class GereVendasController here.
+ * Controlador, controla o funcionamento do sistema.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Beatriz Rocha A84003
+ * @author Filipe Guimarães A85308
+ * @author Gonçalo Ferreira A84073
  */
 public class GereVendasController {
     private IGereVendasModel model;
@@ -20,7 +21,7 @@ public class GereVendasController {
     }
 
     /**
-     * Metodo que trata do menu inicial
+     * Metodo que trata do menu inicial.
      */
     public void run(){
          String[] opcoes={"Carregar ficheiros",
@@ -76,8 +77,7 @@ public class GereVendasController {
 
 
     /**
-    * Método que trata do menu de extras
-    * @return Retorna -1 para voltar ao menu anterior
+    * Método que trata do menu das queries.
     */
     private int runQueries(){
          String[] opcoes = {"Lista ordenada alfabeticamente com os códigos dos produtos nunca comprados e o seu respectivo total",
@@ -236,6 +236,9 @@ public class GereVendasController {
          return 0;
     }
 
+    /**
+     * Método que trata do menu das consultas estatísticas.
+     */
     private int runEstatisticas(){
         String[] opcoes = {"Informações sobre o último ficheiro de vendas lido",
                 "Número total de compras por mês",
@@ -275,7 +278,9 @@ public class GereVendasController {
         return 0;
     }
 
-
+    /**
+     * Método que imprime "enter para continuar...".
+     */
     private void enterContinuar() {
         Scanner s=new Scanner(System.in);
         System.out.print("Pressione enter para continuar . . . ");
