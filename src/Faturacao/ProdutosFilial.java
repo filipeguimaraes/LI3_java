@@ -1,9 +1,6 @@
 package Faturacao;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ProdutosFilial {
@@ -116,7 +113,7 @@ public class ProdutosFilial {
     }
 
     public Map<Integer,Double> getFatMesFilial(){
-        Map<Integer,Double> map = new HashMap<>();
+        Map<Integer,Double> map = new TreeMap<>();
         double k;
         for(DadosAnual da : this.produtos_filial.values()){
             for(Map.Entry<Integer,Double> me : da.getFaturacaoFilial().entrySet() ){

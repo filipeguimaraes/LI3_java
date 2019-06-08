@@ -184,7 +184,7 @@ public class CatFaturacao implements ICatFaturacao {
     }
 
     public Map<Integer,Double> fatFilial(int filial){
-        Map<Integer,Double> map = new HashMap<>();
+        Map<Integer,Double> map = new TreeMap<>();
         double k;
         if(this.vendidos.containsKey(filial)){
             for(Map.Entry<Integer,Double> me : this.vendidos.get(filial).getFatMesFilial().entrySet() ){

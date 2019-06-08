@@ -106,7 +106,7 @@ public interface IGereVendasModel {
 
     List<Integer> getComprasMes();
 
-    List<Double> getFaturacaoFiliais();
+    List<List<Double>> getFaturacaoFiliais();
 
     List<String> getDistintosCli();
 

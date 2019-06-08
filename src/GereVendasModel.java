@@ -17,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 import static java.lang.Double.parseDouble;
@@ -401,18 +402,17 @@ public class GereVendasModel implements IGereVendasModel {
     }
 
 
-    public List<Double> getFaturacaoFiliais(){
-        List<Double> l = new ArrayList<>();
-        double d1 = this.CatFat.fatFilial(1).values().stream()
-                               .mapToDouble(Double::doubleValue)
-                               .sum();
-        double d2= this.CatFat.fatFilial(2).values().stream()
-                              .mapToDouble(Double::doubleValue)
-                              .sum();
-        double d3 = this.CatFat.fatFilial(3).values().stream()
-                               .mapToDouble(Double::doubleValue)
-                               .sum();
-        l.add(0,d1+d2+d3);
+    public List<List<Double>> getFaturacaoFiliais(){
+        List<List<Double>> l = new ArrayList<>();
+        List<Double> d  = new ArrayList<>(12);
+        List<Double> d1 = new ArrayList<>(this.CatFat.fatFilial(1).values());
+        List<Double> d2 = new ArrayList<>(this.CatFat.fatFilial(2).values());
+        List<Double> d3 = new ArrayList<>(this.CatFat.fatFilial(3).values());
+        int i;
+        for(i=0; i<12; i++){
+            d.add(d1.get(i)+d2.get(i)+d3.get(i));
+        }
+        l.add(0,d);
         l.add(1,d1);
         l.add(2,d2);
         l.add(3,d3);
