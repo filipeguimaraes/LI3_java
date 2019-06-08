@@ -1,3 +1,5 @@
+package Faturacao;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -80,7 +82,7 @@ public class ProdutosFilial {
 
     public Map<String,Integer> getProdsQuant(){
         Map<String,Integer> m = new HashMap<>();
-        for(Map.Entry<String,DadosAnual> me : this.produtos_filial.entrySet()){
+        for(Map.Entry<String, DadosAnual> me : this.produtos_filial.entrySet()){
             m.put(me.getKey(),me.getValue().getQuantidadeAnual());
         }
         return m;

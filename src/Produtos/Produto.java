@@ -1,7 +1,9 @@
+package Produtos;
+
 import java.util.Objects;
 import static java.lang.Integer.parseInt;
 
-public class Produto implements Comparable<Produto>,IProduto {
+public class Produto implements Comparable<Produto>, IProduto {
     private String codProd;
 
     public Produto(){
@@ -51,9 +53,9 @@ public class Produto implements Comparable<Produto>,IProduto {
         boolean r;
         r = s.length()==6;
         for(int i=0;r && i<2;i++)
-        r= Character.isUpperCase(s.charAt(i));
+            r= Character.isUpperCase(s.charAt(i));
         for(int i=0;r && i<2;i++)
-        r= Character.isUpperCase(s.charAt(i));
+            r= Character.isUpperCase(s.charAt(i));
         r = r && (1000 <= parseInt(s.substring(2))  && parseInt(s.substring(2)) <= 9999);
         return r;
     }

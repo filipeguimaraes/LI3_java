@@ -1,3 +1,5 @@
+package Filiais;
+
 public interface IVenda {
 
     String getCodProd();

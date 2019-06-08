@@ -1,10 +1,12 @@
+package Filiais;
+
 import javax.print.DocFlavor;
 import java.util.*;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.stream.Collectors;
 
 public class CatFiliais implements ICatFiliais {
-    private Map<Integer,ClientesFilial> filial_clientes;
+    private Map<Integer, ClientesFilial> filial_clientes;
 
     public CatFiliais(){
         this.filial_clientes = new HashMap<>();
@@ -138,8 +140,8 @@ public class CatFiliais implements ICatFiliais {
             sb = new StringBuilder();
             if(prods_mes.containsKey(i+1)) num_clis = prods_mes.get(i+1).size();
             sb.append(r_quant_reg_total[i]).append(" ")
-              .append(num_clis).append(" ")
-              .append(r_gastos_total[i]);
+                    .append(num_clis).append(" ")
+                    .append(r_gastos_total[i]);
             l.add(sb.toString());
         }
         return l;
@@ -173,7 +175,7 @@ public class CatFiliais implements ICatFiliais {
                     map.put(me.getKey(),k);
                 }
                 else{
-                   map.put(me.getKey(),me.getValue());
+                    map.put(me.getKey(),me.getValue());
                 }
             }
         }

@@ -1,10 +1,12 @@
+package Filiais;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 
 public class ClientesFilial {
     private int filial;
-    private Map<String,ProdutosCompradosCliente> clientes_com_compras;
+    private Map<String, ProdutosCompradosCliente> clientes_com_compras;
 
     public ClientesFilial(){
         this.filial = 0;

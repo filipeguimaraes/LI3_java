@@ -1,9 +1,11 @@
+package Filiais;
+
 import java.util.Objects;
 
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
-public class Venda implements IVenda{
+public class Venda implements IVenda {
     private String codProd;
     private String codCli;
     private double preco;

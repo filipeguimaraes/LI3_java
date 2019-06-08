@@ -1,6 +1,14 @@
 import Exceptions.MesException;
 import Exceptions.ProdutoException;
 import Exceptions.ClienteException;
+import Clientes.CatClientes;
+import Clientes.ICatClientes;
+import Produtos.CatProdutos;
+import Produtos.ICatProdutos;
+import Faturacao.CatFaturacao;
+import Faturacao.ICatFaturacao;
+import Filiais.CatFiliais;
+import Filiais.ICatFiliais;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

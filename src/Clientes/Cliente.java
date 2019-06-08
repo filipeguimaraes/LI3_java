@@ -1,7 +1,9 @@
+package Clientes;
+
 import java.util.Objects;
 import static java.lang.Integer.parseInt;
 
-public class Cliente implements Comparable<Cliente>, ICliente{
+public class Cliente implements Comparable<Cliente>, ICliente {
     private String codCli;
 
     public Cliente(){
@@ -89,7 +91,7 @@ public class Cliente implements Comparable<Cliente>, ICliente{
      * @param s código de cliente
      * @return true se for válido, false caso contrário
      */
-   public static boolean validaCliente(String s){
+    public static boolean validaCliente(String s){
         boolean r;
         r=s.length()==5;
         r=Character.isUpperCase(s.charAt(0));
@@ -98,22 +100,22 @@ public class Cliente implements Comparable<Cliente>, ICliente{
         }
         r= r && (1000 <= parseInt(s.substring(1))  && parseInt(s.substring(1)) <= 5000);
         return r;
-   }
+    }
 
     /**
      * Método que calcula o hashCode de um código de cliente
      * @return hashCode de um código de cliente
      */
-   public int hashCode(){
+    public int hashCode(){
         return this.codCli.hashCode();
-   }
+    }
 
     /**
      * Método que compara dois clientes segundo a ordem alfabética
      * @param c cliente
      * @return 0 se forem iguais, 1 se o primeiro for lexicograficamente maior que o segundo e -1 caso contrário
      */
-   public int compareTo(Cliente c){return this.codCli.compareTo(c.getCodCli());}
+    public int compareTo(Cliente c){return this.codCli.compareTo(c.getCodCli());}
 
 
 }

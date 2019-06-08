@@ -1,3 +1,5 @@
+package Produtos;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class CatProdutos implements ICatProdutos{
+public class CatProdutos implements ICatProdutos {
     private Set<IProduto> produtos;
 
     public CatProdutos(){
