@@ -392,6 +392,10 @@ public class GereVendasModel implements IGereVendasModel,Serializable{
         return l;
     }
 
+    /**
+     * Método que calcula o número total de compras por mês
+     * @return lista com as compras realizadas em cada mês
+     */
     public List<Integer> getComprasMes(){
         Map<Integer,Integer> m = this.CatFat.comprasMes();
         List<Integer> l = new ArrayList<>();
@@ -402,7 +406,10 @@ public class GereVendasModel implements IGereVendasModel,Serializable{
         return l;
     }
 
-
+    /**
+     * Método que devolve uma lista cuja primeira posição corresponde à faturação total e as posições seguintes à faturação total por mês para cada filial
+     * @return lista cuja primeira posição corresponde à faturação total e as posições seguintes à faturação total por mês para cada filial
+     */
     public List<List<Double>> getFaturacaoFiliais(){
         List<List<Double>> l = new ArrayList<>();
         List<Double> d  = new ArrayList<>(12);
@@ -420,6 +427,10 @@ public class GereVendasModel implements IGereVendasModel,Serializable{
         return l;
     }
 
+    /**
+     * Método que calcula o número de distintos clientes que compraram em cada mês filial a filial
+     * @return lista com o número de distintos clientes que compraram em cada mês filial a filial
+     */
     public List<String> getDistintosCli(){
         List<String> l = new ArrayList<>();
         Map<Integer,Integer> map;
