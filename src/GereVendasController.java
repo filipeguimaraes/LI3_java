@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @author Filipe Guimarães A85308
  * @author Gonçalo Ferreira A84073
  */
-public class GereVendasController {
+public class GereVendasController implements IGereVendasController{
     private IGereVendasModel model;
     private InterfGereVendasView view;
 
