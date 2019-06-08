@@ -1,6 +1,6 @@
 package Filiais;
 
-public interface IVenda {
+public interface IDadosVenda {
 
     String getCodProd();
 
