@@ -1061,7 +1061,7 @@ public class GereVendasView implements InterfGereVendasView {
         clear();
         banMensagem("Carregar ficheiro de objetos");
         mudarDeLinha();
-        System.out.println("Deseja carregar o ficheiro pré-definido "+RED+"(Sim: 1 | Não:2 | Sair: 0)"+RESET+"?");
+        System.out.println("Deseja carregar o ficheiro pré-definido "+RED+"(Sim: 1 | Não: 2 | Sair: 0)"+RESET+"?");
     }
 
     /**
@@ -1071,7 +1071,10 @@ public class GereVendasView implements InterfGereVendasView {
         clear();
         banMensagem("Escrever ficheiro de objetos");
         mudarDeLinha();
-        System.out.println("Deseja criar o ficheiro pré-definido "+RED+"(Sim: 1 | Não:2 | Sair: 0)"+RESET+"?");
+        System.out.println("Deseja criar o ficheiro pré-definido "+RED+"(Sim: 1 | Não: " +
+                "" +
+                "" +
+                "2 | Sair: 0)"+RESET+"?");
     }
 
     /**
